@@ -1,4 +1,12 @@
 import React from 'react';
+<<<<<<< HEAD
+import Routes from './components/pages/Routes';
+import './App.css';
+
+const App = () => {
+  return <Routes />;
+};
+=======
 import './App.css';
 const light={
   background:"white",
@@ -30,4 +38,5 @@ class App extends React.Component{
     )
   }
 }
+>>>>>>> 76d555922ded3ec31fc6f39b79c46f608f773e7b
 export default App;
