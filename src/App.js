@@ -1,11 +1,16 @@
 import React from 'react';
+import images from './images.jpg';
+import images1 from './images1.jpg';
 import './App.css';
 const light={
-  background:"white",
+  backgroundSize:"cover",
+  background:`url(${images})`,
   color:"black"
 }
 const dark={
-  background:"rgb(40,40,40)",
+  // background:"rgb(40,40,40)",
+  backgroundImage:`url(${images1})`,
+  backgroundSize:"cover",
   color:"white"
 }
 class App extends React.Component{
@@ -26,6 +31,7 @@ class App extends React.Component{
           <button  className="btn" onClick={this.toggle}>{this.state.dark?"Light":"Dark"}</button>
           <hr />
           <h1>Text Here!!!</h1>
+          <img src={this.state.dark?images1:images}  alt="ALTERNATE"/>
       </div>
     )
   }
