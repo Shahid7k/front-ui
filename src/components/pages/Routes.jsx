@@ -17,14 +17,17 @@ import {
   DASHBOARD,
   PROFILE,
 } from '../../constants/routesNomenclature';
+import {light,dark,condition} from '../../theme';
+
+const mode=(condition)?dark:light;
 
 const Routes = () => {
   return (
-    <div>
+    <div style={mode}>
       <BrowserRouter>
-        <Fragment>
+        <Fragment >
           <Navbar />
-          <div className='container'>
+          <div className='container' style={{minHeight:"650px"}}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />

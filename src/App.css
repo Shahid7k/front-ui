@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Reset */
 * {
   margin: 0;
@@ -487,43 +486,36 @@ footer {
 footer a {
   color: var(--link-color);
 }
-=======
-.App {
-  text-align: center;
+
+
+
+/* ------------------S-H-A-H-I-D------------------------- */
+.nobg{
+  background-color: rgba(61, 53, 53, 0) !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dropdown-menu { 
+  max-width: auto !important;
+  min-width: auto !important;
+  /* width: 100px !important; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.font14{
+  font-size: 1.4em;
+}
+.font13{
+  font-size: 1.3em;
+}
+.font12{
+  font-size: 1.2em;
+}
+.font11{
+  font-size: 1.1em;
+}
+.font1{
+  font-size: 1em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
->>>>>>> 76d555922ded3ec31fc6f39b79c46f608f773e7b
+/* ------------------S-H-A-H-I-D------------------------ */

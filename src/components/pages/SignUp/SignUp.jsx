@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {light,dark,condition} from '../../../theme';
+
+const mode=(condition)?dark:light;
 
 const initialState = {
   firstName: '',
@@ -110,9 +113,9 @@ const SignUp = () => {
   } = formData;
 
   return (
-    <div className='form-container'>
-      <div className='form-wrap'>
-        <h1>Sign Up</h1>
+    <div className='form-container' >
+      <div className='form-wrap'style={mode} >
+        <h1 >Sign Up</h1>
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -277,7 +280,8 @@ const SignUp = () => {
         </p>
       </footer>
     </div>
-  );
+ 
+ );
 };
 
 const spanStyle = {

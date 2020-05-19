@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/authContext';
+import {light,dark,condition} from '../../../theme';
+
+const mode=(condition)?dark:light;
 
 const initialState = {
   email: '',
@@ -66,7 +69,7 @@ const SignIn = () => {
 
   return (
     <div className='form-container'>
-      <div className='form-wrap'>
+      <div className='form-wrap' style={mode}>
         <h1>Sign In</h1>
         <p>Sign in and explore the world!</p>
         <form onSubmit={handleSubmit}>
