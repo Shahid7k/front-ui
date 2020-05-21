@@ -24,29 +24,27 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <div className='container'>
-            <Switch>
-              <PrivateRoute path={HOME_ROUTE}>
-                <Home />
-              </PrivateRoute>
-              <PrivateRoute path={DASHBOARD}>
-                <Dashboard />
-              </PrivateRoute>
-              <PrivateRoute path={PROFILE}>
-                <Profile />
-              </PrivateRoute>
+          <Switch>
+            <PrivateRoute path={HOME_ROUTE}>
+              <Home />
+            </PrivateRoute>
+            <PrivateRoute path={DASHBOARD}>
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path={PROFILE}>
+              <Profile />
+            </PrivateRoute>
 
-              <PublicRoute exact={true} path={LANDING_ROUTE} restricted={true}>
-                <LandingPage />
-              </PublicRoute>
-              <PublicRoute path={SIGNIN_ROUTE} restricted={true}>
-                <SignIn />
-              </PublicRoute>
-              <PublicRoute path={SIGNUP_ROUTE} restricted={true}>
-                <SignUp />
-              </PublicRoute>
-            </Switch>
-          </div>
+            <PublicRoute exact={true} path={LANDING_ROUTE}>
+              <LandingPage />
+            </PublicRoute>
+            <PublicRoute path={SIGNIN_ROUTE} restricted={true}>
+              <SignIn />
+            </PublicRoute>
+            <PublicRoute path={SIGNUP_ROUTE} restricted={true}>
+              <SignUp />
+            </PublicRoute>
+          </Switch>
         </Fragment>
       </BrowserRouter>
     </div>
