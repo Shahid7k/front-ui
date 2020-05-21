@@ -11,4 +11,4 @@ export  const dark={
     color:"white"
   }
 
-  export const condition = true;
+  export const condition = !true;

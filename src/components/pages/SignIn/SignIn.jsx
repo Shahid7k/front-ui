@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/authContext';
-import {light,dark,condition} from '../../../theme';
+import {light,dark,condition} from '../../../utils/theme';
 
 const mode=(condition)?dark:light;
 

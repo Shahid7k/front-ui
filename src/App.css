@@ -353,7 +353,7 @@ table th {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0rem;
   z-index: 1;
   width: 100%;
   opacity: 0.9;
@@ -491,15 +491,41 @@ footer a {
 
 /* ------------------S-H-A-H-I-D------------------------- */
 .nobg{
-  background-color: rgba(61, 53, 53, 0) !important;
+  background-color: rgba(39, 26, 26, 0) !important;
 }
 
+.p-0{
+  padding: 0px !important;
+}
+.bg-half-dark{
+  background-color: rgba(37, 31, 31, 0.322);
+}
 .dropdown-menu { 
   max-width: auto !important;
   min-width: auto !important;
   /* width: 100px !important; */
 }
-
+#cursive{
+  font-family: cursive;
+}
+.font2{
+  font-size: 2em;
+}
+.font19{
+  font-size: 1.9em;
+}
+.font18{
+  font-size: 1.8em;
+}
+.font17{
+  font-size: 1.7em;
+}
+.font16{
+  font-size: 1.6em;
+}
+.font15{
+  font-size: 1.5em;
+}
 .font14{
   font-size: 1.4em;
 }
@@ -515,7 +541,39 @@ footer a {
 .font1{
   font-size: 1em;
 }
+.font09{
+  font-size: 0.9em;
+}
+.font08{
+  font-size: 0.8em;
+}
+.font07{
+  font-size: 0.7em;
+}
+.font06{
+  font-size: 0.6em;
+}
+.font05{
+  font-size: 0.5em;
+}
+.font04{
+  font-size: 0.4em;
+}
+.font03{
+  font-size: 0.3em;
+}
+.font02{
+  font-size: 0.2em;
+}
+.font01{
+  font-size: 0.1em;
+}
 
+
+
+/* -----HOME------- */
+
+/* ------HOME------ */
 
 
 /* ------------------S-H-A-H-I-D------------------------ */

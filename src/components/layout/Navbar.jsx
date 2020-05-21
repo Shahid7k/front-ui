@@ -19,16 +19,38 @@ const Navbar = ({ title, icon }) => {
   };
 
   return (
-    <div className='navbar navbar-expand-lg bg-dark py-0'>
+    <div className='navbar navbar-expand-lg navBar '>
       <h1>
         <NavLink to='/' className='text-decoration-none'>
           <i className={icon} /> {title}
         </NavLink>
+        <span >
+         {!userAuth.token ? getNavItems() : "" }
+        </span>
+          
+   
       </h1>
+      
       {userAuth.token ? getAuthLinks(handleLogout) : getNoAuthLinks()}
     </div>
   );
 };
+
+const getNavItems =()=>{
+  return (
+    <>
+      <NavLink to={DASHBOARD} className='listItem text-decoration-none'>
+      {"Dash-board"}
+      </NavLink>
+      <NavLink to='#' className='listItem text-decoration-none'>
+      {"Explore"}
+      </NavLink>
+      <NavLink to='#' className='listItem text-decoration-none'>
+      {"title"}
+      </NavLink>
+    </>
+  );
+}
 
 const getNoAuthLinks = () => (
     
@@ -37,18 +59,12 @@ const getNoAuthLinks = () => (
         {"Log In"}
       </button>
       <div className="dropdown-menu font12" aria-labelledby="dropdownMenuButton">
-        {/* <a className="dropdown-item text-dark"  href="#">Action</a>
-        <a className="dropdown-item" href="#">Another action</a>
-        <a className="dropdown-item"  href="#">Something else here</a> */}
-      
-      <NavLink to={SIGNIN_ROUTE} className='text-dark dropdown-item text-decoration-none'>
-        Sign In
-      </NavLink>
-    
-      <NavLink to={SIGNUP_ROUTE} className='text-dark dropdown-item text-decoration-none'>
-        Sign Up
-      </NavLink>
-
+        <NavLink to={SIGNIN_ROUTE} className='text-dark dropdown-item text-decoration-none'>
+          Sign In
+        </NavLink>      
+        <NavLink to={SIGNUP_ROUTE} className='text-dark dropdown-item text-decoration-none'>
+          Sign Up
+        </NavLink>
       </div>
     </div>
     
@@ -79,7 +95,7 @@ const getAuthLinks = handleLogout => (
   //   </li>
   // </ul>
   <div className="dropdown" >
-    <button className="btn btn-dark nobg dropdown-toggle font14"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button className="btn btn-dark nobg dropdown-toggle font15"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {"Hi User"}
     </button>
     <div className="dropdown-menu font12" aria-labelledby="dropdownMenuButton">

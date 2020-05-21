@@ -17,7 +17,7 @@ import {
   DASHBOARD,
   PROFILE,
 } from '../../constants/routesNomenclature';
-import {light,dark,condition} from '../../theme';
+import {light,dark,condition} from '../../utils/theme';
 
 const mode=(condition)?dark:light;
 
@@ -27,7 +27,7 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment >
           <Navbar />
-          <div className='container' style={{minHeight:"650px"}}>
+          <div style={{paddingTop:"55px",minHeight:"720px"}}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />
