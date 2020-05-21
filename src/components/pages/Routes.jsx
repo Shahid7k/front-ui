@@ -17,34 +17,39 @@ import {
   DASHBOARD,
   PROFILE,
 } from '../../constants/routesNomenclature';
+import {light,dark,condition} from '../../utils/theme';
+
+const mode=(condition)?dark:light;
 
 const Routes = () => {
   return (
-    <div>
+    <div style={mode}>
       <BrowserRouter>
-        <Fragment>
+        <Fragment >
           <Navbar />
-          <Switch>
-            <PrivateRoute path={HOME_ROUTE}>
-              <Home />
-            </PrivateRoute>
-            <PrivateRoute path={DASHBOARD}>
-              <Dashboard />
-            </PrivateRoute>
-            <PrivateRoute path={PROFILE}>
-              <Profile />
-            </PrivateRoute>
+          <div style={{paddingTop:"55px",minHeight:"720px"}}>
+            <Switch>
+              <PrivateRoute path={HOME_ROUTE}>
+                <Home />
+              </PrivateRoute>
+              <PrivateRoute path={DASHBOARD}>
+                <Dashboard />
+              </PrivateRoute>
+              <PrivateRoute path={PROFILE}>
+                <Profile />
+              </PrivateRoute>
 
-            <PublicRoute exact={true} path={LANDING_ROUTE}>
-              <LandingPage />
-            </PublicRoute>
-            <PublicRoute path={SIGNIN_ROUTE} restricted={true}>
-              <SignIn />
-            </PublicRoute>
-            <PublicRoute path={SIGNUP_ROUTE} restricted={true}>
-              <SignUp />
-            </PublicRoute>
-          </Switch>
+              <PublicRoute exact={true} path={LANDING_ROUTE}>
+                <LandingPage />
+              </PublicRoute>
+              <PublicRoute path={SIGNIN_ROUTE} restricted={true}>
+                <SignIn />
+              </PublicRoute>
+              <PublicRoute path={SIGNUP_ROUTE} restricted={true}>
+                <SignUp />
+              </PublicRoute>
+            </Switch>
+          </div>
         </Fragment>
       </BrowserRouter>
     </div>
