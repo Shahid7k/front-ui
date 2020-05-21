@@ -39,7 +39,7 @@ const Routes = () => {
                 <Profile />
               </PrivateRoute>
 
-              <PublicRoute exact={true} path={LANDING_ROUTE} restricted={true}>
+              <PublicRoute exact={true} path={LANDING_ROUTE}>
                 <LandingPage />
               </PublicRoute>
               <PublicRoute path={SIGNIN_ROUTE} restricted={true}>
