@@ -566,6 +566,49 @@ footer a {
 .font01{
   font-size: 0.1em;
 }
+.toolbar-class{
+  color: black !important;
+}
+.text-c{
+  text-align: center !important;
+  width:400px;
+}
 
+.bg-still{
+  position: fixed;
+  top:0;
+  right:0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.fl-l{
+  float: left;
+}
+.fl-r{
+  float: right;
+}
+
+.h-50{
+  height: 50px;
+}
+
+  
+.rotateZ{
+  transform: rotateZ(200deg);
+  height: 50px;
+  width: auto;
+  animation: three 2s infinite;
+  animation-direction: alternate;
+}
+@keyframes three {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(359deg);
+  }
+}
 
 /* ------------------S-H-A-H-I-D------------------------ */

@@ -8,6 +8,8 @@ import Home from '../pages/Home/Home';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Profile from '../pages/Profile/Profile';
 import PrivateRoute from '../routeHandling/PrivateRoute';
+import AllQAs from './AllQAs/AllQAs';
+// import BlogComponent from './BlogComponent/BlogComponent';
 import PublicRoute from '../routeHandling/PublicRoute';
 import {
   LANDING_ROUTE,
@@ -16,10 +18,10 @@ import {
   HOME_ROUTE,
   DASHBOARD,
   PROFILE,
+  ALLQA_ROUTE
 } from '../../constants/routesNomenclature';
-import {light,dark,condition} from '../../utils/theme';
+import {mode} from '../../utils/theme';
 
-const mode=(condition)?dark:light;
 
 const Routes = () => {
   return (
@@ -38,6 +40,9 @@ const Routes = () => {
               <PrivateRoute path={PROFILE}>
                 <Profile />
               </PrivateRoute>
+              <PublicRoute path={ALLQA_ROUTE}>
+                <AllQAs />
+              </PublicRoute>
 
               <PublicRoute exact={true} path={LANDING_ROUTE}>
                 <LandingPage />

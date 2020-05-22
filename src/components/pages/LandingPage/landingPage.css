@@ -71,7 +71,7 @@
     background: black url('https://wallpapercave.com/wp/wp2757874.gif') no-repeat center;
     background-size: cover;
 
-    height: auto;
+    height: 650px;
   
   }
   
@@ -115,7 +115,7 @@
      
      padding: 1em;
  }
- .user-blog-qa-item  .homeIcons{
+ .homeIcons{
       padding-right: 10px;
       max-height: 70px;
       width: auto;
@@ -123,7 +123,7 @@
   .user-blog-qa-item .text{
       display: inline-block;
   }
-
+ 
 
 /* 
    .block-quick-info-2 {

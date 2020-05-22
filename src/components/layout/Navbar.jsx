@@ -6,6 +6,7 @@ import {
   SIGNUP_ROUTE,
   DASHBOARD,
   PROFILE,
+  ALLQA_ROUTE,
 } from '../../constants/routesNomenclature';
 import { authContext } from '../../context/authContext';
 import { logout } from '../../requests/auth';
@@ -45,8 +46,8 @@ const getNavItems =()=>{
       <NavLink to='#' className='listItem text-decoration-none'>
       {"Explore"}
       </NavLink>
-      <NavLink to='#' className='listItem text-decoration-none'>
-      {"title"}
+      <NavLink to={ALLQA_ROUTE} className='listItem text-decoration-none'>
+      {"QA"}
       </NavLink>
     </>
   );

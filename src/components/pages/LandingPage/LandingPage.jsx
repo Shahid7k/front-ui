@@ -3,12 +3,6 @@ import ReactTypingEffect from 'react-typing-effect';
 import Quote from './Quote';
 import './landingPage.css';
 
-// import {light,dark} from '../../../theme';
-
-// const mode=(true)?dark:light;
-
-
-
 
 const LandingPage = () => {
   return (
@@ -46,7 +40,7 @@ const LandingPage = () => {
           
 
           <div className="user-blog-qa-item">
-          <img className="homeIcons" style={{textAlign:"left"}} src="https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png"  />
+          <img className="homeIcons" style={{textAlign:"left"}} alt="users" src="https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png"  />
           <div className="text" >
             <strong className="heading"> 
             <span className="excerpt">100 </span> {" Users"} </strong>
@@ -55,14 +49,14 @@ const LandingPage = () => {
 
 
           <div className="user-blog-qa-item">
-          <img className="homeIcons" src="https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png" />
+          <img className="homeIcons" alt="blogs" src="https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png" />
           <div className="text">
             <strong className="heading"> 
             <span className="excerpt">100 </span> {"Blogs"} </strong>
           </div>
           </div>
           <div className="user-blog-qa-item">
-          <img className="homeIcons" src="https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png" />
+          <img className="homeIcons" alt="QAs" src="https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png" />
           <div className="text">
             <strong className="heading">
             <span className="excerpt">100 </span>{"Q&A"} </strong>

@@ -5,10 +5,14 @@ export const light={
     color:"black"
   }
 export  const dark={
-    background:"rgb(45,45,45)",
+    background:"rgba(0,0,0,0.85)",
     // backgroundImage:`url(${images1})`,
     backgroundSize:"cover",
     color:"white"
   }
+  
 
   export const condition = !true;
+
+
+  export const mode=condition?dark:light
