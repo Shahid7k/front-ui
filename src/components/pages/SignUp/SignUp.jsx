@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {light,dark,condition} from '../../../utils/theme';
+import { signUpUser } from '../../../requests/auth';
+import { light, dark, condition } from '../../../utils/theme';
 
-const mode=(condition)?dark:light;
+const mode = condition ? dark : light;
 
 const initialState = {
   firstName: '',
@@ -38,10 +39,10 @@ const validatorInititalState = {
 
   password: {
     error: false,
-    hasError: pwd =>
-      !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
-        pwd
-      ),
+    hasError: pwd => false,
+    // !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
+    //   pwd
+    // ),
     message:
       'password should be at least 8 characters long with one of (a-z, A-Z, 0-9, special characters)',
   },
@@ -95,10 +96,11 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    alert('Your details have been recorded');
-    setFormData({ ...initialState });
+    const { confirmPassword, ...rest } = formData;
+    const data = await signUpUser(rest);
+    // setFormData({ ...initialState });
   };
 
   const {
@@ -113,9 +115,9 @@ const SignUp = () => {
   } = formData;
 
   return (
-    <div className='form-container' >
-      <div className='form-wrap'style={mode} >
-        <h1 >Sign Up</h1>
+    <div className='form-container'>
+      <div className='form-wrap' style={mode}>
+        <h1>Sign Up</h1>
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -280,8 +282,7 @@ const SignUp = () => {
         </p>
       </footer>
     </div>
- 
- );
+  );
 };
 
 const spanStyle = {

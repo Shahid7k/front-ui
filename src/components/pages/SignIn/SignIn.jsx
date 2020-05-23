@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/authContext';
-import {light,dark,condition} from '../../../utils/theme';
+import { light, dark, condition } from '../../../utils/theme';
 
-const mode=(condition)?dark:light;
+const mode = condition ? dark : light;
 
 const initialState = {
   email: '',
@@ -56,7 +56,7 @@ const SignIn = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const data = await signInUser({ emailId: email, password });
+    const data = await signInUser({ email, password });
     // console.log(data);
     if (data) {
       setAuthStatus(data);

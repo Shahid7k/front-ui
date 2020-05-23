@@ -59,7 +59,7 @@ const BlogEditor = props => {
       />
       {!rest.readOnly && (
         <button
-          className='btn btn-dark d-block ml-auto mt-2 mr-3'
+          className='btn btn-dark d-block ml-auto my-2 mr-2'
           disabled={title.length === 0 || content.length === 0}
           onClick={handleSave}
         >

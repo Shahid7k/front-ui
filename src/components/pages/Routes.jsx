@@ -6,6 +6,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
 import Home from '../pages/Home/Home';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import Profile from '../pages/Profile/Profile';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
@@ -16,24 +17,28 @@ import {
   HOME_ROUTE,
   DASHBOARD,
   PROFILE,
+  POST_BLOG,
 } from '../../constants/routesNomenclature';
-import {light,dark,condition} from '../../utils/theme';
+import { light, dark, condition } from '../../utils/theme';
 
-const mode=(condition)?dark:light;
+const mode = condition ? dark : light;
 
 const Routes = () => {
   return (
     <div style={mode}>
       <BrowserRouter>
-        <Fragment >
+        <Fragment>
           <Navbar />
-          <div style={{paddingTop:"55px",minHeight:"720px"}}>
+          <div style={{ paddingTop: '55px', minHeight: '720px' }}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />
               </PrivateRoute>
               <PrivateRoute path={DASHBOARD}>
                 <Dashboard />
+              </PrivateRoute>
+              <PrivateRoute path={POST_BLOG}>
+                <PostBlog />
               </PrivateRoute>
               <PrivateRoute path={PROFILE}>
                 <Profile />

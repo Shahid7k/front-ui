@@ -1,129 +1,117 @@
-#MainNav{
-  
-    color:white;
-    
-  
-  }
-  .navBar{
-  z-index:2;
+#MainNav {
+  color: white;
+}
+.navBar {
+  z-index: 2;
   position: fixed !important;
-  background:rgba(26, 24, 24, 0.849);
-  
-  }
-  
-  #devLogo{
-    font-size: 32px;
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 3px;
-  }
-  
-  
-  
-  .NavBarList{
-    display: flex;
-  }
-  /* .currentPage{
+  background: rgba(26, 24, 24, 0.849);
+}
+
+#devLogo {
+  font-size: 32px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 3px;
+}
+
+.NavBarList {
+  display: flex;
+}
+/* .currentPage{
     background-color: rgba(165, 130, 130, 0.438);
   } */
-  .listItem{
-    margin-left: 7px;
-    font-size: 0.6em;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .listItem:hover{
-    cursor: pointer;
-    background: rgba(17, 106, 109, 0.493);
-  
-  }
-  
-  /* Align icon to left */
-  #what .items .item {
-    display: flex;
-    text-align: left;
-  }
-  
-  /* Position icon */
-  #what .items .item i {
-    margin-right: 1.3rem;
-    align-self: center;
-    margin-bottom: 0;
-  }
-  
-  #contact .map {
-    flex: 2;
-  }
-  .l-heading {
-    font-size: 40px;
-    line-height: 1.2;
-  }
-  
-  .lead {
-    font-size: 20px;
-  }
-  
-  
-  
-  
-  #showcase {
-    background: black url('https://wallpapercave.com/wp/wp2757874.gif') no-repeat center;
-    background-size: cover;
+.listItem {
+  margin-left: 7px;
+  font-size: 0.6em;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.listItem:hover {
+  cursor: pointer;
+  background: rgba(17, 106, 109, 0.493);
+}
 
-    height: auto;
-  
-  }
-  
-  #showcase .showcase-content {
-    color: #fff;
-    text-align: center;
-    padding: 170px;
-  }
-  
-  #showcase .showcase-content h1 {
-    font-size: 3.2em;
-    line-height: 1.2em;
-  }
-  
-  #showcase .showcase-content p {
-    padding-bottom: 20px;
-    line-height: 1.7em;
-  }
-  
-  .BigOne{
-      position: relative;
-  }
+/* Align icon to left */
+#what .items .item {
+  display: flex;
+  text-align: left;
+}
 
- #user-blog-qa{
-     margin-left: 25em;
-     margin-right: 25em;
-     margin-top: 0em;
-     margin-bottom: 0em;
+/* Position icon */
+#what .items .item i {
+  margin-right: 1.3rem;
+  align-self: center;
+  margin-bottom: 0;
+}
 
-     width: 800px;
-     position:absolute;
-     bottom:-40px;
-     text-align:center;
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-around;
-     -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05);
-    box-shadow: 10px 1px 30px 0 rgba(109, 108, 108, 0.486);
- }
- .user-blog-qa-item{
-     
-     padding: 1em;
- }
- .user-blog-qa-item  .homeIcons{
-      padding-right: 10px;
-      max-height: 70px;
-      width: auto;
-  }
-  .user-blog-qa-item .text{
-      display: inline-block;
-  }
+#contact .map {
+  flex: 2;
+}
+.l-heading {
+  font-size: 40px;
+  line-height: 1.2;
+}
 
+.lead {
+  font-size: 20px;
+}
+
+#showcase {
+  background: black url('https://wallpapercave.com/wp/wp2757874.gif') no-repeat
+    center;
+  background-size: cover;
+
+  height: auto;
+}
+
+#showcase .showcase-content {
+  color: #fff;
+  text-align: center;
+  padding: 170px;
+}
+
+#showcase .showcase-content h1 {
+  font-size: 3.2em;
+  line-height: 1.2em;
+}
+
+#showcase .showcase-content p {
+  padding-bottom: 20px;
+  line-height: 1.7em;
+}
+
+.BigOne {
+  position: relative;
+}
+
+#user-blog-qa {
+  margin-left: 25em;
+  margin-right: 25em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+
+  width: 800px;
+  position: absolute;
+  bottom: -40px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 10px 1px 30px 0 rgba(109, 108, 108, 0.486);
+}
+.user-blog-qa-item {
+  padding: 1em;
+}
+.user-blog-qa-item .homeIcons {
+  padding-right: 10px;
+  max-height: 70px;
+  width: auto;
+}
+.user-blog-qa-item .text {
+  display: inline-block;
+}
 
 /* 
    .block-quick-info-2 {
