@@ -11,12 +11,6 @@ const initialState = {
 };
 
 const PostBlog = () => {
-  // const onSubmit = (e, markup) => {
-  //   console.log(e);
-  //   console.log(markup);
-  //   setContent(markup);
-  // };
-
   const [initialBlogState, setInitialBlogState] = useState(initialState);
 
   const { userAuth } = useContext(authContext);

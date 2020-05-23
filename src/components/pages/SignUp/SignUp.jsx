@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
 import { light, dark, condition } from '../../../utils/theme';
+import { authContext } from '../../../context/authContext';
 
 const mode = condition ? dark : light;
 
 const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  gender: '',
-  country: '',
-  city: '',
-  contact: '',
+  firstName: 'fs',
+  lastName: 'fs',
+  email: 'test@email.com',
+  password: '111111',
+  confirmPassword: '111111',
+  gender: 'Male',
+  country: 'Ind',
+  city: 'Hyd',
+  contact: '1111111111',
 };
 
 const validatorInititalState = {
@@ -74,10 +75,14 @@ const validatorInititalState = {
 };
 
 const SignUp = () => {
+  const { setAuthStatus } = React.useContext(authContext);
+
   const [formData, setFormData] = useState({ ...initialState });
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
   });
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -99,8 +104,13 @@ const SignUp = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const { confirmPassword, ...rest } = formData;
-    const data = await signUpUser(rest);
-    // setFormData({ ...initialState });
+    const response = await signUpUser(rest);
+    console.log(response);
+    if (response.data) {
+      setAuthStatus(response.data);
+    } else {
+      setErrorMessage(response.error.data.error);
+    }
   };
 
   const {
@@ -119,6 +129,7 @@ const SignUp = () => {
       <div className='form-wrap' style={mode}>
         <h1>Sign Up</h1>
         <p>It's free and only takes a minute</p>
+        {errorMessage && <p className='my-3 text-danger'>{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='firstName'>First Name</label>
