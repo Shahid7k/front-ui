@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import BlogComponent from '../BlogComponent/BlogComponent';
 import { POST_BLOG } from '../../../constants/routesNomenclature';
 
 const Dashboard = () => {
@@ -18,7 +17,6 @@ const Dashboard = () => {
           New Blog
         </NavLink>
       </button>
-      {/* <BlogComponent /> */}
     </div>
   );
 };

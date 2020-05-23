@@ -3,7 +3,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { stateFromHTML } from 'draft-js-import-html';
 import { Editor } from 'react-draft-wysiwyg';
-import '../../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 // import './RichEditor.css';
 
 const toolbar = {

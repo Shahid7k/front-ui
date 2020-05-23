@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './BlogEditor.css';
 import RichEditor from './RichEditor/RichEditor';
 

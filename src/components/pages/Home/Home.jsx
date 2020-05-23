@@ -1,6 +1,6 @@
 import React from 'react';
 import BlogCard from '../../layout/BlogCard';
-import BlogEditor from '../BlogComponent/BlogEditor/BlogEditor';
+import BlogEditor from '..//BlogEditor/BlogEditor';
 
 const blogs = [
   {
