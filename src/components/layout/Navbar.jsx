@@ -6,6 +6,7 @@ import {
   SIGNUP_ROUTE,
   DASHBOARD,
   PROFILE,
+  ALLQA_ROUTE,
   HOME_ROUTE,
 } from '../../constants/routesNomenclature';
 import { authContext } from '../../context/authContext';
@@ -25,10 +26,10 @@ const Navbar = ({ title, icon }) => {
         <NavLink to='/' className='text-decoration-none'>
           <i className={icon} /> {title}
         </NavLink>
-        <span>{userAuth.token ? getNavItems() : ''}</span>
+        <span>{!userAuth.token ? getNavItems() : ''}</span>
       </h1>
 
-      {userAuth.token ? getAuthLinks(handleLogout) : getNoAuthLinks()}
+      {!userAuth.token ? getAuthLinks(handleLogout) : getNoAuthLinks()}
     </div>
   );
 };
@@ -42,8 +43,8 @@ const getNavItems = () => {
       <NavLink to='#' className='listItem text-decoration-none'>
         {'Explore'}
       </NavLink>
-      <NavLink to='#' className='listItem text-decoration-none'>
-        {'title'}
+      <NavLink to={ ALLQA_ROUTE} className='listItem text-decoration-none'>
+        {'QA'}
       </NavLink>
     </>
   );

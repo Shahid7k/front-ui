@@ -96,12 +96,12 @@
   }
 
  #user-blog-qa{
-     margin-left: 25em;
-     margin-right: 25em;
-     margin-top: 0em;
-     margin-bottom: 0em;
+     margin-left: 25%;
+     margin-right: 25%;
+    
 
      width: 800px;
+     min-width: 50%;
      position:absolute;
      bottom:-40px;
      text-align:center;
@@ -115,7 +115,7 @@
      
      padding: 1em;
  }
- .user-blog-qa-item  .homeIcons{
+  .homeIcons{
       padding-right: 10px;
       max-height: 70px;
       width: auto;

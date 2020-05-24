@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{Frame, useState, useEffect} from 'react';
 import SearchBar from '../../layout/SearchBar';
 import QuesCard from './QuesCard';
 import {NOTFOUND, LOADING} from '../../layout/otherConstants';
@@ -15,22 +15,22 @@ const initialState={
 
 
 const AllQAs=()=>{
-    const [state,updateList]=useState({...initialState});
+    const [state,updateState]=useState({...initialState});
     useEffect(()=>{
         async function getData(){
-            updateList({...state,loading:true})
+            updateState({...state,loading:true})
             const result=await axios.get("http://localhost:8080/allqa")
             // console.log(JSON.stringify(result))
-            updateList({...state,list:result.data.ques,loading:false})
+            updateState({...state,list:result.data.ques,loading:false})
         }
         getData()
     },[])
     // console.log(state.list)
     const onSearch = (e)=>{
-        updateList({...state,sfield:e.target.value});
+        updateState({...state,sfield:e.target.value});
     }
     const toggleQues = e =>{
-        updateList({...state,displayUnsolved:!state.displayUnsolved})
+        updateState({...state,displayUnsolved:!state.displayUnsolved})
     }
 
 
@@ -56,7 +56,7 @@ const AllQAs=()=>{
             {state.loading?
                 LOADING()    
             :""}
-            {filterSearch.length==0 && !state.loading?NOTFOUND():filterSearch.map((post,i)=><QuesCard key={i} ques={post} />)}
+            {filterSearch.length==0 && !state.loading?NOTFOUND():filterSearch.map((post,i)=><div><QuesCard key={i} ques={post} /></div>)}
         </div>
        
     </div>

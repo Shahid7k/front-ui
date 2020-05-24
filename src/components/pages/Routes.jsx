@@ -6,7 +6,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
 import Home from '../pages/Home/Home';
 import Dashboard from '../pages/Dashboard/Dashboard';
-import Profile from '../pages/Profile/Profile';
+import Profiles from '../pages/Profiles/Profiles';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
 import {
@@ -15,11 +15,12 @@ import {
   SIGNUP_ROUTE,
   HOME_ROUTE,
   DASHBOARD,
+  ALLQA_ROUTE,
   PROFILE,
 } from '../../constants/routesNomenclature';
-import {light,dark,condition} from '../../utils/theme';
+import {mode} from '../../utils/theme';
+import AllQAs from './AllQAs/AllQAs';
 
-const mode=(condition)?dark:light;
 
 const Routes = () => {
   return (
@@ -35,9 +36,12 @@ const Routes = () => {
               <PrivateRoute path={DASHBOARD}>
                 <Dashboard />
               </PrivateRoute>
-              <PrivateRoute path={PROFILE}>
-                <Profile />
-              </PrivateRoute>
+              <PublicRoute path={PROFILE}>
+                <Profiles />
+              </PublicRoute>
+              <PublicRoute path={ ALLQA_ROUTE}>
+                <AllQAs />
+              </PublicRoute>
 
               <PublicRoute exact={true} path={LANDING_ROUTE}>
                 <LandingPage />
