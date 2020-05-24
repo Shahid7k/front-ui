@@ -21,11 +21,11 @@ const BlogComponent = () => {
         initialBlogState={initialBlogState}
         handleSubmit={handleSubmit}
       />
-      <BlogEditor
+      {/* <BlogEditor
         initialBlogState={initialBlogState}
         readOnly={true}
         toolbarHidden={true}
-      />
+      /> */}
     </div>
   );
 };

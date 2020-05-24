@@ -1,16 +1,9 @@
 import axios from 'axios';
 
-export const headers = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-};
-
 export const signInUser = async data => {
   console.log('action called', data);
   try {
-    const res = await axios.post('http://localhost:8080/signin', data, {
-      headers,
-    });
+    const res = await axios.post('http://localhost:8080/signin', data);
     return res.data;
   } catch (error) {
     // const {
@@ -27,5 +20,5 @@ export const signInUser = async data => {
 };
 
 export const logout = () => {
-  delete axios.defaults.headers.common['x-auth-token'];
+  delete axios.defaults.headers.common['Authorization'];
 };

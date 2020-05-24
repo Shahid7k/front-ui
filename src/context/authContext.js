@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import useAuthHandler, { defaultState } from '../customHooks/authHandler';
 import getUserInfoFromLocalStorage from '../utils/getUserFromLocalStorage';
+import axiosClient from '../utils/axiosClient';
 
 const initialState = {
   userAuth: { ...defaultState },
@@ -20,6 +21,10 @@ const AuthContextProvider = ({ children }) => {
   // React.useEffect(() => {
   //   console.log(userAuth);
   // }, [userAuth]);
+
+  if (userAuth.token) {
+    axiosClient.defaults.headers.common['Authorization'] = userAuth.token;
+  }
 
   return (
     <Provider value={{ userAuth, setAuthStatus, setUnAuthStatus }}>

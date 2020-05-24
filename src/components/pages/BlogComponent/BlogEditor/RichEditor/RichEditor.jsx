@@ -12,7 +12,7 @@ const toolbar = {
     'blockType',
     'fontSize',
     'list',
-    'link',
+    // 'link',
     'emoji',
     'image',
   ],
@@ -35,13 +35,13 @@ const toolbar = {
     inDropdown: false,
     options: ['left', 'center'],
   },
-  link: {
-    inDropdown: false,
-    showOpenOptionOnHover: true,
-    defaultTargetOption: '_blank',
-    options: ['link'],
-    linkCallback: undefined,
-  },
+  // link: {
+  //   inDropdown: false,
+  //   showOpenOptionOnHover: true,
+  //   defaultTargetOption: '_blank',
+  //   options: ['link'],
+  //   linkCallback: undefined,
+  // },
   emoji: {
     emojis: ['😀', '😁'],
   },
@@ -79,7 +79,7 @@ const RichEditor = props => {
     const markup = draftToHtml(rawContentState);
     handleBlogContentChange(markup);
   };
-  
+
   return (
     <Editor
       {...rest}
@@ -87,7 +87,7 @@ const RichEditor = props => {
       placeholder='Explore your way in..'
       // wrapperClassName='wrapper-class'
       // editorClassName='editor-class'
-      toolbarClassName='toolbar-class'
+      // toolbarClassName='toolbar-class'
       toolbar={toolbar}
       onEditorStateChange={onEditorStateChange}
     />
