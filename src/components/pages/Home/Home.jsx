@@ -1,66 +1,69 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import BlogCard from '../../layout/BlogCard';
-import BlogEditor from '..//BlogEditor/BlogEditor';
+import { getBlogs } from '../../../requests/blog';
+import { BarLoader } from 'react-spinners';
 
-const blogs = [
-  {
-    title: 'test1',
-    description: 'hfdjhfdhjaf',
-    content: '',
-  },
-  {
-    title: 'test2',
-    description: 'hfdjhfdhjaf',
-    content: '',
-  },
-  {
-    title: 'test3',
-    description: 'hfdjhfdhjaf',
-    content: '',
-  },
-  {
-    title: 'test4',
-    description: 'hfdjhfdhjaf',
-    content: '',
-  },
-  {
-    title: 'test',
-    description: 'hfdjhfdhjaf',
-    content: '',
-  },
-];
+// const blogs = [
+//   {
+//     title: 'test1',
+//     description: 'hfdjhfdhjaf',
+//     content: '',
+//   },
+//   {
+//     title: 'test2',
+//     description: 'hfdjhfdhjaf',
+//     content: '',
+//   },
+//   {
+//     title: 'test3',
+//     description: 'hfdjhfdhjaf',
+//     content: '',
+//   },
+//   {
+//     title: 'test4',
+//     description: 'hfdjhfdhjaf',
+//     content: '',
+//   },
+//   {
+//     title: 'test',
+//     description: 'hfdjhfdhjaf',
+//     content: '',
+//   },
+// ];
 
 const Home = () => {
-  const [targetIndex, setTargetIndex] = React.useState(0);
+  const [blogs, setBlogs] = useState([]);
+  const [showLoader, setShowLoader] = useState(true);
+
+  const history = useHistory();
+
+  React.useEffect(() => {
+    (async function () {
+      const res = await getBlogs();
+      if (res.data) {
+        setBlogs(res.data);
+      }
+      setShowLoader(false);
+    })();
+  }, []);
 
   return (
-    <div>
-      <button
-        onClick={() => setTargetIndex(0)}
-        className='btn btn-danger ml-auto d-block my-2 mr-3'
-      >
-        Close
-      </button>
-      {targetIndex ? (
-        <BlogEditor
-          readOnly={true}
-          toolbarHidden={true}
-          initialBlogState={blogs[targetIndex - 1]}
-        />
-      ) : (
-        <div className='row container'>
-          {blogs.map((blog, index) => (
+    <Fragment>
+      <BarLoader loading={showLoader} color='#333' width={'100%'} />
+      <div className='row container'>
+        {!showLoader &&
+          blogs.map((blog, index) => (
             <div
-              onClick={() => setTargetIndex(index + 1)}
               key={`blog-${index}`}
+              onClick={() => history.push(`/blogs/${blog._id}`)}
               className='col-md-4 col-md-offset-3'
             >
               <BlogCard blog={blog} />
             </div>
           ))}
-        </div>
-      )}
-    </div>
+      </div>
+    </Fragment>
   );
 };
 

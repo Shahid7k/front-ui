@@ -3,14 +3,14 @@ import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 import './BlogEditor.css';
 import RichEditor from './RichEditor/RichEditor';
 
-const initialState = {
+export const blogInitialState = {
   title: '',
   description: '',
   content: '',
 };
 
 const BlogEditor = props => {
-  const [blog, setBlog] = useState(initialState);
+  const [blog, setBlog] = useState(blogInitialState);
 
   const { initialBlogState, handleSubmit, ...rest } = props;
 
@@ -27,7 +27,7 @@ const BlogEditor = props => {
   };
 
   return (
-    <div className='container' style={{ maxWidth: '900px' }}>
+    <div className='container'>
       <input
         type='text'
         placeholder='Title...'

@@ -5,3 +5,4 @@ export const HOME_ROUTE = '/home';
 export const DASHBOARD = '/dashboard';
 export const POST_BLOG = '/post-blog';
 export const PROFILE = '/profile';
+export const GET_BLOG = '/blogs/:blogId';

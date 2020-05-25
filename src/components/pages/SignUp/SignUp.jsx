@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
-import { light, dark, condition } from '../../../utils/theme';
 import { authContext } from '../../../context/authContext';
+import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
+import { light, dark, condition } from '../../../utils/theme';
 
 const mode = condition ? dark : light;
 
 const initialState = {
-  firstName: 'fs',
-  lastName: 'fs',
-  email: 'test@email.com',
+  firstName: 'user',
+  lastName: 'test',
+  email: 'user@email.com',
   password: '111111',
   confirmPassword: '111111',
-  gender: 'Male',
+  gender: '',
   country: 'Ind',
   city: 'Hyd',
-  contact: '1111111111',
+  contact: '1234567890',
 };
 
 const validatorInititalState = {
@@ -287,7 +288,7 @@ const SignUp = () => {
       <footer>
         <p>
           Already have an account? &nbsp;
-          <Link to='/sign-in'>
+          <Link to={SIGNIN_ROUTE}>
             Sign in <i className='fas fa-sign-in-alt'></i>
           </Link>
         </p>

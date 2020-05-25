@@ -5,6 +5,7 @@ import LandingPage from '../pages/LandingPage/LandingPage';
 import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
 import Home from '../pages/Home/Home';
+import Blog from './Blog/Blog';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import Profile from '../pages/Profile/Profile';
@@ -18,6 +19,7 @@ import {
   DASHBOARD,
   PROFILE,
   POST_BLOG,
+  GET_BLOG,
 } from '../../constants/routesNomenclature';
 import { light, dark, condition } from '../../utils/theme';
 
@@ -33,6 +35,9 @@ const Routes = () => {
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />
+              </PrivateRoute>
+              <PrivateRoute path={GET_BLOG}>
+                <Blog />
               </PrivateRoute>
               <PrivateRoute path={DASHBOARD}>
                 <Dashboard />

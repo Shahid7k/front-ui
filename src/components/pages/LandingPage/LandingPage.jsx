@@ -52,6 +52,7 @@ const LandingPage = () => {
               className='homeIcons'
               style={{ textAlign: 'left' }}
               src='https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png'
+              alt='Users'
             />
             <div className='text'>
               <strong className='heading'>
@@ -64,6 +65,7 @@ const LandingPage = () => {
             <img
               className='homeIcons'
               src='https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png'
+              alt='Blogs'
             />
             <div className='text'>
               <strong className='heading'>
@@ -75,6 +77,7 @@ const LandingPage = () => {
             <img
               className='homeIcons'
               src='https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png'
+              alt='Q&A'
             />
             <div className='text'>
               <strong className='heading'>

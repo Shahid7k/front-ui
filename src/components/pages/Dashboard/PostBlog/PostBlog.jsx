@@ -3,15 +3,10 @@ import '../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg
 import BlogEditor from '../../BlogEditor/BlogEditor';
 import { authContext } from '../../../../context/authContext';
 import { postBlog } from '../../../../requests/blog';
-
-const initialState = {
-  title: 'Test Blog',
-  description: 'Testing the blog',
-  content: `<p>Test Data Entered</p><ul><li>Lorem Ipsum</li>/ul>`,
-};
+import { blogInitialState } from '../../BlogEditor/BlogEditor';
 
 const PostBlog = () => {
-  const [initialBlogState, setInitialBlogState] = useState(initialState);
+  const [initialBlogState, setInitialBlogState] = useState(blogInitialState);
 
   const { userAuth } = useContext(authContext);
 

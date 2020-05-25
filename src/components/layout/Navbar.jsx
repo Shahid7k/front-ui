@@ -79,68 +79,70 @@ const getNoAuthLinks = () => (
 );
 
 const getAuthLinks = handleLogout => (
-  <ul className='my-auto'>
-    <li>
-      <NavLink to={HOME_ROUTE} className='text-decoration-none'>
-        Home
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to={DASHBOARD} className='text-decoration-none'>
-        Dashboard
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to={PROFILE} className='text-decoration-none'>
-        Profile
-      </NavLink>
-    </li>
-
-    <li>
-      <NavLink to='#' className='text-decoration-none' onClick={handleLogout}>
-        Log out
-      </NavLink>
-    </li>
-  </ul>
-  // <div className='dropdown'>
-  //   <button
-  //     className='btn btn-dark nobg dropdown-toggle font15'
-  //     type='button'
-  //     id='dropdownMenuButton'
-  //     data-toggle='dropdown'
-  //     aria-haspopup='true'
-  //     aria-expanded='false'
-  //   >
-  //     {'Hi User'}
-  //   </button>
-  //   <div className='dropdown-menu font12' aria-labelledby='dropdownMenuButton'>
-  //     <NavLink
-  //       to='/'
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
+  // <ul className='my-auto'>
+  //   <li>
+  //     <NavLink to={HOME_ROUTE} className='text-decoration-none'>
   //       Home
   //     </NavLink>
-  //     <NavLink
-  //       to={DASHBOARD}
-  //       className=' nobg text-dark dropdown-item text-decoration-none'
-  //     >
+  //   </li>
+  //   <li>
+  //     <NavLink to={DASHBOARD} className='text-decoration-none'>
   //       Dashboard
   //     </NavLink>
-  //     <NavLink
-  //       to={PROFILE}
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
+  //   </li>
+  //   <li>
+  //     <NavLink to={PROFILE} className='text-decoration-none'>
   //       Profile
   //     </NavLink>
+  //   </li>
 
-  //     <NavLink
-  //       to='#'
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
+  //   <li>
+  //     <NavLink to='#' className='text-decoration-none' onClick={handleLogout}>
   //       Log out
   //     </NavLink>
-  //   </div>
-  // </div>
+  //   </li>
+  // </ul>
+
+  <div className='dropdown'>
+    <button
+      className='btn btn-dark nobg dropdown-toggle font15'
+      type='button'
+      id='dropdownMenuButton'
+      data-toggle='dropdown'
+      aria-haspopup='true'
+      aria-expanded='false'
+    >
+      {'Hi User'}
+    </button>
+    <div className='dropdown-menu font12' aria-labelledby='dropdownMenuButton'>
+      <NavLink
+        to={HOME_ROUTE}
+        className='nobg text-dark dropdown-item text-decoration-none'
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to={DASHBOARD}
+        className=' nobg text-dark dropdown-item text-decoration-none'
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        to={PROFILE}
+        className='nobg text-dark dropdown-item text-decoration-none'
+      >
+        Profile
+      </NavLink>
+
+      <NavLink
+        to='#'
+        className='nobg text-dark dropdown-item text-decoration-none'
+        onClick={handleLogout}
+      >
+        Log out
+      </NavLink>
+    </div>
+  </div>
 );
 
 Navbar.propTypes = {
