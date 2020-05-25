@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { authContext } from '../../context/AuthContext';
+import { authContext } from '../../context/1AuthContext';
 import { LANDING_ROUTE } from '../../constants/routesNomenclature';
 
 const PrivateRoute = ({ path, children }) => {

@@ -10,7 +10,7 @@ import {
   HOME_ROUTE,
   POST_BLOG,
 } from '../../constants/routesNomenclature';
-import { authContext } from '../../context/AuthContext';
+import { authContext } from '../../context/1AuthContext';
 import { logout } from '../../requests/auth';
 
 const Navbar = ({ title, icon }) => {

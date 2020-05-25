@@ -11,6 +11,7 @@ import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import Profile from '../pages/Profile/Profile';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
+import AllQAs from '../pages/AllQAs/AllQAs';
 import {
   LANDING_ROUTE,
   SIGNIN_ROUTE,
@@ -20,6 +21,7 @@ import {
   PROFILE,
   POST_BLOG,
   GET_BLOG,
+  ALLQA_ROUTE,
 } from '../../constants/routesNomenclature';
 import { light, dark, condition } from '../../utils/theme';
 
