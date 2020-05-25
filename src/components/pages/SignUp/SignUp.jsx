@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {mode} from '../../../utils/theme';
+import { signUpUser } from '../../../requests/auth';
+import { authContext } from '../../../context/AuthContext';
+import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
+import { light, dark, condition } from '../../../utils/theme';
+import { alertContext } from '../../../context/AlertContext';
+
+const mode = condition ? dark : light;
 
 const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
+  firstName: 'user',
+  lastName: 'test',
+  email: 'user@email.com',
+  password: '111111',
+  confirmPassword: '111111',
   gender: '',
-  country: '',
-  city: '',
-  contact: '',
+  country: 'Ind',
+  city: 'Hyd',
+  contact: '1234567890',
 };
 
 const validatorInititalState = {
@@ -36,10 +42,10 @@ const validatorInititalState = {
 
   password: {
     error: false,
-    hasError: pwd =>
-      !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
-        pwd
-      ),
+    hasError: pwd => false,
+    // !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
+    //   pwd
+    // ),
     message:
       'password should be at least 8 characters long with one of (a-z, A-Z, 0-9, special characters)',
   },
@@ -71,6 +77,9 @@ const validatorInititalState = {
 };
 
 const SignUp = () => {
+  const { setAuthStatus } = React.useContext(authContext);
+  const { addAlert } = React.useContext(alertContext);
+
   const [formData, setFormData] = useState({ ...initialState });
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
@@ -93,10 +102,17 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    alert('Your details have been recorded');
-    setFormData({ ...initialState });
+    const { confirmPassword, ...rest } = formData;
+    const response = await signUpUser(rest);
+    console.log(response);
+    if (response.data) {
+      addAlert('Account got created', 'success');
+      setAuthStatus(response.data);
+    } else if (response.error) {
+      addAlert(response.error.data.error, 'danger');
+    }
   };
 
   const {
@@ -111,9 +127,9 @@ const SignUp = () => {
   } = formData;
 
   return (
-    <div className='form-container' >
-      <div className='form-wrap'style={mode} >
-        <h1 >Sign Up</h1>
+    <div className='form-container'>
+      <div className='form-wrap' style={mode}>
+        <h1>Sign Up</h1>
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -272,14 +288,13 @@ const SignUp = () => {
       <footer>
         <p>
           Already have an account? &nbsp;
-          <Link to='/sign-in'>
+          <Link to={SIGNIN_ROUTE}>
             Sign in <i className='fas fa-sign-in-alt'></i>
           </Link>
         </p>
       </footer>
     </div>
- 
- );
+  );
 };
 
 const spanStyle = {

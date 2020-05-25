@@ -7,8 +7,8 @@ const BlogCard = props => {
   } = props;
 
   return (
-    <div className='card'>
-      <img src={image} className='card-img-top' alt='Card image cap' />
+    <div className='card' style={{ cursor: 'pointer' }}>
+      <img src={image} className='card-img-top' alt='Card Image' />
       <div className='card-body'>
         <p className='card-text'>{title}</p>
         <p className='card-text'>{description}</p>

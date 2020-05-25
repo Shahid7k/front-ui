@@ -23,7 +23,9 @@ const AuthContextProvider = ({ children }) => {
   // }, [userAuth]);
 
   if (userAuth.token) {
-    axiosClient.defaults.headers.common['Authorization'] = userAuth.token;
+    axiosClient.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${userAuth.token}`;
   }
 
   return (
