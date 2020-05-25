@@ -10,7 +10,7 @@ import {
   HOME_ROUTE,
   POST_BLOG,
 } from '../../constants/routesNomenclature';
-import { authContext } from '../../context/1AuthContext';
+import { authContext } from '../../context/AuthContext';
 import { logout } from '../../requests/auth';
 
 const Navbar = ({ title, icon }) => {
@@ -118,7 +118,7 @@ const getAuthLinks = handleLogout => (
   // </ul>
 
   <Fragment>
-    <ul className='my-auto'>
+    <ul className='my-auto ml-auto'>
       <li>
         <NavLink to={HOME_ROUTE} className='text-decoration-none'>
           Home

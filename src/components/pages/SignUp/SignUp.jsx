@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
-import { authContext } from '../../../context/1AuthContext';
+import { authContext } from '../../../context/AuthContext';
 import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
 import { light, dark, condition } from '../../../utils/theme';
 import { alertContext } from '../../../context/AlertContext';

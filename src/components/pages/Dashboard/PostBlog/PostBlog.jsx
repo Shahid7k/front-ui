@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import '../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useHistory } from 'react-router-dom';
 import BlogEditor from '../../BlogEditor/BlogEditor';
-import { authContext } from '../../../../context/1AuthContext';
+import { authContext } from '../../../../context/AuthContext';
 import { DASHBOARD } from '../../../../constants/routesNomenclature';
 import { alertContext } from '../../../../context/AlertContext';
 import { postBlog } from '../../../../requests/blog';

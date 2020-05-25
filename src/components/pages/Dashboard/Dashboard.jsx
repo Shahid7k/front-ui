@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { POST_BLOG } from '../../../constants/routesNomenclature';
-import { authContext } from '../../../context/1AuthContext';
+import { authContext } from '../../../context/AuthContext';
 import BlogCard from '../../layout/BlogCard';
 import { getBlogsByUserId } from '../../../requests/blog';
 import { BarLoader } from 'react-spinners';
