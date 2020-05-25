@@ -67,9 +67,12 @@ const RichEditor = props => {
 
   useEffect(() => {
     if (initialBlogState.content) {
-      const contentState = stateFromHTML(initialBlogState.content);
+      const temp1 = initialBlogState.content.replace('<img', '<figure><img');
+      const temp2 = temp1.replace('width: auto"/>', 'width: auto"/></figure>');
+      const contentState = stateFromHTML(temp2);
       const editorState = EditorState.createWithContent(contentState);
       setEditorState(editorState);
+      console.log(editorState);
     }
   }, [initialBlogState]);
 

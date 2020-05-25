@@ -7,7 +7,7 @@ export const postBlog = async (userId, blogData) => {
       `http://localhost:8080/post/new/${userId}`,
       blogData
     );
-    return res.data;
+    return { data: res.data };
   } catch (error) {
     const {
       response: { data, status },

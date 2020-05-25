@@ -1,4 +1,4 @@
-Reset */ * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,6 +12,21 @@ Reset */ * {
   --danger-color: #dc3545;
   --success-color: #28a745;
   --link-color: #49c1a2;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-iteration-count: 1;
+  animation-duration: 500ms;
 }
 
 /* Main Styling */
@@ -235,14 +250,6 @@ img {
   background: var(--light-color);
   color: #333;
   border-radius: 5px;
-}
-
-.alert {
-  padding: 0.7rem;
-  margin: 1rem 0;
-  opacity: 0.9;
-  background: var(--light-color);
-  color: #333;
 }
 
 /* .btn-primary,

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
-import { authContext } from '../../../context/authContext';
+import { authContext } from '../../../context/AuthContext';
 import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
 import { light, dark, condition } from '../../../utils/theme';
+import { alertContext } from '../../../context/AlertContext';
 
 const mode = condition ? dark : light;
 
@@ -77,13 +78,12 @@ const validatorInititalState = {
 
 const SignUp = () => {
   const { setAuthStatus } = React.useContext(authContext);
+  const { addAlert } = React.useContext(alertContext);
 
   const [formData, setFormData] = useState({ ...initialState });
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
   });
-
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -108,9 +108,10 @@ const SignUp = () => {
     const response = await signUpUser(rest);
     console.log(response);
     if (response.data) {
+      addAlert('Account got created', 'success');
       setAuthStatus(response.data);
-    } else {
-      setErrorMessage(response.error.data.error);
+    } else if (response.error) {
+      addAlert(response.error.data.error, 'danger');
     }
   };
 
@@ -130,7 +131,6 @@ const SignUp = () => {
       <div className='form-wrap' style={mode}>
         <h1>Sign Up</h1>
         <p>It's free and only takes a minute</p>
-        {errorMessage && <p className='my-3 text-danger'>{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <label htmlFor='firstName'>First Name</label>
