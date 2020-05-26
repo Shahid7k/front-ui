@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,5 +23,20 @@ function App() {
     </div>
   );
 }
+=======
+import Routes from './components/pages/Routes';
+import './App.css';
+import AlertProvider from './context/AlertContext';
+import Alert from './components/commonComponents/Alert';
+
+const App = () => {
+  return (
+    <AlertProvider>
+      <Alert />
+      <Routes />
+    </AlertProvider>
+  );
+};
+>>>>>>> 22c6864374de2f3bfed5682a435ad72b84907606
 
 export default App;
