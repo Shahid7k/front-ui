@@ -1,7 +1,8 @@
 import React, {useState,useEffect} from 'react';
+import {NavLink} from 'react-router-dom';
 import './profile.css';
 import SearchBar from '../../layout/SearchBar';
-import { mode } from '../../../utils/theme';
+// import { mode } from '../../../utils/theme';
 import axios from 'axios';
 import {NOTFOUND, LOADING} from '../../layout/otherConstants';
 import UserCard from './UserCard';
@@ -50,6 +51,7 @@ const Profiles = () => {
       
         <img src="https://marketplace.canva.com/EADan4b2aiE/1/0/800w/canva-photo-of-triangle-shape-digital-wallpaper-KOZl2W4wCi8.jpg"
         className="bg-still"
+        alt="BackGroundPic"
         />   
         
         <div className="container text-c"  >
@@ -64,7 +66,10 @@ const Profiles = () => {
             {state.loading?
                 LOADING()    
             :""}
-            {filterSearch.length==0 && !state.loading?NOTFOUND():filterSearch.map((user,i)=><div key={i} className="p-4"><UserCard user={user} /> </div>)}
+            {filterSearch.length===0 && !state.loading?NOTFOUND():filterSearch.map((user,i)=><div key={i} className="p-4">
+            <NavLink to={`/profile/${user._id}`} className='text-decoration-none'>
+              <UserCard user={user} /> 
+            </NavLink></div>)}
         </div>
 
       </div>

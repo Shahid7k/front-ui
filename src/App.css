@@ -292,6 +292,12 @@ img {
   color: #fff;
 }
 
+
+
+.btn:hover {
+  opacity: 0.8;
+} */
+
 .btn-white,
 .bg-white,
 .badge-white,
@@ -300,11 +306,6 @@ img {
   color: #333;
   border: #ccc solid 1px;
 }
-
-.btn:hover {
-  opacity: 0.8;
-} */
-
 .bg-light,
 .badge-light {
   border: #ccc solid 1px;
@@ -620,5 +621,10 @@ footer a {
   display: flex;
   flex-wrap: wrap;
 }
+
+.bg-mint-cream{
+  background:rgba(245, 255, 250,0.5);
+}
+
 
 /* ------------------S-H-A-H-I-D------------------------ */

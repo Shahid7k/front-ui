@@ -15,5 +15,11 @@
 .userCard{
     /* min-width: max-content; */
     width: 15rem;
-    height: 15rem;
+    height: 15rem;  
+    transition: 0.1s;
+
+}
+
+.userCard:hover{
+    transform: scale(1.02);
 }
