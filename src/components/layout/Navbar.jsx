@@ -5,7 +5,7 @@ import {
   SIGNIN_ROUTE,
   SIGNUP_ROUTE,
   DASHBOARD,
-  PROFILE,
+  ALLPROFILES,
   ALLQA_ROUTE,
   HOME_ROUTE,
 } from '../../constants/routesNomenclature';
@@ -92,7 +92,7 @@ const getAuthLinks = handleLogout => (
       </NavLink>
     </li>
     <li>
-      <NavLink to={PROFILE} className='text-decoration-none'>
+      <NavLink to={ALLPROFILES} className='text-decoration-none'>
         Profile
       </NavLink>
     </li>
@@ -128,7 +128,7 @@ const getAuthLinks = handleLogout => (
   //       Dashboard
   //     </NavLink>
   //     <NavLink
-  //       to={PROFILE}
+  //       to={ALLPROFILES}
   //       className='nobg text-dark dropdown-item text-decoration-none'
   //     >
   //       Profile
