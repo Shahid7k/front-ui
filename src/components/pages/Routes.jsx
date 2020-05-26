@@ -7,6 +7,8 @@ import SignIn from '../pages/SignIn/SignIn';
 import Home from '../pages/Home/Home';
 import Blog from './Blog/Blog';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import Profiles from '../pages/Profiles/Profiles';
+import SingleProfile from '../pages/Profiles/SingleProfile';
 import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import Profile from '../pages/Profile/Profile';
 import PrivateRoute from '../routeHandling/PrivateRoute';
@@ -18,6 +20,9 @@ import {
   SIGNUP_ROUTE,
   HOME_ROUTE,
   DASHBOARD,
+  ALLQA_ROUTE,
+  ALLPROFILES,
+  USERPROFILE,
   PROFILE,
   POST_BLOG,
   GET_BLOG,
@@ -47,6 +52,15 @@ const Routes = () => {
               <PrivateRoute path={DASHBOARD}>
                 <Dashboard />
               </PrivateRoute>
+              <PublicRoute path={ALLPROFILES}>
+                <Profiles />
+              </PublicRoute>
+              <PublicRoute path={ ALLQA_ROUTE}>
+                <AllQAs />
+              </PublicRoute>
+              <PublicRoute path={ USERPROFILE}>
+                <SingleProfile />
+              </PublicRoute>
               <PrivateRoute path={POST_BLOG}>
                 <PostBlog />
               </PrivateRoute>

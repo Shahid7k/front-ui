@@ -1,8 +1,8 @@
-import React,{Frame, useState, useEffect} from 'react';
+import React,{ useState, useEffect} from 'react';
 import SearchBar from '../../layout/SearchBar';
 import QuesCard from './QuesCard';
 import {NOTFOUND, LOADING} from '../../layout/otherConstants';
-import {listApi} from  './api';
+// import {listApi} from  './api';
 import axios from 'axios';
 import './../LandingPage/landingPage.css';
 
@@ -56,7 +56,7 @@ const AllQAs=()=>{
             {state.loading?
                 LOADING()    
             :""}
-            {filterSearch.length==0 && !state.loading?NOTFOUND():filterSearch.map((post,i)=><div><QuesCard key={i} ques={post} /></div>)}
+            {filterSearch.length===0 && !state.loading?NOTFOUND():filterSearch.map((post,i)=><div><QuesCard key={i} ques={post} /></div>)}
         </div>
        
     </div>

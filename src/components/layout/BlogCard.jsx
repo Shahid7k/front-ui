@@ -7,12 +7,14 @@ const BlogCard = props => {
   } = props;
 
   return (
-    <div className='card' style={{ cursor: 'pointer' }}>
-      <img src={image} className='card-img-top' alt='Card Image' />
+    <div className='card'>
+      <img src={image} className='card-img-top' alt='Card cap' />
+
       <div className='card-body'>
         <p className='card-text'>{title}</p>
         <p className='card-text'>{description}</p>
       </div>
+      <div className="card-text text-italic">{content}</div>
     </div>
   );
 };
