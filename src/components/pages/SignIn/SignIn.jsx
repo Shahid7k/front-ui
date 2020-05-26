@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
-import { authContext } from '../../../context/authContext';
-import {mode} from '../../../utils/theme';
+import { authContext } from '../../../context/AuthContext';
+import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
+import { light, dark, condition } from '../../../utils/theme';
+
+const mode = condition ? dark : light;
 
 const initialState = {
   email: '',
@@ -54,7 +57,7 @@ const SignIn = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const data = await signInUser({ emailId: email, password });
+    const data = await signInUser({ email, password });
     // console.log(data);
     if (data) {
       setAuthStatus(data);
@@ -108,7 +111,7 @@ const SignIn = () => {
       <footer>
         <p>
           Don't have an account? &nbsp;
-          <Link to='/sign-up'>
+          <Link to={SIGNUP_ROUTE}>
             Sign up <i className='fas fa-user-plus'></i>
           </Link>
         </p>

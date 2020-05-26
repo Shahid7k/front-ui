@@ -1,4 +1,4 @@
-Reset */ * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,6 +14,21 @@ Reset */ * {
   --link-color: #49c1a2;
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-iteration-count: 1;
+  animation-duration: 500ms;
+}
+
 /* Main Styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,7 +36,6 @@ body {
   line-height: 1.7rem;
   background-color: #fff;
   color: #333;
-  min-width: max-content;
 }
 
 a {
@@ -236,14 +250,6 @@ img {
   background: var(--light-color);
   color: #333;
   border-radius: 5px;
-}
-
-.alert {
-  padding: 0.7rem;
-  margin: 1rem 0;
-  opacity: 0.9;
-  background: var(--light-color);
-  color: #333;
 }
 
 /* .btn-primary,
@@ -567,36 +573,35 @@ footer a {
 .font01 {
   font-size: 0.1em;
 }
-.toolbar-class{
+.toolbar-class {
   color: black !important;
 }
-.text-c{
+.text-c {
   text-align: center !important;
-  width:400px;
+  width: 400px;
 }
 
-.bg-still{
+.bg-still {
   position: fixed;
-  top:0;
-  right:0;
+  top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
   z-index: -1;
 }
 
-.fl-l{
+.fl-l {
   float: left;
 }
-.fl-r{
+.fl-r {
   float: right;
 }
 
-.h-50{
+.h-50 {
   height: 50px;
 }
 
-
-.rotateZ{
+.rotateZ {
   transform: rotateZ(200deg);
   height: 50px;
   width: auto;
@@ -612,9 +617,7 @@ footer a {
   }
 }
 
-
-
-.d-flex-wrap{
+.d-flex-wrap {
   display: flex;
   flex-wrap: wrap;
 }
@@ -622,9 +625,6 @@ footer a {
 .bg-mint-cream{
   background:rgba(245, 255, 250,0.5);
 }
-
-
-
 
 
 /* ------------------S-H-A-H-I-D------------------------ */
