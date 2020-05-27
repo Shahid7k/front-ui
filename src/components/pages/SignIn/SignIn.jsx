@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
 import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
-import { light, dark, condition } from '../../../utils/theme';
+import { mode } from '../../../utils/theme';
 
-const mode = condition ? dark : light;
 
 const initialState = {
   email: '',

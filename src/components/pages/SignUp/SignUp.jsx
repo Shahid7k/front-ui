@@ -9,7 +9,7 @@ import { alertContext } from '../../../context/AlertContext';
 const mode = condition ? dark : light;
 
 const initialState = {
-  firstName: 'user',
+  userName: 'user',
   lastName: 'test',
   email: 'user@email.com',
   password: '111111',
@@ -17,11 +17,12 @@ const initialState = {
   gender: '',
   country: 'Ind',
   city: 'Hyd',
-  contact: '1234567890',
+  profession:"",
+  phoneNo: '1234567890',
 };
 
 const validatorInititalState = {
-  firstName: {
+  userName: {
     error: false,
     hasError: name => name.trim().length < 3,
     message: 'Please enter a valid first name (min. of 3 characters)',
@@ -67,12 +68,17 @@ const validatorInititalState = {
     hasError: name => name.trim().length === 0,
     message: 'Please enter city',
   },
+  profession: {
+    error: false,
+    hasError: name => name.trim().length === 0,
+    message: 'Please tell us who you are',
+  },
 
-  contact: {
+  phoneNo: {
     error: false,
     hasError: number =>
       !/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(number),
-    message: 'Please enter a valid first name (min. of 3 characters)',
+    message: 'Please enter a Phone number',
   },
 };
 
@@ -116,14 +122,14 @@ const SignUp = () => {
   };
 
   const {
-    firstName,
-    lastName,
+    userName,
     email,
     password,
     confirmPassword,
     country,
     city,
-    contact,
+    profession,
+    phoneNo,
   } = formData;
 
   return (
@@ -133,23 +139,23 @@ const SignUp = () => {
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
-            <label htmlFor='firstName'>First Name</label>
+            <label htmlFor='userName'>User Name</label>
             <input
               className='form-control'
               type='text'
-              name='firstName'
-              value={firstName}
+              name='userName'
+              value={userName}
               onChange={handleChange}
               onBlur={handleValidatorChange}
             />
-            {formDataValidator.firstName.error && (
+            {formDataValidator.userName.error && (
               <span style={spanStyle}>
-                {formDataValidator.firstName.message}
+                {formDataValidator.userName.message}
               </span>
             )}
           </div>
 
-          <div className='form-group'>
+          {/* <div className='form-group'>
             <label htmlFor='lastName'>Last Name</label>
             <input
               className='form-control'
@@ -164,7 +170,7 @@ const SignUp = () => {
                 {formDataValidator.lastName.message}
               </span>
             )}
-          </div>
+          </div> */}
 
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
@@ -261,17 +267,32 @@ const SignUp = () => {
           </div>
 
           <div className='form-group'>
-            <label htmlFor='contact'>Contact Number</label>
+            <label htmlFor='profession'>Profession</label>
             <input
               className='form-control'
-              type='tel'
-              name='contact'
-              value={contact}
+              type='text'
+              name='profession'
+              value={profession}
               onChange={handleChange}
               onBlur={handleValidatorChange}
             />
-            {formDataValidator.contact.error && (
-              <span style={spanStyle}>{formDataValidator.contact.message}</span>
+            {formDataValidator.profession.error && (
+              <span style={spanStyle}>{formDataValidator.profession.message}</span>
+            )}
+          </div>
+
+          <div className='form-group'>
+            <label htmlFor='phoneNo'>phoneNo Number</label>
+            <input
+              className='form-control'
+              type='tel'
+              name='phoneNo'
+              value={phoneNo}
+              onChange={handleChange}
+              onBlur={handleValidatorChange}
+            />
+            {formDataValidator.phoneNo.error && (
+              <span style={spanStyle}>{formDataValidator.phoneNo.message}</span>
             )}
           </div>
 

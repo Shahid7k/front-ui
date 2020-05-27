@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import {useParams ,useHistory} from 'react-router-dom';
+import {useParams ,useHistory, Link} from 'react-router-dom';
 import axios from 'axios';
 import {mode, condition } from '../../../utils/theme';
 
@@ -53,7 +53,7 @@ const SingleProfile =()=>{
     }
 
     // console.log("-->",JSON.stringify(userId))
-    const {userName,profession,city,country,emailId,phoneNo,gender,about} = state.userData;
+    const {userName,profession,city,country,email,phoneNo,gender,about} = state.userData;
     return (
         <div className="bg-mint-cream container" style={{minHeight:"100vh"}} >
             <div className="fl-l">
@@ -63,7 +63,7 @@ const SingleProfile =()=>{
                   style={mode}>Back</button>
             </div>
             <div className=" text-right " >
-                <button className="btn btn-info w-10 m-2">Edit Profile</button>
+                <Link className="btn btn-info w-10 m-2" to={`/editprofile/${userId}`} >Edit Profile</Link>
                 <button className="btn btn-danger w-10 m-2">Delete Profile</button>
             </div> 
             <br/>
@@ -82,7 +82,7 @@ const SingleProfile =()=>{
                             <i className="fas fa-map-marker-alt p-2"></i>
                             { city , country}<br />
                             <i className="far fa-envelope p-2"></i>
-                            {emailId}<br />
+                            {email}<br />
                             <i className="fas fa-phone"></i>
                             {phoneNo} <br />
                             

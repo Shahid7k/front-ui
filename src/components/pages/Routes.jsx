@@ -8,9 +8,9 @@ import Home from '../pages/Home/Home';
 import Blog from './Blog/Blog';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Profiles from '../pages/Profiles/Profiles';
+import EditProfile from '../pages/Profiles/EditProfile';
 import SingleProfile from '../pages/Profiles/SingleProfile';
 import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
-import Profile from '../pages/Profile/Profile';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
 import AllQAs from '../pages/AllQAs/AllQAs';
@@ -23,14 +23,11 @@ import {
   ALLQA_ROUTE,
   ALLPROFILES,
   USERPROFILE,
-  PROFILE,
+  EDITPROFILE,
   POST_BLOG,
   GET_BLOG,
-  ALLQA_ROUTE,
 } from '../../constants/routesNomenclature';
-import { light, dark, condition } from '../../utils/theme';
-
-const mode = condition ? dark : light;
+import {mode} from '../../utils/theme';
 
 const Routes = () => {
   return (
@@ -40,18 +37,18 @@ const Routes = () => {
           <Navbar />
           <div style={{ paddingTop: '55px', minHeight: '720px' }}>
             <Switch>
-              <PrivateRoute path={HOME_ROUTE}>
+              <PublicRoute path={HOME_ROUTE}>
                 <Home />
-              </PrivateRoute>
+              </PublicRoute>
               <PublicRoute path={ALLQA_ROUTE}>
                 <AllQAs />
               </PublicRoute>
-              <PrivateRoute path={GET_BLOG}>
+              <PublicRoute path={GET_BLOG}>
                 <Blog />
-              </PrivateRoute>
-              <PrivateRoute path={DASHBOARD}>
+              </PublicRoute>
+              <PublicRoute path={DASHBOARD}>
                 <Dashboard />
-              </PrivateRoute>
+              </PublicRoute>
               <PublicRoute path={ALLPROFILES}>
                 <Profiles />
               </PublicRoute>
@@ -61,12 +58,15 @@ const Routes = () => {
               <PublicRoute path={ USERPROFILE}>
                 <SingleProfile />
               </PublicRoute>
-              <PrivateRoute path={POST_BLOG}>
+              <PublicRoute path={POST_BLOG}>
                 <PostBlog />
-              </PrivateRoute>
-              <PrivateRoute path={PROFILE}>
-                <Profile />
-              </PrivateRoute>
+              </PublicRoute>
+              <PublicRoute path={ALLPROFILES}>
+                <Profiles />
+              </PublicRoute>
+              <PublicRoute path={EDITPROFILE}>
+                <EditProfile />
+              </PublicRoute>
 
               <PublicRoute exact={true} path={LANDING_ROUTE}>
                 <LandingPage />

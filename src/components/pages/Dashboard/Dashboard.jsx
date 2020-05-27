@@ -5,6 +5,7 @@ import { authContext } from '../../../context/AuthContext';
 import BlogCard from '../../layout/BlogCard';
 import { getBlogsByUserId } from '../../../requests/blog';
 import { BarLoader } from 'react-spinners';
+import { condition } from '../../../utils/theme';
 
 const Dashboard = () => {
   const { userAuth } = useContext(authContext);
@@ -33,7 +34,7 @@ const Dashboard = () => {
 
   return (
     <Fragment>
-      <BarLoader loading={showLoader} color='#333' width={'100%'} />
+      <BarLoader loading={showLoader} color={`${condition?"#fff":"#b02"}`} width={'100%'} />
       {!showLoader && (
         <div>
           My Dashboard Page
