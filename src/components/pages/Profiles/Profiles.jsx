@@ -11,7 +11,6 @@ import UserCard from './UserCard';
 const initialState={
   usersList:[],
   sfield:"",
-  displayUnsolved:false,
   loading:true
 }
 
@@ -47,14 +46,14 @@ const Profiles = () => {
     
 
     return (
-      <div className="profileBG">
+      <div className="profileBG ">
       
         <img src="https://marketplace.canva.com/EADan4b2aiE/1/0/800w/canva-photo-of-triangle-shape-digital-wallpaper-KOZl2W4wCi8.jpg"
         className="bg-still"
         alt="BackGroundPic"
         />   
         
-        <div className="container text-c"  >
+        <div className="container text-c "  >
             <SearchBar search={onSearch} /> 
             
         </div>

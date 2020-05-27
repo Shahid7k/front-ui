@@ -6,11 +6,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-<<<<<<< HEAD
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
-=======
     "axios": "^0.19.2",
     "draft-js": "^0.11.5",
     "draft-js-import-html": "^1.4.1",
@@ -22,7 +17,6 @@
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.3",
     "react-typing-effect": "^2.0.3"
->>>>>>> 22c6864374de2f3bfed5682a435ad72b84907606
   },
   "scripts": {
     "start": "react-scripts start",

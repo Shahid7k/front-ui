@@ -10,7 +10,7 @@ const PublicRoute = ({ path, restricted, children, ...rest }) => {
 
   const REDIRECT_URL = HOME_ROUTE;
 
-  if (user._id && token && restricted) {
+  if (user!==undefined && user._id && token && restricted) {
     return <Redirect to={{ pathname: REDIRECT_URL }} />;
   }
 
