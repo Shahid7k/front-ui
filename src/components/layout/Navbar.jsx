@@ -1,150 +1,130 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { authContext } from '../../context/AuthContext';
 import {
   SIGNIN_ROUTE,
   SIGNUP_ROUTE,
   DASHBOARD,
-  ALLQA_ROUTE,
+  POST_BLOG,
   HOME_ROUTE,
-  ALLPROFILES,
+  SINGLEPROFILE,
+  PROFILES,
 } from '../../constants/routesNomenclature';
-// import { authContext } from '../../context/authContext';
-import {authContext} from '../../context/AuthContext';
 import { logout } from '../../requests/auth';
+
 const Navbar = ({ title, icon }) => {
   const { userAuth, setUnAuthStatus } = useContext(authContext);
+
   const handleLogout = () => {
     logout();
     setUnAuthStatus();
   };
+
   return (
     <div className='navbar navbar-expand-lg navBar'>
       <h1>
         <NavLink to='/' className='text-decoration-none '>
           <i className={icon} /> {title}
         </NavLink>
-        <span>{userAuth.token ? getNavItems() : ''}</span>
       </h1>
 
-      {userAuth.token ? getAuthLinks(handleLogout) : getNoAuthLinks()}
+      {userAuth.token
+        ? getAuthLinks(userAuth.user.firstName, handleLogout)
+        : getNoAuthLinks()}
     </div>
   );
 };
-const getNavItems = () => {
-  return (
-    <>
-      <NavLink to={DASHBOARD} className='listItem text-decoration-none'>
-        {'Dash-board'}
-      </NavLink>
-      <NavLink to='#' className='listItem text-decoration-none'>
-        {'Explore'}
-      </NavLink>
-      <NavLink to={ALLPROFILES} className='listItem text-decoration-none'>
-        {'Profiles'}
-        </NavLink>
-      <NavLink to={ ALLQA_ROUTE} className='listItem text-decoration-none'>
-        {'QA'}
-      </NavLink>
-    </>
-  );
-};
+
 const getNoAuthLinks = () => (
-  <div className='dropdown'>
-    <button
-      className='btn btn-dark nobg dropdown-toggle font14'
-      type='button'
-      id='dropdownMenuButton'
-      data-toggle='dropdown'
-      aria-haspopup='true'
-      aria-expanded='false'
-    >
-      {'Log In'}
-    </button>
-    <div className='dropdown-menu font12' aria-labelledby='dropdownMenuButton'>
-      <NavLink
-        to={SIGNIN_ROUTE}
-        className='text-dark dropdown-item text-decoration-none'
-      >
-        Sign In
-      </NavLink>
-      <NavLink
-        to={SIGNUP_ROUTE}
-        className='text-dark dropdown-item text-decoration-none'
-      >
-        Sign Up
-      </NavLink>
-    </div>
-  </div>
-);
-const getAuthLinks = handleLogout => (
   <ul className='my-auto'>
     <li>
-      <NavLink to={HOME_ROUTE} className='text-decoration-none'>
-        Home
+      <NavLink to={SIGNIN_ROUTE} className='text-decoration-none'>
+        Sign In
       </NavLink>
     </li>
     <li>
-      <NavLink to={DASHBOARD} className='text-decoration-none'>
-        Dashboard
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to={ALLPROFILES} className='text-decoration-none'>
-        Profiles
-      </NavLink>
-    </li>
-    <li>
-      <NavLink to='#' className='text-decoration-none' onClick={handleLogout}>
-        Log out
+      <NavLink to={SIGNUP_ROUTE} className='text-decoration-none'>
+        Sign Up
       </NavLink>
     </li>
   </ul>
-  // <div className='dropdown'>
-  //   <button
-  //     className='btn btn-dark nobg dropdown-toggle font15'
-  //     type='button'
-  //     id='dropdownMenuButton'
-  //     data-toggle='dropdown'
-  //     aria-haspopup='true'
-  //     aria-expanded='false'
-  //   >
-  //     {'Hi User'}
-  //   </button>
-  //   <div className='dropdown-menu font12' aria-labelledby='dropdownMenuButton'>
-  //     <NavLink
-  //       to='/'
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
-  //       Home
-  //     </NavLink>
-  //     <NavLink
-  //       to={DASHBOARD}
-  //       className=' nobg text-dark dropdown-item text-decoration-none'
-  //     >
-  //       Dashboard
-  //     </NavLink>
-  //     <NavLink
-  //       to={PROFILE}
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
-  //       Profile
-  //     </NavLink>
-  //     <NavLink
-  //       to='#'
-  //       className='nobg text-dark dropdown-item text-decoration-none'
-  //     >
-  //       Log out
-  //     </NavLink>
-  //   </div>
-  // </div>
 );
+
+const getAuthLinks = (firstName, handleLogout) => (
+  <Fragment>
+    <ul className='my-auto ml-auto'>
+      <li>
+        <NavLink to={HOME_ROUTE} className='text-decoration-none'>
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={DASHBOARD} className='text-decoration-none'>
+          Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={PROFILES} className='text-decoration-none'>
+          Profiles
+        </NavLink>
+      </li>
+    </ul>
+    <div className='dropdown'>
+      <button
+        style={{ minWidth: '120px' }}
+        className='btn btn-dark nobg dropdown-toggle'
+        type='button'
+        id='dropdownMenuButton'
+        data-toggle='dropdown'
+        aria-haspopup='true'
+        aria-expanded='false'
+      >
+        {firstName || ''}
+      </button>
+      <div
+        className='dropdown-menu font12'
+        aria-labelledby='dropdownMenuButton'
+      >
+        <NavLink
+          to={POST_BLOG}
+          className='nobg text-dark dropdown-item text-decoration-nonee'
+        >
+          New Blog
+        </NavLink>
+        <NavLink
+          to={DASHBOARD}
+          className='nobg text-dark dropdown-item text-decoration-none'
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          to={SINGLEPROFILE}
+          className='nobg text-dark dropdown-item text-decoration-none'
+        >
+          My Profile
+        </NavLink>
+
+        <NavLink
+          to='#'
+          className='nobg text-dark dropdown-item text-decoration-none'
+          onClick={handleLogout}
+        >
+          Log out
+        </NavLink>
+      </div>
+    </div>
+  </Fragment>
+);
+
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string,
 };
+
 Navbar.defaultProps = {
   title: 'frontUI',
   icon: 'fas fa-blog',
 };
+
 export default Navbar;

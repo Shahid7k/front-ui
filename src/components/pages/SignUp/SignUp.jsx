@@ -9,7 +9,7 @@ import { alertContext } from '../../../context/AlertContext';
 const mode = condition ? dark : light;
 
 const initialState = {
-  userName: 'user',
+  firstName: 'user',
   lastName: 'test',
   email: 'user@email.com',
   password: '111111',
@@ -17,12 +17,12 @@ const initialState = {
   gender: '',
   country: 'Ind',
   city: 'Hyd',
-  profession:"",
+  profession: '',
   phoneNo: '1234567890',
 };
 
 const validatorInititalState = {
-  userName: {
+  firstName: {
     error: false,
     hasError: name => name.trim().length < 3,
     message: 'Please enter a valid first name (min. of 3 characters)',
@@ -122,7 +122,8 @@ const SignUp = () => {
   };
 
   const {
-    userName,
+    firstName,
+    lastName,
     email,
     password,
     confirmPassword,
@@ -139,23 +140,23 @@ const SignUp = () => {
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
-            <label htmlFor='userName'>User Name</label>
+            <label htmlFor='firstName'>First Name</label>
             <input
               className='form-control'
               type='text'
-              name='userName'
-              value={userName}
+              name='firstName'
+              value={firstName}
               onChange={handleChange}
               onBlur={handleValidatorChange}
             />
-            {formDataValidator.userName.error && (
+            {formDataValidator.firstName.error && (
               <span style={spanStyle}>
-                {formDataValidator.userName.message}
+                {formDataValidator.firstName.message}
               </span>
             )}
           </div>
 
-          {/* <div className='form-group'>
+          <div className='form-group'>
             <label htmlFor='lastName'>Last Name</label>
             <input
               className='form-control'
@@ -170,7 +171,7 @@ const SignUp = () => {
                 {formDataValidator.lastName.message}
               </span>
             )}
-          </div> */}
+          </div>
 
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
@@ -229,10 +230,10 @@ const SignUp = () => {
               onChange={handleChange}
             >
               <option value='male'>Male</option>
-              <option value='female' defaultValue>
-                Female
+              <option value='female'>Female</option>
+              <option value='other' defaultValue>
+                Other
               </option>
-              <option value='other'>Other</option>
             </select>
           </div>
 
@@ -277,12 +278,14 @@ const SignUp = () => {
               onBlur={handleValidatorChange}
             />
             {formDataValidator.profession.error && (
-              <span style={spanStyle}>{formDataValidator.profession.message}</span>
+              <span style={spanStyle}>
+                {formDataValidator.profession.message}
+              </span>
             )}
           </div>
 
           <div className='form-group'>
-            <label htmlFor='phoneNo'>phoneNo Number</label>
+            <label htmlFor='phoneNo'>Phone Number</label>
             <input
               className='form-control'
               type='tel'
