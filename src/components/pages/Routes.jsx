@@ -21,13 +21,13 @@ import {
   HOME_ROUTE,
   DASHBOARD,
   ALLQA_ROUTE,
-  ALLPROFILES,
-  USERPROFILE,
+  PROFILES,
+  SINGLEPROFILE,
   EDITPROFILE,
   POST_BLOG,
   GET_BLOG,
 } from '../../constants/routesNomenclature';
-import {mode} from '../../utils/theme';
+import { mode } from '../../utils/theme';
 
 const Routes = () => {
   return (
@@ -37,36 +37,30 @@ const Routes = () => {
           <Navbar />
           <div style={{ paddingTop: '55px', minHeight: '720px' }}>
             <Switch>
-              <PublicRoute path={HOME_ROUTE}>
+              <PrivateRoute path={HOME_ROUTE}>
                 <Home />
-              </PublicRoute>
-              <PublicRoute path={ALLQA_ROUTE}>
+              </PrivateRoute>
+              <PrivateRoute path={ALLQA_ROUTE}>
                 <AllQAs />
-              </PublicRoute>
-              <PublicRoute path={GET_BLOG}>
+              </PrivateRoute>
+              <PrivateRoute path={GET_BLOG}>
                 <Blog />
-              </PublicRoute>
-              <PublicRoute path={DASHBOARD}>
+              </PrivateRoute>
+              <PrivateRoute path={DASHBOARD}>
                 <Dashboard />
-              </PublicRoute>
-              <PublicRoute path={ALLPROFILES}>
-                <Profiles />
-              </PublicRoute>
-              <PublicRoute path={ ALLQA_ROUTE}>
-                <AllQAs />
-              </PublicRoute>
-              <PublicRoute path={ USERPROFILE}>
+              </PrivateRoute>
+              <PrivateRoute path={SINGLEPROFILE}>
                 <SingleProfile />
-              </PublicRoute>
-              <PublicRoute path={POST_BLOG}>
+              </PrivateRoute>
+              <PrivateRoute path={POST_BLOG}>
                 <PostBlog />
-              </PublicRoute>
-              <PublicRoute path={ALLPROFILES}>
+              </PrivateRoute>
+              <PrivateRoute path={PROFILES}>
                 <Profiles />
-              </PublicRoute>
-              <PublicRoute path={EDITPROFILE}>
+              </PrivateRoute>
+              <PrivateRoute path={EDITPROFILE}>
                 <EditProfile />
-              </PublicRoute>
+              </PrivateRoute>
 
               <PublicRoute exact={true} path={LANDING_ROUTE}>
                 <LandingPage />

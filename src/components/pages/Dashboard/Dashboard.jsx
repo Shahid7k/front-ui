@@ -26,17 +26,15 @@ const Dashboard = () => {
     })();
   }, []);
 
-  // const onSubmit = (e, markup) => {
-  //   console.log(e);
-  //   console.log(markup);
-  //   setContent(markup);
-  // };
-
   return (
     <Fragment>
-      <BarLoader loading={showLoader} color={`${condition?"#fff":"#b02"}`} width={'100%'} />
+      <BarLoader
+        loading={showLoader}
+        color={`${condition ? '#fff' : '#b02'}`}
+        width={'100%'}
+      />
       {!showLoader && (
-        <div>
+        <div className='container'>
           My Dashboard Page
           <div>
             <button type='submit' className='btn btn-dark btn-lg d-block'>
