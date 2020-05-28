@@ -31,7 +31,7 @@ const Home = () => {
       />
       {!showLoader && (
         <div className='container'>
-          <div className='row container'>
+          <div className='row'>
             {blogs.map((blog, index) => (
               <div
                 key={`blog-${index}`}

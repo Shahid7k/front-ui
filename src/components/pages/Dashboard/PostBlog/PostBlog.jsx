@@ -27,7 +27,7 @@ const PostBlog = () => {
   };
 
   return (
-    <div>
+    <div className='my-5'>
       <BlogEditor
         initialBlogState={initialBlogState}
         handleSubmit={handleSubmit}

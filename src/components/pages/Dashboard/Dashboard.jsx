@@ -19,7 +19,10 @@ const Dashboard = () => {
   useEffect(() => {
     (async function () {
       const res = await getBlogsByUserId(userAuth.user._id);
-      if (res.data) {
+      // console.log(res.data);
+      if (res.data.length === 0) {
+        console.log('No Blogs By this user');
+      } else if (res.data) {
         setBlogs(res.data);
       }
       setShowLoader(false);
@@ -34,7 +37,7 @@ const Dashboard = () => {
         width={'100%'}
       />
       {!showLoader && (
-        <div className='container'>
+        <div className='container my-5'>
           My Dashboard Page
           <div>
             <button type='submit' className='btn btn-dark btn-lg d-block'>

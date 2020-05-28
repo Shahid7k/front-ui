@@ -3,6 +3,7 @@ import { useParams, useHistory, Link, generatePath } from 'react-router-dom';
 import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
+import { alertContext } from '../../../context/AlertContext';
 import { BarLoader } from 'react-spinners';
 
 const initialUserState = {
@@ -11,6 +12,7 @@ const initialUserState = {
   gender: '',
   profession: '',
   about: '',
+  email: '',
   city: '',
   country: '',
   phoneNo: '',
@@ -20,17 +22,18 @@ const initialUserState = {
 
 const EditProfile = () => {
   let props = useParams();
-  const { userId } = props;
+
+  const { addAlert } = React.useContext(alertContext);
+
+  const userId = useContext(authContext).userAuth.user._id;
 
   const [user, setUser] = useState({ ...initialUserState });
-
-  const { userAuth, setAuthStatus } = useContext(authContext);
 
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     (async function () {
-      const res = await getUserById(userAuth.user._id);
+      const res = await getUserById(userId);
       // console.log(JSON.stringify(res));
       if (res.data) {
         setUser(res.data);
@@ -47,6 +50,7 @@ const EditProfile = () => {
         country,
         phoneNo,
         photo,
+        email,
         darkEnabled,
       } = res.data;
 
@@ -60,7 +64,8 @@ const EditProfile = () => {
         city,
         country,
         phoneNo,
-        // darkEnabled,
+        email,
+        darkEnabled,
       });
     })();
   }, []);
@@ -72,12 +77,15 @@ const EditProfile = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const data = await editUser(userAuth.user._id, user);
-    console.log(data);
-    if (data) {
-      setAuthStatus(data);
-    } else {
-      setUser({ ...initialUserState });
+    const response = await editUser(userId, user);
+    // console.log(data);
+    if (response.data) {
+      //   setAuthStatus(data);
+      // } else {
+      // setUser({ ...initialUserState });
+      addAlert('Profile Updated', 'success');
+    } else if (response.error) {
+      addAlert(response.error.data.error, 'danger');
     }
   };
 
@@ -92,8 +100,6 @@ const EditProfile = () => {
     gender,
     about,
   } = user;
-
-  console.log(email);
 
   return (
     <Fragment>
@@ -192,7 +198,7 @@ const EditProfile = () => {
                       placeholder='Email'
                       name='email'
                       value={email || ''}
-                      onChange={handleChange}
+                      readOnly
                     />
                     <br />
                     <i className='fas fa-phone'></i>

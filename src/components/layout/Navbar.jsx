@@ -30,7 +30,7 @@ const Navbar = ({ title, icon }) => {
       </h1>
 
       {userAuth.token
-        ? getAuthLinks(userAuth.user.firstName, handleLogout)
+        ? getAuthLinks(userAuth.user, handleLogout)
         : getNoAuthLinks()}
     </div>
   );
@@ -51,7 +51,7 @@ const getNoAuthLinks = () => (
   </ul>
 );
 
-const getAuthLinks = (firstName, handleLogout) => (
+const getAuthLinks = (user, handleLogout) => (
   <Fragment>
     <ul className='my-auto ml-auto'>
       <li>
@@ -80,7 +80,7 @@ const getAuthLinks = (firstName, handleLogout) => (
         aria-haspopup='true'
         aria-expanded='false'
       >
-        {firstName || ''}
+        {user.firstName || ''}
       </button>
       <div
         className='dropdown-menu font12'
@@ -99,7 +99,7 @@ const getAuthLinks = (firstName, handleLogout) => (
           Dashboard
         </NavLink>
         <NavLink
-          to={SINGLEPROFILE}
+          to={`/profile/${user._id}`}
           className='nobg text-dark dropdown-item text-decoration-none'
         >
           My Profile

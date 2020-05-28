@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './profile.css';
 import SearchBar from '../../layout/SearchBar';
 // import { mode } from '../../../utils/theme';
@@ -15,6 +15,8 @@ const initialState = {
 
 const Profiles = () => {
   const [state, updateState] = useState({ ...initialState });
+  const history = useHistory();
+
   useEffect(() => {
     async function getData() {
       updateState({ ...state, loading: true });
@@ -30,48 +32,49 @@ const Profiles = () => {
 
   const filterSearch = state.usersList.filter(friend => {
     if (friend.country === undefined && friend.profession === undefined)
-      return friend.userName.toLowerCase().includes(state.sfield.toLowerCase());
+      return friend.firstName
+        .toLowerCase()
+        .includes(state.sfield.toLowerCase());
     else if (friend.profession === undefined)
       return (
         friend.country.toLowerCase().includes(state.sfield.toLowerCase()) ||
-        friend.userName.toLowerCase().includes(state.sfield.toLowerCase())
+        friend.firstName.toLowerCase().includes(state.sfield.toLowerCase())
       );
     else
       return (
         friend.country.toLowerCase().includes(state.sfield.toLowerCase()) ||
         friend.profession.toLowerCase().includes(state.sfield.toLowerCase()) ||
-        friend.userName.toLowerCase().includes(state.sfield.toLowerCase())
+        friend.firstName.toLowerCase().includes(state.sfield.toLowerCase())
       );
   });
   // let filterSearch= state.usersList
-  // .filter((user) => (user.userName.toLowerCase().includes(state.sfield.toLowerCase())
+  // .filter((user) => (user.firstName.toLowerCase().includes(state.sfield.toLowerCase())
   //                   ||user.country.toLowerCase().includes(state.sfield.toLowerCase())
   //                   ||user.profession.toLowerCase().includes(state.sfield.toLowerCase()))  );
 
   return (
-    <div className='profileBG '>
+    <div className='profileBG container my-5'>
       <img
         src='https://marketplace.canva.com/EADan4b2aiE/1/0/800w/canva-photo-of-triangle-shape-digital-wallpaper-KOZl2W4wCi8.jpg'
         className='bg-still'
         alt='BackGroundPic'
       />
 
-      <div className='container text-c '>
+      <div className='text-c '>
         <SearchBar search={onSearch} />
       </div>
 
-      <div className='container d-flex-wrap'>
-        {state.loading ? LOADING() : ''}
+      {state.loading ? LOADING() : ''}
+      <div className='row'>
         {filterSearch.length === 0 && !state.loading
           ? NOTFOUND()
           : filterSearch.map((user, i) => (
-              <div key={i} className='p-4'>
-                <NavLink
-                  to={`/profile/${user._id}`}
-                  className='text-decoration-none'
-                >
-                  <UserCard user={user} />
-                </NavLink>
+              <div
+                onClick={() => history.push(`/profile/${user._id}`)}
+                key={i}
+                className='col-md-3 col-md-offset-3'
+              >
+                <UserCard user={user} />
               </div>
             ))}
       </div>

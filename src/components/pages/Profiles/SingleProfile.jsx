@@ -67,29 +67,28 @@ const SingleProfile = () => {
   } = state.userData;
 
   return (
-    <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
-      <div className='my-2'>
-        <button
-          className={`btn btn-raised btn-outline-primary m-1 `}
-          // onClick={goBack}
-          onClick={() => history.goBack()}
-          style={mode}
-        >
-          Back
-        </button>
-        {userAuth.user._id === userId && (
-          <Fragment>
-            {/* <div className=' text-right '> */}
-            <NavLink to={EDITPROFILE} className='btn btn-info w-10 m-2 ml-auto'>
-              Edit Profile
-            </NavLink>
-            <button className='btn btn-danger w-10 m-2 ml-auto'>
-              Delete Profile
-            </button>
-            {/* </div> */}
-          </Fragment>
-        )}
-      </div>
+    <div
+      className='bg-mint-cream container my-5'
+      style={{ minHeight: '100vh' }}
+    >
+      <button
+        className={`btn btn-raised btn-outline-primary mb-2 mr-2`}
+        // onClick={goBack}
+        onClick={() => history.goBack()}
+        style={mode}
+      >
+        Back
+      </button>
+      {userAuth.user._id === userId && (
+        <Fragment>
+          {/* <div className=' text-right '> */}
+          <NavLink to={EDITPROFILE} className='btn btn-info w-10 mb-2 mr-2'>
+            Edit Profile
+          </NavLink>
+          <button className='btn btn-danger w-10 mb-2'>Delete Profile</button>
+          {/* </div> */}
+        </Fragment>
+      )}
       <br />
       <div className=''>
         <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>

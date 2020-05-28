@@ -28,6 +28,7 @@ export const editUser = async (userId, userData) => {
       `http://localhost:8080/user/${userId}`,
       userData
     );
+    console.log(res);
     return { data: res.data };
   } catch (error) {
     const {
