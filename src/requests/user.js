@@ -1,4 +1,4 @@
-import axiosClient from '../utils/axiosClient';
+import axiosClient, {tokenizedAxiosClient} from '../utils/axiosClient';
 
 export const getUserById = async userId => {
   console.log('get (getUserById) action called');
@@ -24,7 +24,7 @@ export const editUser = async (userId, userData) => {
   console.log('put (editUser) action called');
   console.log(userData);
   try {
-    const res = await axiosClient.put(
+    const res = await tokenizedAxiosClient.put(
       `http://localhost:8080/user/${userId}`,
       userData
     );

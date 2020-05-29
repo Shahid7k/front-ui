@@ -8,7 +8,7 @@ const PrivateRoute = ({ path, children }) => {
 
   const REDIRECT_URL = LANDING_ROUTE;
 
-  if (userAuth.user._id && userAuth.token) {
+  if (userAuth.user!==undefined && userAuth.user._id && userAuth.token) {
     return (
       <Route exact path={path}>
         {children}

@@ -1,9 +1,30 @@
-import React from 'react';
+import React ,{useState,useEffect} from 'react';
 import ReactTypingEffect from 'react-typing-effect';
 import Quote from './Quote';
+import axios from 'axios';
 import './landingPage.css';
 
+const initialCount={
+  blogCount:0,
+  userCount:0,
+  qaCount:0,
+}
+
 const LandingPage = () => {
+  const [counts, setCounts]=useState({...initialCount});
+  useEffect(()=>{
+    async function getData(){
+        const a=await axios.get("http://localhost:8080/countPosts")
+        const b=await axios.get("http://localhost:8080/usersCount")
+        const c=await axios.get("http://localhost:8080/countqa")
+        setCounts({blogCount:a.data.length,userCount:b.data.length,qaCount:c.data.length})
+    }
+    getData()
+},[])
+
+  const {userCount,blogCount,qaCount} = counts
+
+  console.log("Counts: ",counts)
   return (
     <div>
       <div className='BigOne'>
@@ -52,7 +73,7 @@ const LandingPage = () => {
             />
             <div className='text'>
               <strong className='heading'>
-                <span className='excerpt'>100 </span> {' Users'}{' '}
+                <span className='excerpt'>{userCount} </span> {' Users'}{' '}
               </strong>
             </div>
           </div>
@@ -65,7 +86,7 @@ const LandingPage = () => {
             />
             <div className='text'>
               <strong className='heading'>
-                <span className='excerpt'>100 </span> {'Blogs'}{' '}
+                <span className='excerpt'>{blogCount} </span> {' Blogs'}{' '}
               </strong>
             </div>
           </div>
@@ -77,8 +98,8 @@ const LandingPage = () => {
             />
             <div className='text'>
               <strong className='heading'>
-                <span className='excerpt'>100 </span>
-                {'Q&A'}{' '}
+                <span className='excerpt'>{qaCount} </span>
+                {' Q&A'}{' '}
               </strong>
             </div>
           </div>

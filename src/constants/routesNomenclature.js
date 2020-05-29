@@ -7,5 +7,6 @@ export const PROFILES = '/profiles';
 export const SINGLEPROFILE = '/profile/:userId';
 export const EDITPROFILE = '/editprofile/:userId';
 export const ALLQA_ROUTE = '/allqa';
+export const SINGLEQUES_ROUTE = '/question/:quesId';
 export const POST_BLOG = '/post-blog';
 export const GET_BLOG = '/blogs/:blogId';

@@ -66,8 +66,8 @@ const AllQAs = () => {
         {filterSearch.length === 0 && !state.loading
           ? NOTFOUND()
           : filterSearch.map((post, i) => (
-              <div>
-                <QuesCard key={i} ques={post} />
+              <div key={i}>
+                <QuesCard  ques={post} />
               </div>
             ))}
       </div>

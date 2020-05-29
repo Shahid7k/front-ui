@@ -11,6 +11,7 @@ const initialUserState = {
   gender: '',
   profession: '',
   about: '',
+  email:'',
   city: '',
   country: '',
   phoneNo: '',
@@ -21,17 +22,19 @@ const initialUserState = {
 const EditProfile = () => {
   let props = useParams();
   const { userId } = props;
-
+  
   const [user, setUser] = useState({ ...initialUserState });
 
   const { userAuth, setAuthStatus } = useContext(authContext);
 
   const [showLoader, setShowLoader] = useState(true);
 
+  const userDetails= new FormData()
+
   useEffect(() => {
     (async function () {
-      const res = await getUserById(userAuth.user._id);
-      // console.log(JSON.stringify(res));
+      const res = await getUserById(userId);
+      console.log(JSON.stringify(res));
       if (res.data) {
         setUser(res.data);
       }
@@ -47,6 +50,7 @@ const EditProfile = () => {
         country,
         phoneNo,
         photo,
+        email,
         darkEnabled,
       } = res.data;
 
@@ -60,26 +64,11 @@ const EditProfile = () => {
         city,
         country,
         phoneNo,
-        // darkEnabled,
+        email,
+        darkEnabled,
       });
     })();
   }, []);
-
-  const handleChange = e => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const data = await editUser(userAuth.user._id, user);
-    console.log(data);
-    if (data) {
-      setAuthStatus(data);
-    } else {
-      setUser({ ...initialUserState });
-    }
-  };
 
   const {
     firstName,
@@ -93,6 +82,98 @@ const EditProfile = () => {
     about,
   } = user;
 
+
+      let gen="GENIOUS";
+      console.log(gen);
+
+  const handleChange = e => {
+    const name=e.target.name;
+    const value=e.target.value;
+    setUser({ ...user, [e.target.name]: e.target.value });
+    userDetails.set(name,value)
+  };
+
+//   submit = event =>{
+//     event.preventDefault()
+//     if(this.isValid()){
+//         this.setState({loading:true})
+        
+//         console.log("UserData : ",this.userData)
+//         this.updateUser(this.userData)
+//         .then(data=>{
+//             if(data.error) {
+//                 console.log("Error occurred",this.state.error)
+//                 this.setState({error:data.error})
+//             }
+//             else {
+
+//                 console.log("UPDATED USERRRR!!!!!!",false)
+//                 updateUser(data,()=>this.setState({ error:"Updated!" })
+//                 )
+//                 console.log("UPDATED USERRRR!!!!!!",true)
+//             }
+//         })
+//         .catch(err=>{
+//             console.log("caught",err);
+//         })
+//         console.log("reached here   ")
+//     }
+     
+// };
+const userToken=JSON.parse(localStorage.getItem("userInfo")).token
+
+  const updateUser= (userId, user) =>{
+    // const userId=this.props.match.params.userId
+    let URL="http://localhost:8080/user/"+userId;
+    console.log("USER DATA UPDATE -",user)
+    return(
+    fetch(URL,{
+        method:"PUT",
+        headers:{
+            Accept:"application/json",
+            Authorization:"Bearer "+userToken
+        },
+        body:user
+    })
+    .then(response=> response.json())
+    .catch(err=>console.log("Problem ",err))
+    )
+}
+
+
+  const handleSubmit =  e => {
+    e.preventDefault();
+
+     updateUser(userId, userDetails)
+    .then(data=>{
+      console.log(data);
+      if(data.error) {
+        console.log("Error occurred",data.error)
+          // this.setState({error:data.error})
+      }
+      else {
+        if(typeof window!=='undefined'){
+          if(localStorage.getItem("userInfo")){
+              let auth={
+                token:userToken,
+                user:{
+                  _id:userId,
+                  firstName
+                }
+              }
+              localStorage.setItem("userInfo",JSON.stringify(auth))
+          }
+        }  
+        console.log("UPDATED USERRRR!!!!!!",true)
+      }
+    })
+    .catch(err=>{
+        console.log("caught",err);
+    })
+    console.log("reached here   ")
+   };
+
+  
   console.log(email);
 
   return (
@@ -113,7 +194,7 @@ const EditProfile = () => {
           </div>
 
           <br />
-          <form className='form'>
+          <form className='form'  >
             <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>
               <div className='form-inline'>
                 <div className='d-flex flex-wrap'>
@@ -138,24 +219,27 @@ const EditProfile = () => {
                         placeholder={`${gender == 'male' ? 'Male' : 'Female'}`}
                         value={`${gender == 'male' ? 'Male' : 'Female'}`}
                         readOnly
+                        style={mode}
                       />
                     </span>
                     <br />
                     <input
                       type='text'
-                      className='form-control mx-sm-3 mb-2 col-6 m-0'
+                      className='form-control  mb-2 col-6 m-0'
                       placeholder='firstName'
                       name='firstName'
                       value={firstName}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <input
                       type='text'
-                      className='form-control mx-sm-3 mb-2 col-6 m-0'
+                      className='form-control  mb-2 col-6 m-0'
                       placeholder='lastName'
                       name='lastName'
                       value={lastName}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <input
@@ -165,6 +249,7 @@ const EditProfile = () => {
                       name='profession'
                       value={profession}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <i className='fas fa-map-marker-alt p-2'></i>
@@ -175,6 +260,7 @@ const EditProfile = () => {
                       name='city'
                       value={city}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <input
                       type='text'
@@ -183,6 +269,7 @@ const EditProfile = () => {
                       name='country'
                       value={country}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <i className='far fa-envelope p-2'></i>
@@ -192,7 +279,8 @@ const EditProfile = () => {
                       placeholder='Email'
                       name='email'
                       value={email || ''}
-                      onChange={handleChange}
+                      style={mode}
+                      readOnly
                     />
                     <br />
                     <i className='fas fa-phone'></i>
@@ -202,6 +290,7 @@ const EditProfile = () => {
                       placeholder='Phone Number'
                       name='phoneNo'
                       value={phoneNo || ''}
+                      style={mode}
                       onChange={handleChange}
                     />
                     <br />
@@ -229,6 +318,7 @@ const EditProfile = () => {
                   rows='5'
                   aria-describedby='inputGroupPrepend2'
                   required
+                  style={mode}  
                 />
               </div>
               <hr />
@@ -236,6 +326,7 @@ const EditProfile = () => {
             <button
               onClick={handleSubmit}
               className='btn btn-raised btn-outline-info'
+              style={mode}
             >
               Save the Changes
             </button>
