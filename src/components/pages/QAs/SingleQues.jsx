@@ -97,7 +97,7 @@ const SingleQues = () =>{
                                                                 onClick={()=>this.deleteAns(x)}
                                                                 />
                                                             </div>
-                                                        )} */}
+                                                        )}                  Here... Write the code for allowing only the person who answered to delete their answer.                              */}
                                                     </span>
 
                                                 <p className="comment-text font12" style={mode}>
