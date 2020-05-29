@@ -13,7 +13,9 @@ import SingleProfile from '../pages/Profiles/SingleProfile';
 import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
-import AllQAs from '../pages/AllQAs/AllQAs';
+import AllQAs from './QAs/AllQAs';
+import SingleQues from './QAs/SingleQues';
+import Footer from '../layout/Footer';
 import {
   LANDING_ROUTE,
   SIGNIN_ROUTE,
@@ -21,6 +23,7 @@ import {
   HOME_ROUTE,
   DASHBOARD,
   ALLQA_ROUTE,
+  SINGLEQUES_ROUTE,
   PROFILES,
   SINGLEPROFILE,
   EDITPROFILE,
@@ -35,13 +38,16 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <div style={{ paddingTop: '55px' }}>
+          <div style={{ paddingTop: '55px', minWidth:'fit-content' }}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />
               </PrivateRoute>
               <PrivateRoute path={ALLQA_ROUTE}>
                 <AllQAs />
+              </PrivateRoute>
+              <PrivateRoute path={SINGLEQUES_ROUTE}>
+                <SingleQues />
               </PrivateRoute>
               <PrivateRoute path={GET_BLOG}>
                 <Blog />
@@ -73,6 +79,8 @@ const Routes = () => {
               </PublicRoute>
             </Switch>
           </div>
+          <hr />
+          <Footer />
         </Fragment>
       </BrowserRouter>
     </div>

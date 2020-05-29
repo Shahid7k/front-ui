@@ -302,8 +302,8 @@ img {
 .bg-white,
 .badge-white,
 .alert-white {
-  background: #fff;
-  color: #333;
+  background: #fff !important;
+  color: #333 !important;
   border: #ccc solid 1px;
 }
 .bg-light,
@@ -626,5 +626,23 @@ footer a {
   background:rgba(245, 255, 250,0.5);
 }
 
+.footer{
+  position: inherit;
+  bottom: 0;
+  z-index: -1;
+  width:100%;
+}
+
+
+.comment-photo{
+  height: 5rem;
+  width: auto;
+
+}
+
+
+.btn-link{
+  cursor: pointer;
+}
 
 /* ------------------S-H-A-H-I-D------------------------ */

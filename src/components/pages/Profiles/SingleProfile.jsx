@@ -71,24 +71,24 @@ const SingleProfile = () => {
       className='bg-mint-cream container my-5'
       style={{ minHeight: '100vh' }}
     >
-      <button
-        className={`btn btn-raised btn-outline-primary mb-2 mr-2`}
-        // onClick={goBack}
-        onClick={() => history.goBack()}
-        style={mode}
-      >
-        Back
-      </button>
-      {userAuth.user._id === userId && (
-        <Fragment>
-          {/* <div className=' text-right '> */}
-          <NavLink to={EDITPROFILE} className='btn btn-info w-10 mb-2 mr-2'>
-            Edit Profile
-          </NavLink>
-          <button className='btn btn-danger w-10 mb-2'>Delete Profile</button>
-          {/* </div> */}
-        </Fragment>
-      )}
+      
+      <div className='fl-l'>
+          <button className={`btn btn-raised btn-outline-primary m-1 `} 
+            onClick={() =>history.goBack()}
+            style={mode}>Back</button>
+      </div>
+      <div className='text-right' >
+        {userAuth.user._id === userId && (
+           <Fragment>
+            <NavLink to={EDITPROFILE} className='btn btn-info w-10 m-2'>
+              Edit Profile
+            </NavLink>
+            <button className='btn btn-danger w-10 m-2'>Delete Profile</button>
+          </Fragment>
+         )}
+      </div> 
+      <br/>
+
       <br />
       <div className=''>
         <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>

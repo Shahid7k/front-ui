@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import { useParams, useHistory, Link, generatePath } from 'react-router-dom';
 import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
@@ -21,8 +20,6 @@ const initialUserState = {
 };
 
 const EditProfile = () => {
-  let props = useParams();
-
   const { addAlert } = React.useContext(alertContext);
 
   const userId = useContext(authContext).userAuth.user._id;
@@ -30,6 +27,8 @@ const EditProfile = () => {
   const [user, setUser] = useState({ ...initialUserState });
 
   const [showLoader, setShowLoader] = useState(true);
+
+  const userDetails= new FormData()
 
   useEffect(() => {
     (async function () {
@@ -80,9 +79,6 @@ const EditProfile = () => {
     const response = await editUser(userId, user);
     // console.log(data);
     if (response.data) {
-      //   setAuthStatus(data);
-      // } else {
-      // setUser({ ...initialUserState });
       addAlert('Profile Updated', 'success');
     } else if (response.error) {
       addAlert(response.error.data.error, 'danger');
@@ -100,6 +96,8 @@ const EditProfile = () => {
     gender,
     about,
   } = user;
+
+const userToken=JSON.parse(localStorage.getItem("userInfo")).token
 
   return (
     <Fragment>
@@ -119,7 +117,7 @@ const EditProfile = () => {
           </div>
 
           <br />
-          <form className='form'>
+          <form className='form'  >
             <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>
               <div className='form-inline'>
                 <div className='d-flex flex-wrap'>
@@ -144,24 +142,27 @@ const EditProfile = () => {
                         placeholder={`${gender == 'male' ? 'Male' : 'Female'}`}
                         value={`${gender == 'male' ? 'Male' : 'Female'}`}
                         readOnly
+                        style={mode}
                       />
                     </span>
                     <br />
                     <input
                       type='text'
-                      className='form-control mx-sm-3 mb-2 col-6 m-0'
+                      className='form-control  mb-2 col-6 m-0'
                       placeholder='firstName'
                       name='firstName'
                       value={firstName}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <input
                       type='text'
-                      className='form-control mx-sm-3 mb-2 col-6 m-0'
+                      className='form-control  mb-2 col-6 m-0'
                       placeholder='lastName'
                       name='lastName'
                       value={lastName}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <input
@@ -171,6 +172,7 @@ const EditProfile = () => {
                       name='profession'
                       value={profession}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <i className='fas fa-map-marker-alt p-2'></i>
@@ -181,6 +183,7 @@ const EditProfile = () => {
                       name='city'
                       value={city}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <input
                       type='text'
@@ -189,6 +192,7 @@ const EditProfile = () => {
                       name='country'
                       value={country}
                       onChange={handleChange}
+                      style={mode}
                     />
                     <br />
                     <i className='far fa-envelope p-2'></i>
@@ -198,6 +202,7 @@ const EditProfile = () => {
                       placeholder='Email'
                       name='email'
                       value={email || ''}
+                      style={mode}
                       readOnly
                     />
                     <br />
@@ -208,6 +213,7 @@ const EditProfile = () => {
                       placeholder='Phone Number'
                       name='phoneNo'
                       value={phoneNo || ''}
+                      style={mode}
                       onChange={handleChange}
                     />
                     <br />
@@ -235,6 +241,7 @@ const EditProfile = () => {
                   rows='5'
                   aria-describedby='inputGroupPrepend2'
                   required
+                  style={mode}  
                 />
               </div>
               <hr />
@@ -242,6 +249,7 @@ const EditProfile = () => {
             <button
               onClick={handleSubmit}
               className='btn btn-raised btn-outline-info'
+              style={mode}
             >
               Save the Changes
             </button>

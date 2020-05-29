@@ -12,11 +12,11 @@ const QuesCard = ({ques}) =>{
          >
              <div style={{background:bg}}>
                  
-                <h5 className="card-header p-2" style={{background:bg}}>{ques.title}</h5>
+                <h5 className="card-header text-truncate p-2" style={{background:bg}}>{ques.title}</h5>
                 <div className="card-body p-2">
                     <h6 className="card-text text-muted p-0">{ques.tags.replace(/ /g,";")}</h6>
                     <p className="card-text p-0 text-truncate">{ques.body}</p>
-                    <NavLink to='/' className='btn btn-info'>Read more...</NavLink>
+                    <NavLink to={`/question/${ques._id}`} className='btn btn-info'>Read more...</NavLink>
                 </div>
                 {/* <img src={ques.photo} style={{height:"200px",width:"50%"}}  /> */}
                 
