@@ -38,7 +38,7 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <div style={{ paddingTop: '55px', minHeight: '720px',minWidth:"fit-content" }}>
+          <div style={{ paddingTop: '55px', minWidth:'fit-content' }}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />

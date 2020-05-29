@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import { useParams, useHistory, Link, generatePath } from 'react-router-dom';
 import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
+import { alertContext } from '../../../context/AlertContext';
 import { BarLoader } from 'react-spinners';
 
 const initialUserState = {
@@ -11,7 +11,7 @@ const initialUserState = {
   gender: '',
   profession: '',
   about: '',
-  email:'',
+  email: '',
   city: '',
   country: '',
   phoneNo: '',
@@ -20,12 +20,11 @@ const initialUserState = {
 };
 
 const EditProfile = () => {
-  let props = useParams();
-  const { userId } = props;
-  
-  const [user, setUser] = useState({ ...initialUserState });
+  const { addAlert } = React.useContext(alertContext);
 
-  const { userAuth, setAuthStatus } = useContext(authContext);
+  const userId = useContext(authContext).userAuth.user._id;
+
+  const [user, setUser] = useState({ ...initialUserState });
 
   const [showLoader, setShowLoader] = useState(true);
 
@@ -34,7 +33,7 @@ const EditProfile = () => {
   useEffect(() => {
     (async function () {
       const res = await getUserById(userId);
-      console.log(JSON.stringify(res));
+      // console.log(JSON.stringify(res));
       if (res.data) {
         setUser(res.data);
       }
@@ -70,6 +69,22 @@ const EditProfile = () => {
     })();
   }, []);
 
+  const handleChange = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    const response = await editUser(userId, user);
+    // console.log(data);
+    if (response.data) {
+      addAlert('Profile Updated', 'success');
+    } else if (response.error) {
+      addAlert(response.error.data.error, 'danger');
+    }
+  };
+
   const {
     firstName,
     lastName,
@@ -82,99 +97,7 @@ const EditProfile = () => {
     about,
   } = user;
 
-
-      let gen="GENIOUS";
-      console.log(gen);
-
-  const handleChange = e => {
-    const name=e.target.name;
-    const value=e.target.value;
-    setUser({ ...user, [e.target.name]: e.target.value });
-    userDetails.set(name,value)
-  };
-
-//   submit = event =>{
-//     event.preventDefault()
-//     if(this.isValid()){
-//         this.setState({loading:true})
-        
-//         console.log("UserData : ",this.userData)
-//         this.updateUser(this.userData)
-//         .then(data=>{
-//             if(data.error) {
-//                 console.log("Error occurred",this.state.error)
-//                 this.setState({error:data.error})
-//             }
-//             else {
-
-//                 console.log("UPDATED USERRRR!!!!!!",false)
-//                 updateUser(data,()=>this.setState({ error:"Updated!" })
-//                 )
-//                 console.log("UPDATED USERRRR!!!!!!",true)
-//             }
-//         })
-//         .catch(err=>{
-//             console.log("caught",err);
-//         })
-//         console.log("reached here   ")
-//     }
-     
-// };
 const userToken=JSON.parse(localStorage.getItem("userInfo")).token
-
-  const updateUser= (userId, user) =>{
-    // const userId=this.props.match.params.userId
-    let URL="http://localhost:8080/user/"+userId;
-    console.log("USER DATA UPDATE -",user)
-    return(
-    fetch(URL,{
-        method:"PUT",
-        headers:{
-            Accept:"application/json",
-            Authorization:"Bearer "+userToken
-        },
-        body:user
-    })
-    .then(response=> response.json())
-    .catch(err=>console.log("Problem ",err))
-    )
-}
-
-
-  const handleSubmit =  e => {
-    e.preventDefault();
-
-     updateUser(userId, userDetails)
-    .then(data=>{
-      console.log(data);
-      if(data.error) {
-        console.log("Error occurred",data.error)
-          // this.setState({error:data.error})
-      }
-      else {
-        if(typeof window!=='undefined'){
-          if(localStorage.getItem("userInfo")){
-              let auth={
-                token:userToken,
-                user:{
-                  _id:userId,
-                  firstName
-                }
-              }
-              localStorage.setItem("userInfo",JSON.stringify(auth))
-          }
-        }  
-        console.log("UPDATED USERRRR!!!!!!",true)
-      }
-    })
-    .catch(err=>{
-        console.log("caught",err);
-    })
-    console.log("reached here   ")
-   };
-
-  
-  console.log(email);
 
   return (
     <Fragment>

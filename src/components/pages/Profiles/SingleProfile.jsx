@@ -67,25 +67,28 @@ const SingleProfile = () => {
   } = state.userData;
 
   return (
-    <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
+    <div
+      className='bg-mint-cream container my-5'
+      style={{ minHeight: '100vh' }}
+    >
       
-      <div className="fl-l">
-                <button className={`btn btn-raised btn-outline-primary m-1 `} 
-                // onClick={goBack}
-                onClick={() =>history.goBack()}
-                  style={mode}>Back</button>
-            </div>
-            <div className=" text-right " >
-            {userAuth.user._id === userId && (
-               <>
-                <NavLink className="btn btn-info w-10 m-2" to={`/editprofile/${userId}`} >Edit Profile</NavLink>
-                <button className="btn btn-danger w-10 m-2">Delete Profile</button>
-              </>
-               )}
-            </div> 
-            <br/>
+      <div className='fl-l'>
+          <button className={`btn btn-raised btn-outline-primary m-1 `} 
+            onClick={() =>history.goBack()}
+            style={mode}>Back</button>
+      </div>
+      <div className='text-right' >
+        {userAuth.user._id === userId && (
+           <Fragment>
+            <NavLink to={EDITPROFILE} className='btn btn-info w-10 m-2'>
+              Edit Profile
+            </NavLink>
+            <button className='btn btn-danger w-10 m-2'>Delete Profile</button>
+          </Fragment>
+         )}
+      </div> 
+      <br/>
 
-   
       <br />
       <div className=''>
         <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>
