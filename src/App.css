@@ -645,4 +645,20 @@ footer a {
   cursor: pointer;
 }
 
+.bg-transparent{
+  background: rgba(0,0,0,0) !important;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.bg-red{
+  background: rgba(233, 33, 33, 0.726);
+}
+.bg-blue{
+  background: rgba(27, 27, 47, 0.87);
+}
+
+
 /* ------------------S-H-A-H-I-D------------------------ */

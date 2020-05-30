@@ -1,6 +1,6 @@
 export const light = {
   backgroundSize: 'cover',
-  background:"rgb(240,240,240)",
+  background:"rgba(240,240,240,0.2)",
   // background:`url(${images})`,
   color: 'black',
 };
