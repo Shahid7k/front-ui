@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
 import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
-import { light, dark, condition } from '../../../utils/theme';
+import { mode } from '../../../utils/theme';
 import { alertContext } from '../../../context/AlertContext';
 
-const mode = condition ? dark : light;
 
 const initialState = {
   firstName: 'user',

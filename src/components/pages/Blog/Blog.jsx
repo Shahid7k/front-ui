@@ -39,7 +39,7 @@ const Blog = () => {
         <React.Fragment>
           <div className='container'>
             <button className='btn btn-lg btn-dark mt-2 mb-5' onClick={goBack}>
-              <i className='fas fa-arrow-left mr-2' />
+              <i className='fas fa-angle-left mr-2' />
               Back
             </button>
          

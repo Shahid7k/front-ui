@@ -15,7 +15,7 @@ const initialQuesState={
 }
 
 const SingleQues = () =>{
-
+    const history=useHistory()
     let props = useParams();
     const { quesId } = props;
     const [quesState,fetchQues]=useState({...initialQuesState});
@@ -41,8 +41,17 @@ const SingleQues = () =>{
       const {title,tags,body,answers,postedBy,created,satisfied,photoURL} = quesState;
     return (
         <div className={`${condition?"bg-dark":"bg-mint-cream"}`}>
+            <div className='container'>
+                <button className={`btn btn-raised btn-outline-primary m-1 `} 
+                // onClick={goBack}
+                onClick={() =>history.goBack()}
+                style={mode}>
+                    <i className='fas fa-angle-left mr-2' />
+                    Back
+                </button>
+            </div>
            <div className="mx-5 p-5 container ">
-               <h1 className=" font18 p-2 container m-5 px-5" style={mode}>{title}.</h1>
+               <h1 className=" font18 p-2 container mx-5 px-5" style={mode}>{title}.</h1>
                 <div className="d-flex">
                     <div 
                     className="   container px-5 mx-5 my-0"
@@ -70,7 +79,7 @@ const SingleQues = () =>{
                             <div className="btn-link text-center" onClick={toggleAnswers}>
                                 Show All Answers!
                             </div>
-                            {quesState.showAnswers && (
+                            {quesState.showAnswers && (quesState.answers.length!==0) && (
                                 
                                     quesState.answers.map((x,i) =>(<p key={i}> 
                                          <div key={i}   className="p-4 d-flex">
@@ -110,6 +119,7 @@ const SingleQues = () =>{
                                      </p>))
                               
                             )}
+                            {(quesState.showAnswers && quesState.answers.length===0 && <div className="h4"> No Answers Yet</div>)}
                         </div>
 
                     </div>

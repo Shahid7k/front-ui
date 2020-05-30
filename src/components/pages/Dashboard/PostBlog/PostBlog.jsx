@@ -7,6 +7,7 @@ import { DASHBOARD } from '../../../../constants/routesNomenclature';
 import { alertContext } from '../../../../context/AlertContext';
 import { postBlog } from '../../../../requests/blog';
 import { blogInitialState } from '../../BlogEditor/BlogEditor';
+import { mode } from '../../../../utils/theme';
 
 const PostBlog = () => {
   const history = useHistory();
@@ -27,7 +28,16 @@ const PostBlog = () => {
   };
 
   return (
-    <div className='my-5'>
+    <div className='container'>
+      <div className=''>
+            <button className={`btn btn-raised btn-outline-primary m-3 `} 
+            // onClick={goBack}
+            onClick={() =>history.goBack()}
+              style={mode}>
+                <i className='fas fa-angle-left mr-2' />
+                Back
+                </button>
+          </div>
       <BlogEditor
         initialBlogState={initialBlogState}
         handleSubmit={handleSubmit}
