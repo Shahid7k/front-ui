@@ -22,3 +22,28 @@ export const askQuestion = async( userId, quesData ) => {
       // console.log(error);
     }
 } 
+
+export const answer = async (userId, quesId ,answer)=>{
+    const URL="http://localhost:8080/qa/answer";
+        
+    try{
+        const res= await axiosClient.put(
+            `http://localhost:8080/qa/answer`,
+            { userId, quesId, answer }
+        );
+        console.log("ANSWER : ",res.data);
+        return {data:res.data};
+    }
+    catch(error){
+        const {
+            res: { data, status },
+          } = error;
+          return {
+            error: {
+              status,
+              data,
+            },
+          };
+    }
+    
+}

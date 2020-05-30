@@ -665,5 +665,13 @@ footer a {
   color:rgb(245, 41, 41);
   
 }
+.underline{
+  text-decoration: underline;
+}
+
+.comment-time{
+  float: right !important;
+  background:rgba(1,22,22,0.4)
+}
 
 /* ------------------S-H-A-H-I-D------------------------ */
