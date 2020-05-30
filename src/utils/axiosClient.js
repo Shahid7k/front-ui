@@ -11,17 +11,17 @@ const axiosClient = axios.create({
 });
 
 
-const token="Bearer "+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.USER_AUTH)).token;
-// console.log("TOKEN : ",token)
-const tokenHead={
-  Accept:'application/json',
-  'Content-Type':'application/json',
-  Authorization: token
-}
+// const token="Bearer "+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.USER_AUTH)).token;
+// // console.log("TOKEN : ",token)
+// const tokenHead={
+//   Accept:'application/json',
+//   'Content-Type':'application/json',
+//   Authorization: token
+// }
 
-export const tokenizedAxiosClient = axios.create({
-  tokenHead,
-});
+// export const tokenizedAxiosClient = axios.create({
+//   tokenHead,
+// });
 
 
 export default axiosClient;

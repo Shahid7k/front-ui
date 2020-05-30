@@ -41,17 +41,17 @@ const SingleQues = () =>{
       const {title,tags,body,answers,postedBy,created,satisfied,photoURL} = quesState;
     return (
         <div className={`${condition?"bg-dark":"bg-mint-cream"}`}>
-           <div className="mx-5 p-5 ">
-               <h1 className=" p-2" style={mode}>{title}.</h1>
+           <div className="mx-5 p-5 container ">
+               <h1 className=" font18 p-2 container m-5 px-5" style={mode}>{title}.</h1>
                 <div className="d-flex">
                     <div 
-                    className="  container p-5 m-5"
+                    className="   container px-5 mx-5 my-0"
                     >
                            
                         <div className=" p-5" style={mode}>
                                 <NavLink to={`/profile/${postedBy._id}`} className="h6 font-italic">asked by - {postedBy.userName} </NavLink>
                                 <div className="text-muted p-3 h5" > {"Tags : "} {tags}</div>
-                                <div className="h4">
+                                <div className="font12">
                                     {body}
                                 </div>
                                <a href={photoURL} target="_blank" className="figure text-wrap"  >  
@@ -114,7 +114,7 @@ const SingleQues = () =>{
 
                     </div>
                     
-                    <div className=" text-center my-5 py-5">
+                    <div className=" text-center my-5 py-5 font11">
                         Things <br />
                         Things <br />
                         Things <br />

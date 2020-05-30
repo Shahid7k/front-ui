@@ -1,11 +1,11 @@
 import React from 'react';
-import { mode } from '../../../utils/theme';
+import { mode, condition } from '../../../utils/theme';
 
 const UserCard = ({ user }) => {
   // console.log(user)
   return (
     <div
-      className='card text-center userCard'
+      className={`card text-center userCard ${condition?"":"bg-white"}`} 
       style={mode}
       //  style={{height:"auto"}}
     >

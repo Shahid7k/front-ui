@@ -1,4 +1,5 @@
 import React from 'react';
+import { mode, condition } from '../../utils/theme';
 
 const BlogCard = props => {
   const {
@@ -7,7 +8,7 @@ const BlogCard = props => {
   } = props;
 
   return (
-    <div className='card'>
+    <div className={`card ${condition?"":"bg-white"} pointer `} style={mode}>
       <img src={image} className='card-img-top' alt='Card cap' />
 
       <div className='card-body'>

@@ -14,6 +14,7 @@ import PostBlog from '../pages/Dashboard/PostBlog/PostBlog';
 import PrivateRoute from '../routeHandling/PrivateRoute';
 import PublicRoute from '../routeHandling/PublicRoute';
 import AllQAs from './QAs/AllQAs';
+import Ask from './QAs/Ask';
 import SingleQues from './QAs/SingleQues';
 import Footer from '../layout/Footer';
 import {
@@ -23,6 +24,7 @@ import {
   HOME_ROUTE,
   DASHBOARD,
   ALLQA_ROUTE,
+  ASK_ROUTE,
   SINGLEQUES_ROUTE,
   PROFILES,
   SINGLEPROFILE,
@@ -38,13 +40,16 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <div style={{ paddingTop: '55px', minWidth:'fit-content' }}>
+          <div style={{ paddingTop: '55px', minWidth:'fit-content',minHeight:"38rem" }}>
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />
               </PrivateRoute>
               <PrivateRoute path={ALLQA_ROUTE}>
                 <AllQAs />
+              </PrivateRoute>
+              <PrivateRoute path={ASK_ROUTE}>
+                <Ask />
               </PrivateRoute>
               <PrivateRoute path={SINGLEQUES_ROUTE}>
                 <SingleQues />

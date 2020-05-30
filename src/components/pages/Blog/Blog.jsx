@@ -42,12 +42,17 @@ const Blog = () => {
               <i className='fas fa-arrow-left mr-2' />
               Back
             </button>
-          </div>
+         
           <BlogEditor
             initialBlogState={blog}
             readOnly={true}
             toolbarHidden={true}
-          />
+          /> 
+          <button className="btn btn-raised bg-info my-2">
+            Like
+          </button>
+          
+        </div>
         </React.Fragment>
       )}
     </Fragment>

@@ -60,7 +60,7 @@ const Profiles = () => {
         alt='BackGroundPic'
       />
 
-      <div className='text-c '>
+      <div className='text-c container '>
         <SearchBar search={onSearch} />
       </div>
 

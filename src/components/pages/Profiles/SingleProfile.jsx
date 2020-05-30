@@ -83,7 +83,7 @@ const SingleProfile = () => {
             <NavLink to={EDITPROFILE} className='btn btn-info w-10 m-2'>
               Edit Profile
             </NavLink>
-            <button className='btn btn-danger w-10 m-2'>Delete Profile</button>
+            <button className='btn btn-danger w-10 m-2'>Delete Account</button>
           </Fragment>
          )}
       </div> 
@@ -114,7 +114,7 @@ const SingleProfile = () => {
               {profession}
               <br />
               <i className='fas fa-map-marker-alt p-2'></i>
-              {(city, country)}
+              {city} {" ,"} {country}
               <br />
               <i className='far fa-envelope p-2'></i>
               {email}

@@ -113,6 +113,20 @@
   color:#000 !important;
 }
 
+.screenshotsHome{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.screenshotsHome img{
+  height: 20rem;
+  width: 43%;
+}
+.secondHalfOfHomePage{
+  background: url('https://u9e3g8s7.stackpathcdn.com/wp-content/uploads/2018/10/wallpaper-cream-white-pattern-background-light-line-texture-x-rhwallherecom-ivory-off-paper-picture-free-1.jpg');
+  background-size: cover;
+}
+
+
 /* 
    .block-quick-info-2 {
     //padding: 2rem 0; 
