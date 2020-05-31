@@ -113,7 +113,7 @@ const SingleQues = () =>{
                         <div className=" m-3 p-2 container" style={mode}  >
                             {quesState.showAnsBox && 
                                 <div className="form">
-                                    <textarea type="text" className="form-control" rows="4" name="answer" value={quesState.answer} onChange={handleChange("answer")} placeholder="Start writing your answer here" />
+                                    <textarea type="text" className="form-control" rows="4" style={mode} name="answer" value={quesState.answer} onChange={handleChange("answer")} placeholder="Start writing your answer here" />
                                     <button className="btn btn-primary m-2" onClick={submitAnswer}> Submit Answer!</button>
                                     <hr/>
                                 </div>
