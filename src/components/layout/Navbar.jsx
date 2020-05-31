@@ -8,7 +8,7 @@ import {
   DASHBOARD,
   POST_BLOG,
   HOME_ROUTE,
-  SINGLEPROFILE,
+  ASK_ROUTE,
   PROFILES,
 } from '../../constants/routesNomenclature';
 import { logout } from '../../requests/auth';
@@ -93,10 +93,10 @@ const getAuthLinks = (user, handleLogout) => (
           New Blog
         </NavLink>
         <NavLink
-          to={DASHBOARD}
+          to={ASK_ROUTE}
           className='nobg text-dark dropdown-item text-decoration-none'
         >
-          Dashboard
+          Ask
         </NavLink>
         <NavLink
           to={`/profile/${user._id}`}

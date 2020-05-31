@@ -14,8 +14,7 @@ const initialState = {
 };
 
 const SingleProfile = () => {
-  let props = useParams();
-  const { userId } = props;
+  const { userId } = useParams();
 
   let history = useHistory();
 
@@ -71,23 +70,30 @@ const SingleProfile = () => {
       className='bg-mint-cream container my-5'
       style={{ minHeight: '100vh' }}
     >
-      
       <div className='fl-l'>
-          <button className={`btn btn-raised btn-outline-primary m-1 `} 
-            onClick={() =>history.goBack()}
-            style={mode}>Back</button>
+        <button
+          className={`btn btn-raised btn-outline-primary m-1 `}
+          onClick={() => history.goBack()}
+          style={mode}
+        >
+          Back
+        </button>
       </div>
-      <div className='text-right' >
+      <div className='text-right'>
         {userAuth.user._id === userId && (
-           <Fragment>
+          <Fragment>
             <NavLink to={EDITPROFILE} className='btn btn-info w-10 m-2'>
+              <i className='fas fa-user-edit mr-2' />
               Edit Profile
             </NavLink>
-            <button className='btn btn-danger w-10 m-2'>Delete Account</button>
+            <button className='btn btn-danger w-10 m-2'>
+              <i className='fas fa-trash-alt mr-2' />
+              Delete Account
+            </button>
           </Fragment>
-         )}
-      </div> 
-      <br/>
+        )}
+      </div>
+      <br />
 
       <br />
       <div className=''>
@@ -114,7 +120,7 @@ const SingleProfile = () => {
               {profession}
               <br />
               <i className='fas fa-map-marker-alt p-2'></i>
-              {city} {" ,"} {country}
+              {city} {' ,'} {country}
               <br />
               <i className='far fa-envelope p-2'></i>
               {email}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import '../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useHistory } from 'react-router-dom';
 import BlogEditor from '../../BlogEditor/BlogEditor';
@@ -14,7 +14,10 @@ const PostBlog = () => {
 
   const [initialBlogState, setInitialBlogState] = useState(blogInitialState);
 
+  const [showSave, setShowSave] = useState(false);
+
   const { userAuth } = useContext(authContext);
+
   const { addAlert } = useContext(alertContext);
 
   const handleSubmit = async blog => {
@@ -27,27 +30,45 @@ const PostBlog = () => {
     }
   };
 
+  const handleSave = blog => {
+    setInitialBlogState(blog);
+    setShowSave(true);
+  };
+
+  const { title, description, content } = initialBlogState;
+
   return (
-    <div className='container'>
-      <div className=''>
-            <button className={`btn btn-raised btn-outline-primary m-3 `} 
-            // onClick={goBack}
-            onClick={() =>history.goBack()}
-              style={mode}>
-                <i className='fas fa-angle-left mr-2' />
-                Back
-                </button>
-          </div>
-      <BlogEditor
-        initialBlogState={initialBlogState}
-        handleSubmit={handleSubmit}
-      />
-      {/* <BlogEditor
-        initialBlogState={initialBlogState}
-        readOnly={true}
-        toolbarHidden={true}
-      /> */}
-    </div>
+    <Fragment>
+      <div className='container'>
+        <div className='fl-l'>
+          <button
+            className='btn btn-dark mt-2 mb-5'
+            onClick={() => history.goBack()}
+          >
+            <i className='fas fa-angle-left mr-2' />
+            Back
+          </button>
+        </div>
+      </div>
+
+      <div className='my-5'>
+        <BlogEditor
+          initialBlogState={initialBlogState}
+          handleSubmit={handleSubmit}
+        />
+        {showSave && (
+          <button
+            className='btn btn-success mt-2 ml-2 mb-5'
+            disabled={
+              title.length < 4 || description.length < 5 || content.length < 30
+            }
+            onClick={handleSave}
+          >
+            Post
+          </button>
+        )}
+      </div>
+    </Fragment>
   );
 };
 
