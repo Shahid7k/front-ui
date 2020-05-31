@@ -28,7 +28,7 @@ const EditProfile = () => {
 
   const [showLoader, setShowLoader] = useState(true);
 
-  const userDetails= new FormData()
+  const userDetails = new FormData();
 
   useEffect(() => {
     (async function () {
@@ -97,7 +97,7 @@ const EditProfile = () => {
     about,
   } = user;
 
-const userToken=JSON.parse(localStorage.getItem("userInfo")).token
+  const userToken = JSON.parse(localStorage.getItem('userInfo')).token;
 
   return (
     <Fragment>
@@ -117,7 +117,7 @@ const userToken=JSON.parse(localStorage.getItem("userInfo")).token
           </div>
 
           <br />
-          <form className='form'  >
+          <form className='form'>
             <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>
               <div className='form-inline'>
                 <div className='d-flex flex-wrap'>
@@ -241,7 +241,7 @@ const userToken=JSON.parse(localStorage.getItem("userInfo")).token
                   rows='5'
                   aria-describedby='inputGroupPrepend2'
                   required
-                  style={mode}  
+                  style={mode}
                 />
               </div>
               <hr />

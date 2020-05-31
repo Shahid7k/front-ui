@@ -72,7 +72,6 @@ const RichEditor = props => {
       const contentState = stateFromHTML(temp2);
       const editorState = EditorState.createWithContent(contentState);
       setEditorState(editorState);
-      console.log(editorState);
     }
   }, [initialBlogState]);
 
@@ -87,10 +86,7 @@ const RichEditor = props => {
     <Editor
       {...rest}
       editorState={editorState}
-      placeholder='Explore your way in..'
-      // wrapperClassName='wrapper-class'
-      // editorClassName='editor-class'
-      // toolbarClassName='toolbar-class'
+      placeholder='Explore Your Way In..'
       toolbar={toolbar}
       onEditorStateChange={onEditorStateChange}
     />
