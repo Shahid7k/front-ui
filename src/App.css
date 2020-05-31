@@ -654,11 +654,24 @@ footer a {
 }
 
 .bg-red{
-  background: rgba(233, 33, 33, 0.726);
+  background: rgba(233, 33, 33, 0.726) !important;
 }
 .bg-blue{
   background: rgba(27, 27, 47, 0.87);
 }
 
+
+.errorMsg{
+  color:rgb(245, 41, 41);
+  
+}
+.underline{
+  text-decoration: underline;
+}
+
+.comment-time{
+  float: right !important;
+  background:rgba(1,22,22,0.4)
+}
 
 /* ------------------S-H-A-H-I-D------------------------ */

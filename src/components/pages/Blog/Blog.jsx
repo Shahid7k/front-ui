@@ -38,12 +38,6 @@ const Blog = () => {
     })();
   }, []);
 
-  // console.log(blogId);
-
-  // function goBack() {
-  //   history.goBack();
-  // }
-
   const handleSave = blogData => {
     setBlog(blogData);
     setIsEditable(true);
@@ -67,7 +61,7 @@ const Blog = () => {
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
       {!showLoader && (
-        <React.Fragment>
+        <Fragment>
           <div className='container'>
             <div className='fl-l'>
               <button
@@ -120,7 +114,7 @@ const Blog = () => {
               <button className='btn btn-raised bg-info my-2'>Like</button>
             )}
           </div>
-        </React.Fragment>
+        <Fragment>
       )}
     </Fragment>
   );

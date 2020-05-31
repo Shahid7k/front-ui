@@ -7,6 +7,7 @@ import { DASHBOARD } from '../../../../constants/routesNomenclature';
 import { alertContext } from '../../../../context/AlertContext';
 import { postBlog } from '../../../../requests/blog';
 import { blogInitialState } from '../../BlogEditor/BlogEditor';
+import { mode } from '../../../../utils/theme';
 
 const PostBlog = () => {
   const history = useHistory();
