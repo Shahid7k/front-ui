@@ -12,18 +12,22 @@ export const blogInitialState = {
 const BlogEditor = props => {
   const [blog, setBlog] = useState(blogInitialState);
 
-  const { initialBlogState, handleSubmit, ...rest } = props;
+  const [showDone, setShowDone] = useState(true);
+
+  const { initialBlogState, handleSave, ...rest } = props;
 
   useEffect(() => {
     if (initialBlogState) {
       setBlog(initialBlogState);
     }
+    setShowDone(true);
   }, [initialBlogState]);
 
   const { title, description, content } = blog;
 
-  const handleSave = () => {
-    handleSubmit && handleSubmit(blog);
+  const handleDone = () => {
+    setShowDone(false);
+    handleSave && handleSave(blog);
   };
 
   return (
@@ -57,13 +61,15 @@ const BlogEditor = props => {
           setBlog({ ...blog, content: markup })
         }
       />
-      {!rest.readOnly && (
+      {!rest.readOnly && showDone && (
         <button
           className='btn btn-dark d-block ml-auto my-2 mr-2'
-          disabled={title.length === 0 || content.length === 0}
-          onClick={handleSave}
+          disabled={
+            title.length < 4 || description.length < 5 || content.length < 30
+          }
+          onClick={handleDone}
         >
-          Save
+          Done
         </button>
       )}
     </div>
