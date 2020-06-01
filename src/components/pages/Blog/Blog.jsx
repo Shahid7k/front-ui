@@ -114,7 +114,7 @@ const Blog = () => {
               <button className='btn btn-raised bg-info my-2'>Like</button>
             )}
           </div>
-        <Fragment>
+        </Fragment>
       )}
     </Fragment>
   );

@@ -16,6 +16,7 @@ import PublicRoute from '../routeHandling/PublicRoute';
 import AllQAs from './QAs/AllQAs';
 import Ask from './QAs/Ask';
 import SingleQues from './QAs/SingleQues';
+import EditQues from './QAs/EditQues';
 import Footer from '../layout/Footer';
 import {
   LANDING_ROUTE,
@@ -26,6 +27,7 @@ import {
   ALLQA_ROUTE,
   ASK_ROUTE,
   SINGLEQUES_ROUTE,
+  EDITQUES_ROUTE,
   PROFILES,
   SINGLEPROFILE,
   EDITPROFILE,
@@ -53,6 +55,9 @@ const Routes = () => {
               </PrivateRoute>
               <PrivateRoute path={SINGLEQUES_ROUTE}>
                 <SingleQues />
+              </PrivateRoute>
+              <PrivateRoute path={EDITQUES_ROUTE}>
+                <EditQues />
               </PrivateRoute>
               <PrivateRoute path={GET_BLOG}>
                 <Blog />

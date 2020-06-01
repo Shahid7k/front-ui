@@ -659,6 +659,10 @@ footer a {
 .bg-blue{
   background: rgba(27, 27, 47, 0.87);
 }
+.bg-darker{
+  background: rgba(16, 16, 19, 0.87);
+  color: white;
+}
 
 
 .errorMsg{
@@ -671,7 +675,7 @@ footer a {
 
 .comment-time{
   float: right !important;
-  background:rgba(1,22,22,0.4)
+  /* background:rgba(1,22,22,0.4) */
 }
 
 /* ------------------S-H-A-H-I-D------------------------ */
