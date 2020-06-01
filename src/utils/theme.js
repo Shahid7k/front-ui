@@ -1,6 +1,6 @@
 export const light = {
   backgroundSize: 'cover',
-  background:"rgba(240,240,240,0.2)",
+  background: 'rgba(240,240,240,0.2)',
   // background:`url(${images})`,
   color: 'black',
 };
@@ -11,6 +11,6 @@ export const dark = {
   color: 'white',
 };
 
-export const condition = true;
+export const condition = false;
 
 export const mode = condition ? dark : light;

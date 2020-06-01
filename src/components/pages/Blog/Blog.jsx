@@ -1,30 +1,47 @@
 import React, { Fragment, useState, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
 import BlogEditor from '../BlogEditor/BlogEditor';
-import { getBlogById } from '../../../requests/blog';
+import {
+  editBlog,
+  getBlogById,
+  addComment,
+  like,
+  unlike,
+  deleteBlog,
+} from '../../../requests/blog';
 import { DASHBOARD } from '../../../constants/routesNomenclature';
-import { blogInitialState } from '../BlogEditor/BlogEditor';
 import { BarLoader } from 'react-spinners';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
-import { editBlog } from '../../../requests/blog';
+import { mode, condition } from '../../../utils/theme';
+
+const blogState = {
+  title: '',
+  description: '',
+  content: '',
+  _id: '',
+  created: '',
+  postedBy: {},
+  likes: [],
+  comments: [],
+};
 
 const Blog = () => {
   const { blogId } = useParams();
 
   const history = useHistory();
 
-  const { userAuth } = useContext(authContext);
+  const userId = useContext(authContext).userAuth.user._id;
 
   const { addAlert } = useContext(alertContext);
 
-  const [blog, setBlog] = useState(blogInitialState);
+  const [blog, setBlog] = useState(blogState);
+
+  const [userComment, setUserComment] = useState('');
+
+  const [userLike, setUserLike] = useState(false);
 
   const [showLoader, setShowLoader] = useState(true);
-
-  const [isEditable, setIsEditable] = useState(false);
-
-  const [showSave, setShowSave] = useState(false);
 
   React.useEffect(() => {
     (async function () {
@@ -38,86 +55,153 @@ const Blog = () => {
     })();
   }, []);
 
-  const handleSave = blogData => {
-    setBlog(blogData);
-    setIsEditable(true);
-    setShowSave(true);
-  };
+  // console.log(blog);
 
-  const handleSubmit = async () => {
-    setIsEditable(false);
+  const handleSubmit = async blog => {
+    setBlog({ ...blog }, blog);
     const response = await editBlog(blogId, blog);
     if (response.data) {
-      addAlert('Blog successfully edited!', 'success');
       history.push(DASHBOARD);
+    } else {
+      addAlert(response.error.data.error, 'success');
+    }
+  };
+
+  const handleDelete = async () => {
+    const response = await deleteBlog(blogId);
+    // console.log(response);
+    if (response.data) {
+      addAlert(response.error.data.error, 'danger');
+      history.push(DASHBOARD);
+    }
+  };
+
+  const handleCommentChange = e => {
+    setUserComment(e.target.value);
+  };
+
+  const submitLike = async () => {
+    // setBlog({ ...blog, likes });
+    const response = userLike
+      ? await like(userId, blogId)
+      : await unlike(userId, blogId);
+    console.log(response);
+    if (response.data) {
+      setBlog({ ...blog, likes: response.data.likes });
     } else {
       addAlert(response.error.data.error, 'danger');
     }
   };
 
-  const { title, description, content, postedBy } = blog;
+  const submitComment = async () => {
+    // setBlog({ ...blog, comments });
+    const response = await addComment(userId, blogId, userComment);
+    console.log(response);
+    if (response.data) {
+      setUserComment('');
+      setBlog({ ...blog, comments: response.data.comments });
+    } else {
+      addAlert(response.error.data.error, 'danger');
+    }
+  };
+
+  // console.log(blog);
+  // console.log(blog.likes);
+  // console.log(userComment);
 
   return (
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
       {!showLoader && (
         <Fragment>
+          <BlogEditor
+            initialBlogState={blog}
+            handleSubmit={handleSubmit}
+            handleDelete={handleDelete}
+          />
+
           <div className='container'>
-            <div className='fl-l'>
-              <button
-                className='btn btn-dark mt-2 mb-5'
-                onClick={() => history.goBack()}
-              >
-                <i className='fas fa-angle-left mr-2' />
-                Back
+            <button className='btn btn-info my-2 mr-2' onClick={submitLike}>
+              {userLike ? 'Unlike' : 'Like'}
+            </button>
+            <div>
+              <textarea
+                style={commentStyle}
+                type='text'
+                name='comment'
+                rows='3'
+                cols='50'
+                placeholder='Write a comment...'
+                value={userComment}
+                onChange={handleCommentChange}
+              />
+              <button className='btn btn-info m-2' onClick={submitComment}>
+                Comment
               </button>
             </div>
+            <div className='container'>
+              {blog.comments.length !== 0 &&
+                blog.comments.map((comment, i) => (
+                  <div key={i} className='p'>
+                    <div key={i} className='p-4 d-flex'>
+                      <div className='comment-photo rounded-circle'>
+                        {comment !== null && comment !== undefined ? (
+                          <NavLink to={`/profile/${comment.postedBy._id}`}>
+                            <img
+                              src={`http://localhost:8080/user/photo/${comment.postedBy._id}`}
+                              alt='Face'
+                              onError={i =>
+                                (i.target.src =
+                                  'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png')
+                              }
+                              className='comment-photo rounded-circle'
+                            />
+                          </NavLink>
+                        ) : (
+                          <p> Anonymous!</p>
+                        )}
+                      </div>
+                      <div className='be-comment-content  m-1'>
+                        <div className=' mx-1 h6 font11 d-inline-block '>
+                          <NavLink
+                            to={`/profile/${comment.postedBy._id}`}
+                            style={mode}
+                          >
+                            {comment.postedBy.firstName}
+                          </NavLink>
+                        </div>
+                        <div className='comment-time mx-5 d-inline-block'>
+                          <i className='fa fa-clock-o'></i>
+                          {comment.created.substring(0, 10)}
+                          {' , '}
+                          {comment.created.substring(11, 19)} {' (GMT)'}
+                        </div>
 
-            <div className='text-right'>
-              {userAuth.user._id === postedBy._id && (
-                <Fragment>
-                  {!isEditable && (
-                    <button
-                      className='btn btn-primary mt-2 mb-5'
-                      onClick={() => setIsEditable(true)}
-                    >
-                      <i className='fas fa-pen mr-2' />
-                      Edit
-                    </button>
-                  )}
-
-                  {isEditable && showSave && (
-                    <button
-                      className='btn btn-success mt-2 ml-2 mb-5'
-                      disabled={
-                        title.length < 4 ||
-                        description.length < 5 ||
-                        content.length < 30
-                      }
-                      onClick={handleSubmit}
-                    >
-                      <i className='fas fa-save mr-2' />
-                      Save
-                    </button>
-                  )}
-                </Fragment>
-              )}
+                        <p className='comment-text ' style={mode}>
+                          {comment.text}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
-
-            <BlogEditor
-              initialBlogState={blog}
-              readOnly={!isEditable}
-              toolbarHidden={!isEditable}
-              handleSave={handleSave}
-            />
-            {!isEditable && (
-              <button className='btn btn-raised bg-info my-2'>Like</button>
-            )}
           </div>
         </Fragment>
       )}
     </Fragment>
   );
+};
+
+const commentStyle = {
+  width: '60%',
+  padding: '.375rem .75rem',
+  fontSize: '1rem',
+  fontWeight: '400',
+  lineHeight: '1.5',
+  color: '#495057',
+  backgrounColor: ' #fff',
+  border: '1px solid #ced4da',
+  borderRadius: '.25rem',
 };
 
 export default Blog;

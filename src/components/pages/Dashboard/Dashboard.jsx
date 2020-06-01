@@ -40,7 +40,7 @@ const Dashboard = () => {
         <div className='container my-5'>
           My Dashboard Page
           <div>
-            <button type='submit' className='btn btn-dark btn-lg d-block'>
+            <button type='submit' className='btn btn-dark d-block'>
               <NavLink
                 to={POST_BLOG}
                 className='text-white text-decoration-none'

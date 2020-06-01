@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './BlogEditor.css';
+import { authContext } from '../../../context/AuthContext';
 import RichEditor from './RichEditor/RichEditor';
 
 export const blogInitialState = {
@@ -10,69 +12,136 @@ export const blogInitialState = {
 };
 
 const BlogEditor = props => {
+  const history = useHistory();
+
   const [blog, setBlog] = useState(blogInitialState);
 
-  const [showDone, setShowDone] = useState(true);
+  const userId = useContext(authContext).userAuth.user._id;
 
-  const { initialBlogState, handleSave, ...rest } = props;
+  const [isEditable, setIsEditable] = useState(false);
+
+  const { initialBlogState, handleSubmit, handleDelete, ...rest } = props;
 
   useEffect(() => {
     if (initialBlogState) {
       setBlog(initialBlogState);
     }
-    setShowDone(true);
+    if (rest.showPostButton) {
+      setIsEditable(true);
+    }
   }, [initialBlogState]);
 
   const { title, description, content } = blog;
 
-  const handleDone = () => {
-    setShowDone(false);
-    handleSave && handleSave(blog);
+  const handleSave = () => {
+    handleSubmit && handleSubmit(blog);
+  };
+
+  const handleRemove = () => {
+    handleDelete && handleDelete();
   };
 
   return (
-    <div className='container'>
-      <input
-        type='text'
-        placeholder='Title...'
-        className={
-          rest.readOnly ? 'border-top-0 border-left-0 border-right-0' : ''
-        }
-        name='blogTitle'
-        value={title}
-        disabled={rest.readOnly}
-        onChange={e => setBlog({ ...blog, title: e.target.value })}
-      />
-      <input
-        type='text'
-        placeholder='Description...'
-        className={
-          rest.readOnly ? 'border-top-0 border-left-0 border-right-0' : ''
-        }
-        name='blogDescription'
-        value={description}
-        disabled={rest.readOnly}
-        onChange={e => setBlog({ ...blog, description: e.target.value })}
-      />
-      <RichEditor
-        {...rest}
-        initialBlogState={initialBlogState}
-        handleBlogContentChange={markup =>
-          setBlog({ ...blog, content: markup })
-        }
-      />
-      {!rest.readOnly && showDone && (
-        <button
-          className='btn btn-dark d-block ml-auto my-2 mr-2'
-          disabled={
-            title.length < 4 || description.length < 5 || content.length < 30
+    <Fragment>
+      <div className='container'>
+        <div className='fl-l'>
+          <button
+            className='btn btn-dark mt-2 mb-5'
+            onClick={() => history.goBack()}
+          >
+            <i className='fas fa-angle-left mr-2' />
+            Back
+          </button>
+        </div>
+
+        <div className='text-right'>
+          {rest.showPostButton && (
+            <button
+              className='btn btn-success mt-2 ml-2 mb-5'
+              disabled={
+                title.length < 4 ||
+                description.length < 5 ||
+                content.length < 15
+              }
+              onClick={handleSave}
+            >
+              <i className='fas fa-save mr-2' />
+              Post
+            </button>
+          )}
+          {blog.postedBy && userId === blog.postedBy._id && (
+            <Fragment>
+              {!isEditable && (
+                <Fragment>
+                  <button
+                    className='btn btn-primary mt-2 mb-5'
+                    onClick={() => setIsEditable(true)}
+                  >
+                    <i className='fas fa-pen mr-2' />
+                    Edit
+                  </button>
+                  <button
+                    className='btn btn-danger mt-2 mb-5 ml-2'
+                    onClick={handleRemove}
+                  >
+                    <i className='fas fa-trash-alt mr-2' />
+                    Delete
+                  </button>
+                </Fragment>
+              )}
+
+              {isEditable && (
+                <button
+                  className='btn btn-success mt-2 ml-2 mb-5'
+                  disabled={
+                    title.length < 4 ||
+                    description.length < 5 ||
+                    content.length < 15
+                  }
+                  onClick={handleSave}
+                >
+                  <i className='fas fa-save mr-2' />
+                  Save
+                </button>
+              )}
+            </Fragment>
+          )}
+        </div>
+      </div>
+
+      <div className='container'>
+        <input
+          type='text'
+          placeholder='Title...'
+          className={
+            !isEditable ? 'border-top-0 border-left-0 border-right-0' : ''
           }
-          onClick={handleDone}
-        >
-          Done
-        </button>
-      )}
-    </div>
+          name='blogTitle'
+          value={title}
+          disabled={!isEditable}
+          onChange={e => setBlog({ ...blog, title: e.target.value })}
+        />
+        <input
+          type='text'
+          placeholder='Description...'
+          className={
+            !isEditable ? 'border-top-0 border-left-0 border-right-0' : ''
+          }
+          name='blogDescription'
+          value={description}
+          disabled={!isEditable}
+          onChange={e => setBlog({ ...blog, description: e.target.value })}
+        />
+        <RichEditor
+          initialBlogState={initialBlogState}
+          readOnly={!isEditable}
+          toolbarHidden={!isEditable}
+          handleBlogContentChange={markup =>
+            setBlog({ ...blog, content: markup })
+          }
+        />
+      </div>
+    </Fragment>
   );
 };
 
@@ -80,6 +149,7 @@ BlogEditor.defaultProps = {
   initialBlogState: '',
   readOnly: false,
   toolbarHidden: false,
+  showPostButton: false,
 };
 
 export default BlogEditor;
