@@ -20,7 +20,7 @@ const BlogEditor = props => {
 
   const [isEditable, setIsEditable] = useState(false);
 
-  const { initialBlogState, handleSubmit, ...rest } = props;
+  const { initialBlogState, handleSubmit, handleDelete, ...rest } = props;
 
   useEffect(() => {
     if (initialBlogState) {
@@ -35,6 +35,10 @@ const BlogEditor = props => {
 
   const handleSave = () => {
     handleSubmit && handleSubmit(blog);
+  };
+
+  const handleRemove = () => {
+    handleDelete && handleDelete();
   };
 
   return (
@@ -57,7 +61,7 @@ const BlogEditor = props => {
               disabled={
                 title.length < 4 ||
                 description.length < 5 ||
-                content.length < 20
+                content.length < 15
               }
               onClick={handleSave}
             >
@@ -68,13 +72,22 @@ const BlogEditor = props => {
           {blog.postedBy && userId === blog.postedBy._id && (
             <Fragment>
               {!isEditable && (
-                <button
-                  className='btn btn-primary mt-2 mb-5'
-                  onClick={() => setIsEditable(true)}
-                >
-                  <i className='fas fa-pen mr-2' />
-                  Edit
-                </button>
+                <Fragment>
+                  <button
+                    className='btn btn-primary mt-2 mb-5'
+                    onClick={() => setIsEditable(true)}
+                  >
+                    <i className='fas fa-pen mr-2' />
+                    Edit
+                  </button>
+                  <button
+                    className='btn btn-danger mt-2 mb-5 ml-2'
+                    onClick={handleRemove}
+                  >
+                    <i className='fas fa-trash-alt mr-2' />
+                    Delete
+                  </button>
+                </Fragment>
               )}
 
               {isEditable && (
@@ -83,7 +96,7 @@ const BlogEditor = props => {
                   disabled={
                     title.length < 4 ||
                     description.length < 5 ||
-                    content.length < 20
+                    content.length < 15
                   }
                   onClick={handleSave}
                 >

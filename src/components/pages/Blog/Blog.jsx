@@ -7,6 +7,7 @@ import {
   addComment,
   like,
   unlike,
+  deleteBlog,
 } from '../../../requests/blog';
 import { DASHBOARD } from '../../../constants/routesNomenclature';
 import { BarLoader } from 'react-spinners';
@@ -54,7 +55,7 @@ const Blog = () => {
     })();
   }, []);
 
-  console.log(blog);
+  // console.log(blog);
 
   const handleSubmit = async blog => {
     setBlog({ ...blog }, blog);
@@ -62,7 +63,16 @@ const Blog = () => {
     if (response.data) {
       history.push(DASHBOARD);
     } else {
+      addAlert(response.error.data.error, 'success');
+    }
+  };
+
+  const handleDelete = async () => {
+    const response = await deleteBlog(blogId);
+    // console.log(response);
+    if (response.data) {
       addAlert(response.error.data.error, 'danger');
+      history.push(DASHBOARD);
     }
   };
 
@@ -95,16 +105,20 @@ const Blog = () => {
     }
   };
 
-  console.log(blog);
-  console.log(blog.likes);
-  console.log(userComment);
+  // console.log(blog);
+  // console.log(blog.likes);
+  // console.log(userComment);
 
   return (
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
       {!showLoader && (
         <Fragment>
-          <BlogEditor initialBlogState={blog} handleSubmit={handleSubmit} />
+          <BlogEditor
+            initialBlogState={blog}
+            handleSubmit={handleSubmit}
+            handleDelete={handleDelete}
+          />
 
           <div className='container'>
             <button className='btn btn-info my-2 mr-2' onClick={submitLike}>

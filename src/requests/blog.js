@@ -45,6 +45,28 @@ export const editBlog = async (blogId, blogData) => {
   }
 };
 
+export const deleteBlog = async blogId => {
+  console.log('post (deleteBlog) action called', blogId);
+  try {
+    const res = await axiosClient.delete(
+      `http://localhost:8080/post/${blogId}`
+    );
+    console.log(res);
+    return { data: res.data };
+  } catch (error) {
+    const {
+      response: { data, status },
+    } = error;
+    return {
+      error: {
+        status,
+        data,
+      },
+    };
+    // console.log(error);
+  }
+};
+
 export const getBlogs = async () => {
   console.log('get (getBlogs) action called');
   try {
