@@ -1,10 +1,10 @@
 import React , {useEffect,useState} from 'react';
-import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { useParams, useHistory, NavLink, Redirect } from 'react-router-dom';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
 import axios from 'axios';
 import { mode, condition } from '../../../utils/theme';
-import { answer } from '../../../requests/ques';
+import { answer,deleteAnswer,deleteQues } from '../../../requests/ques';
 
 const initialQuesState={
     title:'',
@@ -28,7 +28,7 @@ const SingleQues = () =>{
     const [quesState,fetchQues]=useState({...initialQuesState});
     // console.log("ID: ",quesId)
     // let photoURL="";
-
+    const [redirect,setRedirect]=useState(false)
     useEffect(() => {
         async function getData() {
           fetchQues({ ...quesState, loading: true });
@@ -59,7 +59,7 @@ const SingleQues = () =>{
           e.preventDefault();
           
           const response = await answer(userId,quesId,{answer:quesState.answer})
-          console.log("RESPONSE",response);
+        //   console.log("RESPONSE",response);
           if (response.data) {
              addAlert('Your answer is successfully submitted .', 'success');
                 fetchQues({...quesState,answer:'',answers:response.data.answers})
@@ -68,10 +68,46 @@ const SingleQues = () =>{
           }
 
       }
+
+     const del=async()=>{
+        if(window.confirm("Are you sure you want to delete?"))
+        {
+            const res=await deleteQues(quesId)
+            if(res.data){
+                setRedirect(true);
+            }
+            else if(res.error){
+                addAlert(res.error.data.error,'danger')
+            }
+        }
+    }
+
+     const  deleteAnswerConfirmed=async(answer)=>{
+        // this.setState({loading:true})
+        // const userId=comment.postedBy._id
+        // const quesId=this.props.postId
+        // const token="Bearer "+(isAuthenticated().token)
+        const response = await deleteAnswer(userId,quesId,answer)
+        // console.log("DEL",response)
+        if (response.data) {
+            addAlert('Your answer is deleted  .', 'success');
+               fetchQues({...quesState,answer:'',answers:response.data.answers})
+         } else if (response.error) {
+           addAlert(response.error.data.error, 'danger');
+         }
+
+    }
+    const deleteAns=(answer)=>{
+        let decision=window.confirm("Are you sure you want to delete the answer?")
+        if(decision) deleteAnswerConfirmed(answer)
+        
+    }
+    
+
       const {title,tags,body,answers,postedBy,created,satisfied,photoURL} = quesState;
       
-      console.log("ANSWERS ARRAY : ",answers)
-    
+    //   console.log("ANSWERS ARRAY : ",answers)
+    if(redirect) return <Redirect to="/"  />
       return (
         <div className={`${condition?"bg-dark":"bg-mint-cream"}`}>
             <div className='container'>
@@ -103,17 +139,28 @@ const SingleQues = () =>{
                                     />
                                 <p className="figure-caption">Click to open</p> 
                                 </a>
+                                
                                 <hr />
+                                
                                 <p className={` ${satisfied?"text-success":"text-danger"}`}>{satisfied?(<><i className='fa fa-check m-1' aria-hidden='true'></i>Solved</>):(<><i className='fa fa-times m-1' aria-hidden='true'></i>Not Solved</>)}</p> 
+                                { userId===postedBy._id
+                                    && (
+                                        <div className="container m-4">
+                                            <NavLink className={`btn  btn-raised ${condition?"btn-dark": "btn-warning"} mx-2`}  to={`/editQuestion/${quesId}`}  >Edit</NavLink>
+                                            <button className={`btn btn-raised ${condition?"btn-dark": "btn-danger"} mx-2`}  onClick={del}  >Delete Question</button>
+                                        </div>  
+                                    )
+                                }
                                 <div>
                                     <div className={`btn  ${condition?"btn-dark": "btn-info"}`}  onClick={showAnswerBox}>Answer this Question</div>
+                                    
                                 </div>
                         </div>
 
                         <div className=" m-3 p-2 container" style={mode}  >
                             {quesState.showAnsBox && 
                                 <div className="form">
-                                    <textarea type="text" className="form-control" rows="4" name="answer" value={quesState.answer} onChange={handleChange("answer")} placeholder="Start writing your answer here" />
+                                    <textarea type="text" className="form-control" rows="4" style={mode} name="answer" value={quesState.answer} onChange={handleChange("answer")} placeholder="Start writing your answer here" />
                                     <button className="btn btn-primary m-2" onClick={submitAnswer}> Submit Answer!</button>
                                     <hr/>
                                 </div>
@@ -121,7 +168,7 @@ const SingleQues = () =>{
 
 
                             <div className="btn-link text-center" onClick={toggleAnswers}>
-                                Show All Answers!
+                                {!quesState.showAnswers ?"Show":"Hide"} All Answers!
                             </div>
                             {quesState.showAnswers && (quesState.answers.length!==0) && (
                                 
@@ -138,19 +185,21 @@ const SingleQues = () =>{
                                                 
                                                     <div className=" mx-1 h6 font11 d-inline-block "  >
                                                         <NavLink to= {`/profile/${x.postedBy._id}`} style={mode} >{x.postedBy.firstName}</NavLink>
-                                                        </div>
-                                                    <div className="comment-time mx-5 d-inline-block"  >
+                                                    </div>
+                                                    <div className="comment-time font09 mx-5 d-inline-block"  >
                                                         <i className="fa fa-clock-o"></i>
                                                         {x.created.substring(0,10)}{" , "}{x.created.substring(11,19)} {" (GMT)"}
-                                                    {/* { (isAuthenticated().user && isAuthenticated().user._id===x.postedBy._id &&
+                                                    {userId===x.postedBy._id &&
                                                             <div className="d-inline-block">
-                                                                <img src="https://toppng.com/uploads/preview/delete-button-clipart-volume-icon-hapus-11563950527luvjbpuej2.png"
+                                                                {/* <img src="https://toppng.com/uploads/preview/delete-button-clipart-volume-icon-hapus-11563950527luvjbpuej2.png"
                                                                 alt="delete" 
+                                                                className="pointer"
                                                                 style={{height:"30px",width:"30px"}} 
-                                                                onClick={()=>this.deleteAns(x)}
-                                                                />
+                                                                onClick={()=>deleteAns(x)}
+                                                                /> */}
+                                                                <i className="font13 fas fa-trash mx-4 pointer"    onClick={()=>deleteAns(x)} />
                                                             </div>
-                                                        )}                  Here... Write the code for allowing only the person who answered to delete their answer.                              */}
+                                                        }                   
                                                     </div>
 
                                                 <p className="comment-text " style={mode}>

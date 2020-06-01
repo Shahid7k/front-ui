@@ -87,6 +87,7 @@ const RichEditor = props => {
       {...rest}
       editorState={editorState}
       placeholder='Explore Your Way In..'
+      // toolbarClassName='toolbar-class'
       toolbar={toolbar}
       onEditorStateChange={onEditorStateChange}
     />

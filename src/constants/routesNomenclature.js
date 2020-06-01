@@ -9,5 +9,6 @@ export const EDITPROFILE = '/edit-profile/';
 export const ALLQA_ROUTE = '/allqa';
 export const ASK_ROUTE = '/ask';
 export const SINGLEQUES_ROUTE = '/question/:quesId';
+export const EDITQUES_ROUTE = '/editQuestion/:quesId';
 export const POST_BLOG = '/post-blog';
 export const GET_BLOG = '/blogs/:blogId';

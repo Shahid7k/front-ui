@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
+import {LOADING} from '../../layout/otherConstants';
 import { BarLoader } from 'react-spinners';
 
 const initialUserState = {
@@ -63,7 +64,7 @@ const EditProfile = () => {
 
   let history = useHistory();
   const userId = useContext(authContext).userAuth.user._id;
-
+  const [redirect,setRedirect] = useState(false)
   const [user, setUser] = useState({ ...initialUserState });
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
@@ -133,10 +134,14 @@ const EditProfile = () => {
     // console.log(data);
     if (response.data) {
       addAlert('Profile Updated', 'success');
+      setRedirect(true)
     } else if (response.error) {
       addAlert(response.error.data.error, 'danger');
     }
   };
+  const toggleMode= (name)=>e=>{
+    setUser({...user,darkEnabled:(name==="dark")})
+  }
 
   const {
     firstName,
@@ -148,10 +153,11 @@ const EditProfile = () => {
     phoneNo,
     gender,
     about,
+    darkEnabled
   } = user;
 
   const userToken = JSON.parse(localStorage.getItem('userInfo')).token;
-
+  if(redirect) return <Redirect to={`/profile/${userId}`} />
   return (
     <Fragment>
       <BarLoader
@@ -160,7 +166,7 @@ const EditProfile = () => {
         width={'100%'}
       />
 
-      {!showLoader && (
+      {!showLoader? (
         <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
           <div className=''>
             <button
@@ -172,6 +178,14 @@ const EditProfile = () => {
               <i className='fas fa-angle-left mr-2' />
               Back
             </button>
+          </div>
+          <div className="fl-r m-5">
+            <label className="mx-4 h5 underline" >Mode: <div className="font08">{darkEnabled?"Dark":"Light"}</div></label>
+             <br/>
+            {/* THE ABOVE TEXT WRAPPED IN DIV {inside Label,not the Label} IS JUST TO CHECK IF OUR DARK,LIGHT MODES ARE WORKING PROPERLY OR NOT! */}
+            <div className={`btn btn-dark  bg-darker ${condition?"disabled":""} `} onClick={toggleMode("dark")}  >Dark</div>
+            <button className={`btn btn-raised btn-light ${condition?"":"disabled"}`} onClick={toggleMode("light")}  >Light</button>
+            <br />
           </div>
 
           <br />
@@ -367,7 +381,7 @@ const EditProfile = () => {
             </button>
           </form>
         </div>
-      )}
+      ):<>{LOADING}</>}
     </Fragment>
   );
 };
