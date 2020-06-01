@@ -38,37 +38,24 @@ const PostBlog = () => {
   const { title, description, content } = initialBlogState;
 
   return (
-    <Fragment>
-      <div className='container'>
-        <div className='fl-l'>
-          <button
-            className='btn btn-dark mt-2 mb-5'
-            onClick={() => history.goBack()}
-          >
-            <i className='fas fa-angle-left mr-2' />
-            Back
-          </button>
-        </div>
-      </div>
-
-      <div className='my-5'>
-        <BlogEditor
-          initialBlogState={initialBlogState}
-          handleSubmit={handleSubmit}
-        />
-        {showSave && (
-          <button
-            className='btn btn-success mt-2 ml-2 mb-5'
-            disabled={
-              title.length < 4 || description.length < 5 || content.length < 30
-            }
-            onClick={handleSave}
-          >
-            Post
-          </button>
-        )}
-      </div>
-    </Fragment>
+    <div className='my-5'>
+      <BlogEditor
+        initialBlogState={initialBlogState}
+        handleSubmit={handleSubmit}
+        showPostButton={true}
+      />
+      {showSave && (
+        <button
+          className='btn btn-success mt-2 ml-2 mb-5'
+          disabled={
+            title.length < 4 || description.length < 5 || content.length < 30
+          }
+          onClick={handleSave}
+        >
+          Post
+        </button>
+      )}
+    </div>
   );
 };
 

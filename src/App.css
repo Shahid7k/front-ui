@@ -331,8 +331,7 @@ input[type='email'],
 input[type='password'],
 input[type='date'],
 input[type='tel'],
-select,
-textarea {
+select {
   display: block;
   width: 100%;
   padding: 0.4rem;
@@ -622,56 +621,51 @@ footer a {
   flex-wrap: wrap;
 }
 
-.bg-mint-cream{
-  background:rgba(245, 255, 250,0.5);
+.bg-mint-cream {
+  background: rgba(245, 255, 250, 0.5);
 }
 
-.footer{
+.footer {
   position: inherit;
   bottom: 0;
   z-index: -1;
-  width:100%;
+  width: 100%;
 }
 
-
-.comment-photo{
+.comment-photo {
   height: 5rem;
   width: auto;
-
 }
 
-
-.btn-link{
+.btn-link {
   cursor: pointer;
 }
 
-.bg-transparent{
-  background: rgba(0,0,0,0) !important;
+.bg-transparent {
+  background: rgba(0, 0, 0, 0) !important;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.bg-red{
+.bg-red {
   background: rgba(233, 33, 33, 0.726) !important;
 }
-.bg-blue{
+.bg-blue {
   background: rgba(27, 27, 47, 0.87);
 }
 
-
-.errorMsg{
-  color:rgb(245, 41, 41);
-  
+.errorMsg {
+  color: rgb(245, 41, 41);
 }
-.underline{
+.underline {
   text-decoration: underline;
 }
 
-.comment-time{
+.comment-time {
   float: right !important;
-  background:rgba(1,22,22,0.4)
+  background: rgba(1, 22, 22, 0.4);
 }
 
 /* ------------------S-H-A-H-I-D------------------------ */

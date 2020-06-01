@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
@@ -58,7 +58,6 @@ const validatorInititalState = {
   },
 };
 
-
 const EditProfile = () => {
   const { addAlert } = React.useContext(alertContext);
 
@@ -79,7 +78,6 @@ const EditProfile = () => {
       [e.target.name]: currValidator,
     });
   };
-
 
   const [showLoader, setShowLoader] = useState(true);
 
@@ -165,13 +163,15 @@ const EditProfile = () => {
       {!showLoader && (
         <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
           <div className=''>
-            <button className={`btn btn-raised btn-outline-primary m-1 `} 
-            // onClick={goBack}
-            onClick={() =>history.goBack()}
-              style={mode}>
-                <i className='fas fa-angle-left mr-2' />
-                Back
-                </button>
+            <button
+              className={`btn btn-raised btn-outline-primary m-1 `}
+              // onClick={goBack}
+              onClick={() => history.goBack()}
+              style={mode}
+            >
+              <i className='fas fa-angle-left mr-2' />
+              Back
+            </button>
           </div>
 
           <br />
@@ -206,17 +206,21 @@ const EditProfile = () => {
                     <br />
                     <input
                       type='text'
-                      className={`${formDataValidator.firstName.error?"border-danger":""} form-control  mb-2 col-6 m-0`}
+                      className={`${
+                        formDataValidator.firstName.error ? 'border-danger' : ''
+                      } form-control  mb-2 col-6 m-0`}
                       placeholder='firstName'
                       name='firstName'
                       value={firstName}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
                       style={mode}
-                    /> 
+                    />
                     <input
                       type='text'
-                      className={`${formDataValidator.lastName.error?"border-danger":""} form-control  mb-2 col-6 m-0`}
+                      className={`${
+                        formDataValidator.lastName.error ? 'border-danger' : ''
+                      } form-control  mb-2 col-6 m-0`}
                       placeholder='lastName'
                       name='lastName'
                       value={lastName}
@@ -226,21 +230,25 @@ const EditProfile = () => {
                     />
                     <br />
                     {formDataValidator.lastName.error && (
-                       <span className="errorMsg font07 mx-1 my-0">
-                         {formDataValidator.lastName.message}
-                       </span>
-                     )}   
-                    
+                      <span className='errorMsg font07 mx-1 my-0'>
+                        {formDataValidator.lastName.message}
+                      </span>
+                    )}
+
                     {formDataValidator.firstName.error && (
-                        <span className="errorMsg font07 mx-1 my-0">
-                          {formDataValidator.firstName.message}
-                        </span>
-                      )}  
-                      <br />
+                      <span className='errorMsg font07 mx-1 my-0'>
+                        {formDataValidator.firstName.message}
+                      </span>
+                    )}
+                    <br />
                     <input
                       type='text'
-                      className={`${formDataValidator.profession.error?"border-danger":""}  form-control mx-sm-3 mb-2 col-6 m-0`}
-                      placeholder="Profession"
+                      className={`${
+                        formDataValidator.profession.error
+                          ? 'border-danger'
+                          : ''
+                      }  form-control mx-sm-3 mb-2 col-6 m-0`}
+                      placeholder='Profession'
                       name='profession'
                       value={profession}
                       onChange={handleChange}
@@ -248,15 +256,17 @@ const EditProfile = () => {
                       style={mode}
                     />
                     {formDataValidator.profession.error && (
-                       <span className="errorMsg font07">
-                         {formDataValidator.profession.message}
-                       </span>
-                     )}   
+                      <span className='errorMsg font07'>
+                        {formDataValidator.profession.message}
+                      </span>
+                    )}
                     <br />
                     <i className='fas fa-map-marker-alt p-2'></i>
                     <input
                       type='text'
-                      className={`${formDataValidator.city.error?"border-danger":""} form-control mx-sm-3 mb-2 col-3 m-0`}
+                      className={`${
+                        formDataValidator.city.error ? 'border-danger' : ''
+                      } form-control mx-sm-3 mb-2 col-3 m-0`}
                       placeholder='City'
                       name='city'
                       value={city}
@@ -264,12 +274,13 @@ const EditProfile = () => {
                       onBlur={handleValidatorChange}
                       style={mode}
                     />
-                    
-                    
+
                     <input
                       type='text'
-                      className={`${formDataValidator.country.error?"border-danger":""} form-control mx-sm-3 mb-2 col-3 m-0`}
-                      placeholder="Country"
+                      className={`${
+                        formDataValidator.country.error ? 'border-danger' : ''
+                      } form-control mx-sm-3 mb-2 col-3 m-0`}
+                      placeholder='Country'
                       name='country'
                       value={country}
                       onChange={handleChange}
@@ -278,16 +289,16 @@ const EditProfile = () => {
                     />
                     <br />
                     {formDataValidator.city.error && (
-                       <span className="errorMsg font07 mx-1 my-0">
-                         {formDataValidator.city.message}
-                       </span>
-                     )}   
-                     {formDataValidator.country.error && (
-                        <span className="errorMsg font07 mx-1 my-0">
-                          {formDataValidator.country.message}
-                        </span>
-                      )}   
-                     <br />
+                      <span className='errorMsg font07 mx-1 my-0'>
+                        {formDataValidator.city.message}
+                      </span>
+                    )}
+                    {formDataValidator.country.error && (
+                      <span className='errorMsg font07 mx-1 my-0'>
+                        {formDataValidator.country.message}
+                      </span>
+                    )}
+                    <br />
                     <i className='far fa-envelope p-2'></i>
                     <input
                       type='email'
@@ -302,7 +313,9 @@ const EditProfile = () => {
                     <i className='fas fa-phone'></i>
                     <input
                       type='tel'
-                      className={` ${formDataValidator.phoneNo.error?"border-danger":""} form-control mx-sm-3 mb-2 col-6 m-0 p-0`}
+                      className={` ${
+                        formDataValidator.phoneNo.error ? 'border-danger' : ''
+                      } form-control mx-sm-3 mb-2 col-6 m-0 p-0`}
                       placeholder='Phone Number'
                       name='phoneNo'
                       value={phoneNo || ''}
@@ -311,10 +324,10 @@ const EditProfile = () => {
                       onBlur={handleValidatorChange}
                     />
                     {formDataValidator.phoneNo.error && (
-                       <span className="errorMsg font07">
-                         {formDataValidator.phoneNo.message}
-                       </span>
-                     )}   
+                      <span className='errorMsg font07'>
+                        {formDataValidator.phoneNo.message}
+                      </span>
+                    )}
                     <br />
                   </div>
 

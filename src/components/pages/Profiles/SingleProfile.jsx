@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import axios from 'axios';
 import { mode, condition } from '../../../utils/theme';
 import { authContext } from '../../../context/AuthContext';
 import { EDITPROFILE } from '../../../constants/routesNomenclature';
+import BlogCard from '../../layout/BlogCard';
+import { getBlogsByUserId } from '../../../requests/blog';
+import { getUserById } from '../../../requests/user';
 
 const initialState = {
   showPosts: false,
   userData: '',
-  postsList: ['ALL', 'THE', 'POSTS', 'HERE!'],
   loading: false,
   photoURL: '',
 };
@@ -19,6 +20,8 @@ const SingleProfile = () => {
   let history = useHistory();
 
   const [state, updateState] = useState({ ...initialState });
+
+  const [blogs, setBlogs] = useState([]);
 
   const { userAuth } = useContext(authContext);
 
@@ -40,9 +43,15 @@ const SingleProfile = () => {
   useEffect(() => {
     (async function () {
       updateState({ ...state, loading: true });
-      const result = await axios.get('http://localhost:8080/user/' + userId);
+      const result = await getUserById(userId);
       // console.log(JSON.stringify(result))
       updateState({ ...state, userData: result.data, loading: false });
+
+      const res = await getBlogsByUserId(userId);
+      // console.log(res.data);
+      if (res.data.length !== 0) {
+        setBlogs(res.data);
+      }
     })();
   }, []);
 
@@ -76,6 +85,7 @@ const SingleProfile = () => {
           onClick={() => history.goBack()}
           style={mode}
         >
+          <i className='fas fa-angle-left mr-2' />
           Back
         </button>
       </div>
@@ -158,23 +168,31 @@ const SingleProfile = () => {
             </li>
           </ul>
           <hr />
-          <button
-            className='btn btn-link btn-raised w-100 p-2 m-2'
-            style={mode}
-            onClick={toggle}
-          >
-            {state.showPosts ? 'Hide' : 'Show'} All Blogs
-          </button>
-          {state.showPosts && (
-            <div>
-              {' '}
-              {state.postsList.map((post, i) => (
-                <div key={i} className='text-truncate'>
-                  {' '}
-                  {'->'} {post}
+          {blogs.length !== 0 ? (
+            <Fragment>
+              <button
+                className='btn btn-link btn-raised w-100 p-2 m-2'
+                style={mode}
+                onClick={toggle}
+              >
+                {state.showPosts ? 'Hide' : 'Show'} All Blogs
+              </button>
+              {state.showPosts && (
+                <div className='row container'>
+                  {blogs.map((blog, index) => (
+                    <div
+                      key={`blog-${index}`}
+                      onClick={() => history.push(`/blogs/${blog._id}`)}
+                      className='col-md-4 col-md-offset-3'
+                    >
+                      <BlogCard blog={blog} />
+                    </div>
+                  ))}
                 </div>
-              ))}{' '}
-            </div>
+              )}
+            </Fragment>
+          ) : (
+            <h3 className='text-center'>No Blogs By This User.</h3>
           )}
         </div>
       </div>
