@@ -24,6 +24,7 @@ const blogState = {
   postedBy: {},
   likes: [],
   comments: [],
+  userLiked:false
 };
 
 const Blog = () => {
@@ -39,18 +40,19 @@ const Blog = () => {
 
   const [userComment, setUserComment] = useState('');
 
-  const [userLike, setUserLike] = useState(false);
+  // const [userLike, setUserLike] = useState(false);
 
   const [showLoader, setShowLoader] = useState(true);
 
   React.useEffect(() => {
     (async function () {
       const res = await getBlogById(blogId);
-      // console.log(res.data);
+      // console.log("BLOGDATA:",res.data);
       if (res.data) {
-        setBlog(res.data);
+        const match= res.data.likes.indexOf(userId)!==-1
+        // setBlog(res.data);
+        setBlog({...res.data,userLiked:match})
       }
-
       setShowLoader(false);
     })();
   }, []);
@@ -63,7 +65,7 @@ const Blog = () => {
     if (response.data) {
       history.push(DASHBOARD);
     } else {
-      addAlert(response.error.data.error, 'success');
+      addAlert(response.error.data.error, 'danger');
     }
   };
 
@@ -71,8 +73,10 @@ const Blog = () => {
     const response = await deleteBlog(blogId);
     // console.log(response);
     if (response.data) {
-      addAlert(response.error.data.error, 'danger');
+      addAlert("Blog deleted", 'success');
       history.push(DASHBOARD);
+    }else{
+      addAlert(response.error.data.error, 'danger');
     }
   };
 
@@ -82,16 +86,18 @@ const Blog = () => {
 
   const submitLike = async () => {
     // setBlog({ ...blog, likes });
-    const response = userLike
+    const response = !blog.userLiked
       ? await like(userId, blogId)
       : await unlike(userId, blogId);
-    console.log(response);
-    if (response.data) {
-      setBlog({ ...blog, likes: response.data.likes });
+    // console.log(response);
+    if (response.likes) {
+      const match= response.likes.indexOf(userId)!==-1 
+      setBlog({ ...blog, likes: response.likes,userLiked:match  });
     } else {
       addAlert(response.error.data.error, 'danger');
     }
   };
+
 
   const submitComment = async () => {
     // setBlog({ ...blog, comments });
@@ -108,7 +114,7 @@ const Blog = () => {
   // console.log(blog);
   // console.log(blog.likes);
   // console.log(userComment);
-
+  const likesCount =  blog.likes.length
   return (
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
@@ -122,8 +128,9 @@ const Blog = () => {
 
           <div className='container'>
             <button className='btn btn-info my-2 mr-2' onClick={submitLike}>
-              {userLike ? 'Unlike' : 'Like'}
+              {blog.userLiked ? 'Unlike' : 'Like'}
             </button>
+            {likesCount} {likesCount==1?"Like":"Likes"}
             <div>
               <textarea
                 style={commentStyle}

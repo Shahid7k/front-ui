@@ -171,7 +171,7 @@ const LandingPage = () => {
 
           <div className="d-flex flex-wrap font14 ">
             <div className="screenshotsHome py-4 bg-red">
-                <img  className="img-fluid rounded d-inline px-4" src={BlogsScreenshot} />
+                <img  className="img-fluid rounded d-inline px-4" src={BlogsScreenshot} alt="BlogsScreenshot" />
                 <span className="px-4">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui molestiae minus necessitatibus voluptas consequatur illo harum maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum quos officia ducimus itaque! Itaque, facilis?
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, ipsum tenetur eaque eius rem ullam dolore accusamus dicta corporis debitis laboriosam voluptatem, molestias placeat perspiciatis, cupiditate id vitae tempore quod?
@@ -182,7 +182,7 @@ const LandingPage = () => {
                 <span className="px-4">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui molestiae minus necessitatibus voluptas consequatur illo harum maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum quos officia ducimus itaque! Itaque, facilis?
                 </span>
-                <img className="px-4 img-fluid rounded " src={qaScreenshot}   />
+                <img className="px-4 img-fluid rounded " src={qaScreenshot}  alt="QAsScreenshot"  />
             </div>
             
 

@@ -11,6 +11,6 @@ export const dark = {
   color: 'white',
 };
 
-export const condition = false;
+export const condition = true;
 
 export const mode = condition ? dark : light;

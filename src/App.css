@@ -512,6 +512,9 @@ footer a {
 #cursive {
   font-family: cursive;
 }
+.text-white{
+  color: white !important;
+}
 .font2 {
   font-size: 2em;
 }
@@ -572,9 +575,7 @@ footer a {
 .font01 {
   font-size: 0.1em;
 }
-.toolbar-class {
-  color: black !important;
-}
+
 .text-c {
   text-align: center !important;
   width: 400px !important;
@@ -656,8 +657,8 @@ footer a {
   background: rgba(27, 27, 47, 0.87);
 }
 .bg-darker{
-  background: rgba(16, 16, 19, 0.87);
-  color: white;
+  background: rgba(16, 16, 19, 0.87) !important;
+  color: white !important;
 }
 
 .errorMsg {
