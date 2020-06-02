@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
-import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { useParams, useHistory, NavLink, Redirect } from 'react-router-dom';
 import { mode, condition } from '../../../utils/theme';
 import { authContext } from '../../../context/AuthContext';
 import { EDITPROFILE } from '../../../constants/routesNomenclature';
 import BlogCard from '../../layout/BlogCard';
-import { getBlogsByUserId } from '../../../requests/blog';
-import { getUserById } from '../../../requests/user';
+import { getBlogsByUserId, deleteBlog } from '../../../requests/blog';
+import { alertContext } from '../../../context/AlertContext';
+import { getUserById ,deleteUser} from '../../../requests/user';
+import { getQuesByUser } from '../../../requests/ques';
+import { logout } from '../../../requests/auth';
 
 const initialState = {
   showPosts: false,
@@ -22,8 +25,10 @@ const SingleProfile = () => {
   const [state, updateState] = useState({ ...initialState });
 
   const [blogs, setBlogs] = useState([]);
-
-  const { userAuth } = useContext(authContext);
+  const [deletedAccount,deleteAccount] = useState(false);
+  const { addAlert } = useContext(alertContext);
+  
+  const { userAuth ,setUnAuthStatus} = useContext(authContext);
 
   //Logic to retrieve User Data from the _id from URL LINK
   // useEffect(()=>{
@@ -52,6 +57,8 @@ const SingleProfile = () => {
       if (res.data.length !== 0) {
         setBlogs(res.data);
       }
+      const quesArr=await getQuesByUser(userId);
+      console.log(quesArr);
     })();
   }, []);
 
@@ -61,6 +68,47 @@ const SingleProfile = () => {
     e.preventDefault();
     updateState({ ...state, showPosts: !state.showPosts });
   };
+  const handleLogout = () => {
+    logout();
+    setUnAuthStatus();
+  };
+
+
+  const deleteUserConfirmed=async()=>{
+    // window.alert("This will delete all the blogs, too!")
+    blogs.map((x,i)=>{
+        const post=x
+        const res =  deleteBlog(post._id)
+        if(res.data){
+          addAlert(`Deleting ${i+1} blogs`, 'success');
+          
+        }else if(res.error){
+          addAlert(res.error.data.error, 'danger');
+        }  
+    })
+    const res= await deleteUser(userId)
+    console.log("PAGEACCOUNTDELETE:",res)
+    if(res.data){
+      handleLogout();
+      addAlert(`Deleted Account successfully`, 'success');
+      deleteAccount(true);
+    }
+    else{
+      addAlert(res.error.data.error, 'danger');
+    }
+  
+}
+
+  // const deleteUser = async()=>{
+  //   const answer=await window.confirm("Are you sure you want to delete the Account?")
+  //   console.log("answer:",answer)
+  //   // const answer=true
+  //   if(answer){
+  //       deleteUserConfirmed();
+  //   }
+  // }
+
+  
 
   // console.log("-->",JSON.stringify(userId))
   const {
@@ -74,6 +122,7 @@ const SingleProfile = () => {
     about,
   } = state.userData;
 
+  if(deletedAccount) return <Redirect to='/'/>;
   return (
     <div
       className='bg-mint-cream container my-5'
@@ -96,7 +145,7 @@ const SingleProfile = () => {
               <i className='fas fa-user-edit mr-2' />
               Edit Profile
             </NavLink>
-            <button className='btn btn-danger w-10 m-2'>
+            <button className='btn btn-danger w-10 m-2' onClick={deleteUserConfirmed}>
               <i className='fas fa-trash-alt mr-2' />
               Delete Account
             </button>
@@ -159,7 +208,7 @@ const SingleProfile = () => {
             <li>
               <i className='far fa-circle'></i>
               <br />
-              {'35 BLOGS'}
+              {blogs.length} {' BLOGS'}
             </li>
             <li>
               <i className='far fa-circle'></i>

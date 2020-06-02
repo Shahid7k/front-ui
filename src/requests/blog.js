@@ -150,15 +150,15 @@ export const addComment = async (userId, blogId, comment) => {
   }
 };
 
-export const like = async (userId, blogId) => {
+export const like = async (userId, postId) => {
   console.log('like action called');
   try {
     const res = await axiosClient.put(`http://localhost:8080/post/like`, {
       userId,
-      blogId,
+      postId,
     });
-    console.log(res);
-    return { data: res.config.data };
+    console.log("LIKE-",res.data.likes);
+    return { likes: res.data.likes };
   } catch (error) {
     const {
       response: { data, status },
@@ -173,15 +173,15 @@ export const like = async (userId, blogId) => {
   }
 };
 
-export const unlike = async (userId, blogId) => {
-  console.log('like action called');
+export const unlike = async (userId, postId) => {
+  console.log('unlike action called');
   try {
     const res = await axiosClient.put(`http://localhost:8080/post/unlike`, {
       userId,
-      blogId,
+      postId,
     });
-    console.log(res);
-    return { data: res.config.data };
+    console.log("UNLIKE",res.data);
+    return { likes: res.data.likes };
   } catch (error) {
     const {
       response: { data, status },

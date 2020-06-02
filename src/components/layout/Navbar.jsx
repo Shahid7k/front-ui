@@ -22,7 +22,7 @@ const Navbar = ({ title, icon }) => {
   };
 
   return (
-    <div className='navbar navbar-expand-lg navBar'>
+    <div className='navbar navbar-expand-lg navBar' style={{zIndex:"3"}}>
       <h1>
         <NavLink to='/' className='text-decoration-none '>
           <i className={icon} /> {title}

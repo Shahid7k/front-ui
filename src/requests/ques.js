@@ -153,3 +153,15 @@ export const deleteQues = async(quesId) =>{
     // console.log(error);
   }
 }
+
+export const getQuesByUser = async(userId) =>{
+  try{
+    const res=await axiosClient.get("http://localhost:8080/qa/by/"+userId);
+    console.log("QARESP=",res)
+    return {data:res.data}
+  }
+  catch(error){
+    const {res:{data,status}} = error;
+    return {error:{status,data}}
+  }
+}

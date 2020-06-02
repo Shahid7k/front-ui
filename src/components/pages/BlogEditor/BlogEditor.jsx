@@ -4,12 +4,18 @@ import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 import './BlogEditor.css';
 import { authContext } from '../../../context/AuthContext';
 import RichEditor from './RichEditor/RichEditor';
+import { condition } from '../../../utils/theme';
 
 export const blogInitialState = {
   title: '',
   description: '',
   content: '',
 };
+
+const dlMode = condition ? {
+  background:"black",
+  color:"white"
+}:{}
 
 const BlogEditor = props => {
   const history = useHistory();
@@ -113,12 +119,13 @@ const BlogEditor = props => {
         <input
           type='text'
           placeholder='Title...'
+          readOnly={!isEditable}
           className={
             !isEditable ? 'border-top-0 border-left-0 border-right-0' : ''
           }
+          style={dlMode}
           name='blogTitle'
           value={title}
-          disabled={!isEditable}
           onChange={e => setBlog({ ...blog, title: e.target.value })}
         />
         <input
@@ -129,7 +136,8 @@ const BlogEditor = props => {
           }
           name='blogDescription'
           value={description}
-          disabled={!isEditable}
+          style={dlMode}
+          readOnly={!isEditable}
           onChange={e => setBlog({ ...blog, description: e.target.value })}
         />
         <RichEditor

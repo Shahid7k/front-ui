@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useState} from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { alertContext } from '../../../context/AlertContext';
 import { authContext } from '../../../context/AuthContext';
