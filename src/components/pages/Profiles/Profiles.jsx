@@ -60,8 +60,10 @@ const Profiles = () => {
         alt='BackGroundPic'
       />
 
-      <div className='text-c container '>
-        <SearchBar search={onSearch} />
+      <div className="clearfix">
+        <div className=' w-25 fl-r '>
+          <SearchBar search={onSearch}  />
+        </div>
       </div>
 
       {state.loading ? LOADING() : ''}

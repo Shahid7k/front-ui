@@ -76,12 +76,13 @@ const SingleProfile = () => {
 
   const deleteUserConfirmed=async()=>{
     // window.alert("This will delete all the blogs, too!")
-    blogs.map((x,i)=>{
+    blogs.map(async(x,i)=>{
         const post=x
-        const res =  deleteBlog(post._id)
+        const res = await deleteBlog(post._id)
         if(res.data){
-          addAlert(`Deleting ${i+1} blogs`, 'success');
-          
+         setTimeout(() => {
+           addAlert(`Deleting ${i+1} blogs`, 'success');
+         }, 500); 
         }else if(res.error){
           addAlert(res.error.data.error, 'danger');
         }  
@@ -90,7 +91,9 @@ const SingleProfile = () => {
     console.log("PAGEACCOUNTDELETE:",res)
     if(res.data){
       handleLogout();
-      addAlert(`Deleted Account successfully`, 'success');
+     setTimeout(() => {
+       addAlert(`Deleted Account successfully`, 'success');
+     }, 1000);
       deleteAccount(true);
     }
     else{
@@ -99,14 +102,14 @@ const SingleProfile = () => {
   
 }
 
-  // const deleteUser = async()=>{
-  //   const answer=await window.confirm("Are you sure you want to delete the Account?")
-  //   console.log("answer:",answer)
-  //   // const answer=true
-  //   if(answer){
-  //       deleteUserConfirmed();
-  //   }
-  // }
+  const deleteUserPrompt = async()=>{
+    const answer=await window.confirm("Are you sure you want to delete the Account?")
+    // console.log("answer:",answer)
+    // const answer=true
+    if(answer){
+        deleteUserConfirmed();
+    }
+  }
 
   
 
@@ -145,7 +148,7 @@ const SingleProfile = () => {
               <i className='fas fa-user-edit mr-2' />
               Edit Profile
             </NavLink>
-            <button className='btn btn-danger w-10 m-2' onClick={deleteUserConfirmed}>
+            <button className='btn btn-danger w-10 m-2' onClick={deleteUserPrompt}>
               <i className='fas fa-trash-alt mr-2' />
               Delete Account
             </button>

@@ -1,3 +1,6 @@
+import getUserFromLocalStorage from './getUserFromLocalStorage';
+
+
 export const light = {
   backgroundSize: 'cover',
   background: 'rgba(240,240,240,0.2)',
@@ -10,6 +13,7 @@ export const dark = {
   backgroundSize: 'cover',
   color: 'white',
 };
+
 
 export const condition = true;
 
