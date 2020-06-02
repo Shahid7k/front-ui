@@ -14,7 +14,7 @@ const QuesCard = ({ques}) =>{
                  
                 <h5 className="card-header text-truncate p-2" style={{background:bg}}>{ques.title}</h5>
                 <div className="card-body p-2">
-                    <h6 className="card-text text-muted p-0">{ques.tags.replace(/ /g,";")}</h6>
+                    <h6 className="card-text text-muted p-0">{ques.tags.trim().split(" ").map((x,i)=><div key={i} className="badge badge-dark my-0 mx-1 py-0 px-1 font08 arrow" >{x.trim()}</div>)}</h6>
                     <p className="card-text p-0 text-truncate">{ques.body}</p>
                     <NavLink to={`/question/${ques._id}`} className='btn btn-info'>Read more...</NavLink>
                 </div>
