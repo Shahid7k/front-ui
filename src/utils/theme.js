@@ -18,6 +18,6 @@ export const dark = {
 const darkMode = getUserFromLocalStorage().user.darkEnabled;
 console.log('DarkMode: ', darkMode);
 
-export const condition = !true;
+export const condition = darkMode;
 
 export const mode = condition ? dark : light;

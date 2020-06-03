@@ -5,7 +5,7 @@ const Footer = ( ) => {
     return (
         <footer className="bg-dark  text-light footer">
             <div className="p-2 container d-flex">
-            <div className="text-left flex-fill px-1 text-capitalize">Project DeVlog <code>version 1.0</code> </div>
+            <div className="text-left flex-fill px-1font-weight-light"> <span className="megrim font-weight-bold"> DeVlog </span> <code className="font-weight-bold">version 1.0</code> </div>
             <div className="text-center flex-fill ">
                 <div className="text-right  d-inline-block mx-1  text-capitalize">Contact us :</div>
                 <a href="mailto:someone@example.com" className="text-center  d-inline-block mx-1 ">

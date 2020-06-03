@@ -175,12 +175,12 @@ const LandingPage = () => {
           style={{ padding: '55px 20px' }}
         >
           <img
-            className='px-3 img-fluid rounded'
+            className='img-fluid rounded border border-danger'
             src={BlogsScreenshot}
             alt='BlogsScreenshot'
           />
 
-          <span className='px-3 my-auto'>
+          <span className=' border rounded p-4 m-2 my-auto'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
             molestiae minus necessitatibus voluptas consequatur illo harum
             maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
@@ -195,7 +195,7 @@ const LandingPage = () => {
           className='screenshotsHome bg-blue font14 text-white'
           style={{ padding: '55px 20px' }}
         >
-          <span className='px-3 my-auto'>
+          <span className='p-3 rounded border border-danger m-2 my-auto'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
             molestiae minus necessitatibus voluptas consequatur illo harum
             maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
@@ -203,7 +203,7 @@ const LandingPage = () => {
           </span>
 
           <img
-            className='px-3 img-fluid rounded '
+            className=' img-fluid rounded border border-primary '
             src={qaScreenshot}
             alt='QAsScreenshot'
           />

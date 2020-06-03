@@ -656,10 +656,10 @@ footer a {
   cursor: crosshair;
 }
 .bg-red {
-  background: rgba(233, 33, 33, 0.726) !important;
+  background: rgba(214, 23, 23, 0.938) !important;
 }
 .bg-blue {
-  background: rgba(27, 27, 47, 0.87);
+  background: rgba(23, 23, 59, 0.856);
 }
 .bg-darker {
   background: rgba(16, 16, 19, 0.87) !important;
@@ -688,5 +688,21 @@ footer a {
 .architects-daughter {
   font-size: 2.2rem;
   font-family: 'Architects Daughter', cursive;
+}
+.great-vibes{
+  font-size: 3rem !important;
+  font-family: 'Great Vibes', cursive;
+}
+.megrim{
+  font-family: 'Megrim', cursive;
+}
+.poiret-one{
+  font-family: 'Poiret One', cursive;
+}
+.press-start{
+  font-family: 'Press Start 2P', cursive;
+}
+.shadows-in-light{
+  font-family: 'Shadows Into Light', cursive;
 }
 /* ------------------S-H-A-H-I-D------------------------ */

@@ -152,6 +152,7 @@ const EditProfile = () => {
     let userInAuth = userAuth.user;
     userInAuth = { ...userInAuth, darkEnabled: name === 'dark' };
     toggleDarkMode(name);
+    window.location.reload();
   };
 
   const {
@@ -412,9 +413,7 @@ const EditProfile = () => {
             </button>
           </form>
         </div>
-      ) : (
-        <>{LOADING}</>
-      )}
+      ) : LOADING}
     </Fragment>
   );
 };

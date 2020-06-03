@@ -93,8 +93,8 @@ const Dashboard = () => {
           <div className='container'>
             {/* here */}
             {/* to here */}
-            <div className='text-center font19 bg-white p-3'>
-              D.A.S.H.B.O.A.R.D.
+            <div className='text-center shadows-in-light font19 bg-white p-3'>
+              {"D . A . S . H . B . O . A . R . D ."}
             </div>
             <div
               className={`border rounded  p-5 my-5 ${
@@ -121,7 +121,7 @@ const Dashboard = () => {
               </NavLink>
             </div>
             <button
-              className={`  ${
+              className={` btn  ${
                 userStuff.showBlogs ? 'btn-outline-light' : 'btn-outline-dark'
               } ${
                 condition ? 'bg-darker' : 'bg-white'
@@ -132,7 +132,7 @@ const Dashboard = () => {
               Your Blogs
             </button>
             <button
-              className={`  ${
+              className={` btn ${
                 userStuff.showQAs ? 'btn-outline-light' : 'btn-outline-dark'
               } ${
                 condition ? 'bg-darker' : 'bg-white'
