@@ -150,6 +150,30 @@ export const addComment = async (userId, blogId, comment) => {
   }
 };
 
+export const deleteComment = async (userId, blogId, comment) => {
+  console.log('delete comment action called');
+  try {
+    const res = await axiosClient.put(`http://localhost:8080/post/uncomment`, {
+      userId,
+      blogId,
+      comment,
+    });
+    console.log(res);
+    return { data: res.data };
+  } catch (error) {
+    const {
+      response: { data, status },
+    } = error;
+    return {
+      error: {
+        status,
+        data,
+      },
+    };
+    // console.log(error);
+  }
+};
+
 export const like = async (userId, postId) => {
   console.log('like action called');
   try {
@@ -157,7 +181,7 @@ export const like = async (userId, postId) => {
       userId,
       postId,
     });
-    console.log("LIKE-",res.data.likes);
+    console.log('LIKE-', res.data.likes);
     return { likes: res.data.likes };
   } catch (error) {
     const {
@@ -180,7 +204,7 @@ export const unlike = async (userId, postId) => {
       userId,
       postId,
     });
-    console.log("UNLIKE",res.data);
+    console.log('UNLIKE', res.data);
     return { likes: res.data.likes };
   } catch (error) {
     const {
