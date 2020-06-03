@@ -6,7 +6,7 @@ import { EDITPROFILE } from '../../../constants/routesNomenclature';
 import BlogCard from '../../layout/BlogCard';
 import { getBlogsByUserId, deleteBlog } from '../../../requests/blog';
 import { alertContext } from '../../../context/AlertContext';
-import { getUserById ,deleteUser} from '../../../requests/user';
+import { getUserById, deleteUser } from '../../../requests/user';
 import { getQuesByUser } from '../../../requests/ques';
 import { logout } from '../../../requests/auth';
 
@@ -25,10 +25,10 @@ const SingleProfile = () => {
   const [state, updateState] = useState({ ...initialState });
 
   const [blogs, setBlogs] = useState([]);
-  const [deletedAccount,deleteAccount] = useState(false);
+  const [deletedAccount, deleteAccount] = useState(false);
   const { addAlert } = useContext(alertContext);
-  
-  const { userAuth ,setUnAuthStatus} = useContext(authContext);
+
+  const { userAuth, setUnAuthStatus } = useContext(authContext);
 
   //Logic to retrieve User Data from the _id from URL LINK
   // useEffect(()=>{
@@ -57,7 +57,7 @@ const SingleProfile = () => {
       if (res.data.length !== 0) {
         setBlogs(res.data);
       }
-      const quesArr=await getQuesByUser(userId);
+      const quesArr = await getQuesByUser(userId);
       console.log(quesArr);
     })();
   }, []);
@@ -68,50 +68,49 @@ const SingleProfile = () => {
     e.preventDefault();
     updateState({ ...state, showPosts: !state.showPosts });
   };
+
   const handleLogout = () => {
     logout();
     setUnAuthStatus();
   };
 
-
-  const deleteUserConfirmed=async()=>{
+  const deleteUserConfirmed = async () => {
     // window.alert("This will delete all the blogs, too!")
-    blogs.map(async(x,i)=>{
-        const post=x
-        const res = await deleteBlog(post._id)
-        if(res.data){
-         setTimeout(() => {
-           addAlert(`Deleting ${i+1} blogs`, 'success');
-         }, 500); 
-        }else if(res.error){
-          addAlert(res.error.data.error, 'danger');
-        }  
-    })
-    const res= await deleteUser(userId)
-    console.log("PAGEACCOUNTDELETE:",res)
-    if(res.data){
+    blogs.map(async (x, i) => {
+      const post = x;
+      const res = await deleteBlog(post._id);
+      if (res.data) {
+        setTimeout(() => {
+          addAlert(`Deleting ${i + 1} blogs`, 'success');
+        }, 500);
+      } else if (res.error) {
+        addAlert(res.error.data.error, 'danger');
+      }
+    });
+
+    const res = await deleteUser(userId);
+    console.log('PAGEACCOUNTDELETE:', res);
+    if (res.data) {
       handleLogout();
-     setTimeout(() => {
-       addAlert(`Deleted Account successfully`, 'success');
-     }, 1000);
+      setTimeout(() => {
+        addAlert(`Deleted Account successfully`, 'success');
+      }, 1000);
       deleteAccount(true);
-    }
-    else{
+    } else {
       addAlert(res.error.data.error, 'danger');
     }
-  
-}
+  };
 
-  const deleteUserPrompt = async()=>{
-    const answer=await window.confirm("Are you sure you want to delete the Account?")
+  const deleteUserPrompt = async () => {
+    const answer = await window.confirm(
+      'Are you sure you want to delete the Account?'
+    );
     // console.log("answer:",answer)
     // const answer=true
-    if(answer){
-        deleteUserConfirmed();
+    if (answer) {
+      deleteUserConfirmed();
     }
-  }
-
-  
+  };
 
   // console.log("-->",JSON.stringify(userId))
   const {
@@ -126,7 +125,9 @@ const SingleProfile = () => {
     about,
   } = state.userData;
 
-  if(deletedAccount) return <Redirect to='/'/>;
+  console.log(gender);
+
+  if (deletedAccount) return <Redirect to='/' />;
   return (
     <div
       className='bg-mint-cream container my-5'
@@ -149,7 +150,10 @@ const SingleProfile = () => {
               <i className='fas fa-user-edit mr-2' />
               Edit Profile
             </NavLink>
-            <button className='btn btn-danger w-10 m-2' onClick={deleteUserPrompt}>
+            <button
+              className='btn btn-danger w-10 m-2'
+              onClick={deleteUserPrompt}
+            >
               <i className='fas fa-trash-alt mr-2' />
               Delete Account
             </button>

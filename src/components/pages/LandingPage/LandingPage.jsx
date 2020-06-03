@@ -180,26 +180,26 @@ const LandingPage = () => {
             alt='BlogsScreenshot'
           />
 
-          <span className=' border rounded p-4 m-2 my-auto'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-            molestiae minus necessitatibus voluptas consequatur illo harum
-            maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
-            quos officia ducimus itaque! Itaque, facilis? Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Quo, ipsum tenetur eaque eius rem
-            ullam dolore accusamus dicta corporis debitis laboriosam voluptatem,
-            molestias placeat perspiciatis, cupiditate id vitae tempore quod?
-          </span>
+          <p className=' border rounded p-4 m-2 my-auto text-center'>
+            A platform for sharing your tech expertise while building a
+            potentially valuable readership.
+            <br />
+            Got a product review or advances in latest technology to exhibit?
+            <br />
+            Grab some eyeballs with your writing on any thing related to tech.
+          </p>
         </div>
 
         <div
           className='screenshotsHome bg-blue font14 text-white'
           style={{ padding: '55px 20px' }}
         >
-          <span className='p-3 rounded border border-danger m-2 my-auto'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-            molestiae minus necessitatibus voluptas consequatur illo harum
-            maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
-            quos officia ducimus itaque! Itaque, facilis?
+
+          <span className='p-3 rounded border text-center border-danger m-2 my-auto'>
+            A great resource to find questions, that people in your industry are
+            asking.
+            <br />A question and answer site where queries are asked, answered,
+            edited and organised by the community of DeVloggers.
           </span>
 
           <img
