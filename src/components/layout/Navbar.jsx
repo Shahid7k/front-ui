@@ -22,9 +22,9 @@ const Navbar = ({ title, icon }) => {
   };
 
   return (
-    <div className='navbar navbar-expand-lg navBar' style={{zIndex:"3"}}>
+    <div className='navbar font13 navbar-expand-lg navBar poiret-one' style={{zIndex:"3"}}>
       <h1>
-        <NavLink to='/' className='text-decoration-none '>
+        <NavLink to='/' className='text-decoration-none poiret-one '>
           <i className={icon} /> {title}
         </NavLink>
       </h1>
@@ -73,7 +73,7 @@ const getAuthLinks = (user, handleLogout) => (
     <div className='dropdown'>
       <button
         style={{ minWidth: '120px' }}
-        className='btn btn-dark nobg dropdown-toggle'
+        className='btn btn-dark nobg dropdown-toggle font13'
         type='button'
         id='dropdownMenuButton'
         data-toggle='dropdown'
@@ -123,7 +123,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'frontUI',
+  title: 'DeVlog',
   icon: 'fas fa-blog',
 };
 

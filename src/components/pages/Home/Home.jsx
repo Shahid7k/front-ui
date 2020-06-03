@@ -5,6 +5,7 @@ import { getBlogs } from '../../../requests/blog';
 import { BarLoader } from 'react-spinners';
 import { condition } from '../../../utils/theme';
 import axios from 'axios';
+import {LOADING} from '../../layout/otherConstants';
 import './Home.css';
 
 const Home = () => {
@@ -35,6 +36,9 @@ const Home = () => {
         color={`${condition ? '#fff' : '#b02'}`}
         width={'100%'}
       />
+      {showLoader && (
+        LOADING()
+      )}
       {!showLoader && (
         <div className='clearfix'>
           <div className=' w-100 font11'>
@@ -57,7 +61,7 @@ const Home = () => {
                 <hr />
               </div>
               <div className=' d-inline-block' id='create-blog-button'>
-                <NavLink to='/post-blog' className='btn btn-outline-dark'>
+                <NavLink to='/post-blog' className={`btn ${condition?"btn-outline-dark":"btn-outline-light"}`}>
                   Create blog <i className='fas fa-angle-right mr-2' />
                 </NavLink>
               </div>
@@ -95,6 +99,7 @@ const Home = () => {
                 <div className='h6 underline'>{'Recent Questions:'}</div>
                 {qa.map((ques, i) => (
                   <NavLink
+                  key={i}
                     to={`/question/${ques._id}`}
                     className={`h6 ${condition ? 'text-white' : ''}`}
                   >
@@ -103,6 +108,10 @@ const Home = () => {
                     {ques.title.substring(0, 50)}...
                   </NavLink>
                 ))}
+                <hr/><hr/>
+                <div className="h4" >
+                  <NavLink to="/allqa" className={` ${condition ? 'text-white' : ''}`} >{"▓ QA Section >"}</NavLink>  
+                </div>
               </div>
             </div>
           </div>

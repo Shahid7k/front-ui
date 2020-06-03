@@ -115,6 +115,7 @@ const SingleProfile = () => {
   // console.log("-->",JSON.stringify(userId))
   const {
     firstName,
+    lastName,
     profession,
     city,
     country,
@@ -173,26 +174,31 @@ const SingleProfile = () => {
               />
             </div>
 
-            <div className=' font11 p-5 w-50 text-center'>
-              <span>
+            <div className=' font15  p-5 w-50 text-center'>
+              <div className="my-1">
                 <i
                   className={`fas p-2 ${
                     gender === 'male' ? 'fa-mars' : 'fa-venus'
                   }`}
                 ></i>
-                {firstName}{' '}
-              </span>
-              <br />
-              {profession}
-              <br />
-              <i className='fas fa-map-marker-alt p-2'></i>
-              {city} {' ,'} {country}
-              <br />
-              <i className='far fa-envelope p-2'></i>
-              {email}
-              <br />
-              <i className='fas fa-phone'></i>
-              {phoneNo} <br />
+                {firstName}{' '}{ lastName}
+              </div>
+              {/* <br /> */}
+              <div className="my-1">
+              <i className="fa fa-briefcase p-2" aria-hidden="true"></i>
+              {profession}</div>
+              {/* <br /> */}
+             
+             <div className="my-1"> <i className='fas fa-map-marker-alt p-2'></i>
+              {city} {' ,'} {country}</div>
+              {/* <br /> */}
+                  <div className="my-1"> <i className='far fa-envelope p-2'></i>
+              {email}</div>
+              {/* <br /> */}
+              <div className="my-1"><i className='fas fa-phone'></i>
+              {phoneNo} 
+              </div>
+              {/* <br /> */}
             </div>
 
             {state.photoURL !== '' && (
@@ -200,10 +206,12 @@ const SingleProfile = () => {
             )}
           </div>{' '}
           <hr />
-          <div className=' text-center'>
-            --ABOUT--
+          <div className='font12 text-center'>
+           <div className="poiret-one font14 underline font-weight-bold ">
+            A B O U T
+           </div>
             <br />
-            {about}
+            {about===undefined?`The user didn't say anything about ${gender==="male"?"him":"her"}self yet `:"2"}
           </div>
           <hr />
           <ul className='d-flex flex-wrap justify-content-around text-center'>

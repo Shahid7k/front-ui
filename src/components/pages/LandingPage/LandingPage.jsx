@@ -175,12 +175,12 @@ const LandingPage = () => {
           style={{ padding: '55px 20px' }}
         >
           <img
-            className='px-3 img-fluid rounded'
+            className='img-fluid rounded border border-danger'
             src={BlogsScreenshot}
             alt='BlogsScreenshot'
           />
 
-          <p className='px-3 my-auto text-center'>
+          <p className=' border rounded p-4 m-2 my-auto text-center'>
             A platform for sharing your tech expertise while building a
             potentially valuable readership.
             <br />
@@ -194,15 +194,16 @@ const LandingPage = () => {
           className='screenshotsHome bg-blue font14 text-white'
           style={{ padding: '55px 20px' }}
         >
-          <p className='px-3 my-auto text-center'>
+
+          <span className='p-3 rounded border text-center border-danger m-2 my-auto'>
             A great resource to find questions, that people in your industry are
             asking.
             <br />A question and answer site where queries are asked, answered,
             edited and organised by the community of DeVloggers.
-          </p>
+          </span>
 
           <img
-            className='px-3 img-fluid rounded '
+            className=' img-fluid rounded border border-primary '
             src={qaScreenshot}
             alt='QAsScreenshot'
           />
