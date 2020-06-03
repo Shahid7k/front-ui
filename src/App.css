@@ -512,7 +512,7 @@ footer a {
 #cursive {
   font-family: cursive;
 }
-.text-white{
+.text-white {
   color: white !important;
 }
 .font2 {
@@ -634,8 +634,9 @@ footer a {
 }
 
 .comment-photo {
-  height: 5rem;
+  height: 3rem;
   width: auto;
+  background: #333;
 }
 
 .btn-link {
@@ -656,7 +657,7 @@ footer a {
 .bg-blue {
   background: rgba(27, 27, 47, 0.87);
 }
-.bg-darker{
+.bg-darker {
   background: rgba(16, 16, 19, 0.87) !important;
   color: white !important;
 }

@@ -5,6 +5,7 @@ import {
   editBlog,
   getBlogById,
   addComment,
+  deleteComment,
   like,
   unlike,
   deleteBlog,
@@ -24,7 +25,7 @@ const blogState = {
   postedBy: {},
   likes: [],
   comments: [],
-  userLiked:false
+  userLiked: false,
 };
 
 const Blog = () => {
@@ -49,9 +50,9 @@ const Blog = () => {
       const res = await getBlogById(blogId);
       // console.log("BLOGDATA:",res.data);
       if (res.data) {
-        const match= res.data.likes.indexOf(userId)!==-1
+        const match = res.data.likes.indexOf(userId) !== -1;
         // setBlog(res.data);
-        setBlog({...res.data,userLiked:match})
+        setBlog({ ...res.data, userLiked: match });
       }
       setShowLoader(false);
     })();
@@ -73,9 +74,9 @@ const Blog = () => {
     const response = await deleteBlog(blogId);
     // console.log(response);
     if (response.data) {
-      addAlert("Blog deleted", 'success');
+      addAlert('Blog deleted', 'success');
       history.push(DASHBOARD);
-    }else{
+    } else {
       addAlert(response.error.data.error, 'danger');
     }
   };
@@ -91,13 +92,12 @@ const Blog = () => {
       : await unlike(userId, blogId);
     // console.log(response);
     if (response.likes) {
-      const match= response.likes.indexOf(userId)!==-1 
-      setBlog({ ...blog, likes: response.likes,userLiked:match  });
+      const match = response.likes.indexOf(userId) !== -1;
+      setBlog({ ...blog, likes: response.likes, userLiked: match });
     } else {
       addAlert(response.error.data.error, 'danger');
     }
   };
-
 
   const submitComment = async () => {
     // setBlog({ ...blog, comments });
@@ -111,10 +111,19 @@ const Blog = () => {
     }
   };
 
-  // console.log(blog);
-  // console.log(blog.likes);
-  // console.log(userComment);
-  const likesCount =  blog.likes.length
+  const removeComment = async userComment => {
+    const response = await deleteComment(userId, blogId, userComment);
+    console.log(response);
+    if (response.data) {
+      // setUserComment('');
+      addAlert('Comment deleted.', 'success');
+      setBlog({ ...blog, comments: response.data.comments });
+    } else {
+      addAlert(response.error.data.error, 'danger');
+    }
+  };
+
+  const likesCount = blog.likes.length;
   return (
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
@@ -130,7 +139,7 @@ const Blog = () => {
             <button className='btn btn-info my-2 mr-2' onClick={submitLike}>
               {blog.userLiked ? 'Unlike' : 'Like'}
             </button>
-            {likesCount} {likesCount==1?"Like":"Likes"}
+            {likesCount} {likesCount == 1 ? 'Like' : 'Likes'}
             <div>
               <textarea
                 style={commentStyle}
@@ -146,52 +155,60 @@ const Blog = () => {
                 Comment
               </button>
             </div>
-            <div className='container'>
-              {blog.comments.length !== 0 &&
-                blog.comments.map((comment, i) => (
-                  <div key={i} className='p'>
-                    <div key={i} className='p-4 d-flex'>
-                      <div className='comment-photo rounded-circle'>
-                        {comment !== null && comment !== undefined ? (
-                          <NavLink to={`/profile/${comment.postedBy._id}`}>
-                            <img
-                              src={`http://localhost:8080/user/photo/${comment.postedBy._id}`}
-                              alt='Face'
-                              onError={i =>
-                                (i.target.src =
-                                  'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png')
-                              }
-                              className='comment-photo rounded-circle'
-                            />
-                          </NavLink>
-                        ) : (
-                          <p> Anonymous!</p>
-                        )}
-                      </div>
-                      <div className='be-comment-content  m-1'>
-                        <div className=' mx-1 h6 font11 d-inline-block '>
-                          <NavLink
-                            to={`/profile/${comment.postedBy._id}`}
-                            style={mode}
-                          >
-                            {comment.postedBy.firstName}
-                          </NavLink>
-                        </div>
-                        <div className='comment-time mx-5 d-inline-block'>
-                          <i className='fa fa-clock-o'></i>
+          </div>
+          <div className='container'>
+            {blog.comments.length !== 0 &&
+              blog.comments.map((comment, i) => (
+                <div key={i} className='p'>
+                  <div key={i} className='d-flex'>
+                    <div className='comment-photo rounded-circle'>
+                      {comment !== null && comment !== undefined ? (
+                        <NavLink to={`/profile/${comment.postedBy._id}`}>
+                          <img
+                            src={`http://localhost:8080/user/photo/${comment.postedBy._id}`}
+                            alt='Face'
+                            onError={i =>
+                              (i.target.src =
+                                'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png')
+                            }
+                            className='comment-photo rounded-circle'
+                          />
+                        </NavLink>
+                      ) : (
+                        <p> Anonymous!</p>
+                      )}
+                    </div>
+                    <div className='be-comment-content ml-2 w-100'>
+                      <div>
+                        <NavLink
+                          to={`/profile/${comment.postedBy._id}`}
+                          style={mode}
+                        >
+                          <strong>{comment.postedBy.firstName}</strong>
+                        </NavLink>
+                        <div className='comment-time ml-auto d-inline-block'>
+                          <i className='far fa-clock mr-1' />
                           {comment.created.substring(0, 10)}
                           {' , '}
                           {comment.created.substring(11, 19)} {' (GMT)'}
+                          {userId === comment.postedBy._id && (
+                            <div className='d-inline-block my-auto'>
+                              <i
+                                className='fas fa-trash mx-3 pointer'
+                                style={{ color: '#E51B0E' }}
+                                onClick={() => removeComment(comment)}
+                              />
+                            </div>
+                          )}
                         </div>
-
-                        <p className='comment-text ' style={mode}>
-                          {comment.text}
-                        </p>
                       </div>
+                      <p className='comment-text' style={mode}>
+                        {comment.text}
+                      </p>
                     </div>
                   </div>
-                ))}
-            </div>
+                </div>
+              ))}
           </div>
         </Fragment>
       )}
