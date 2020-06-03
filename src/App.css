@@ -516,64 +516,64 @@ footer a {
   color: white !important;
 }
 .font2 {
-  font-size: 2em !important;
+  font-size: 2rem !important;
 }
 .font19 {
-  font-size: 1.9em !important;
+  font-size: 1.9rem !important;
 }
 .font18 {
-  font-size: 1.8em !important;
+  font-size: 1.8rem !important;
 }
 .font17 {
-  font-size: 1.7em !important;
+  font-size: 1.7rem !important;
 }
 .font16 {
-  font-size: 1.6em !important;
+  font-size: 1.6rem !important;
 }
 .font15 {
-  font-size: 1.5em !important;
+  font-size: 1.5rem !important;
 }
 .font14 {
-  font-size: 1.4em !important;
+  font-size: 1.4rem !important;
 }
 .font13 {
-  font-size: 1.3em !important;
+  font-size: 1.3rem !important;
 }
 .font12 {
-  font-size: 1.2em !important;
+  font-size: 1.2rem !important;
 }
 .font11 {
-  font-size: 1.1em !important;
+  font-size: 1.1rem !important;
 }
 .font1 {
-  font-size: 1em !important;
+  font-size: 1rem !important;
 }
 .font09 {
-  font-size: 0.9em !important;
+  font-size: 0.9rem !important;
 }
 .font08 {
-  font-size: 0.8em !important;
+  font-size: 0.8rem !important;
 }
 .font07 {
-  font-size: 0.7em !important;
+  font-size: 0.7rem !important;
 }
 .font06 {
-  font-size: 0.6em !important;
+  font-size: 0.6rem !important;
 }
 .font05 {
-  font-size: 0.5em !important;
+  font-size: 0.5rem !important;
 }
 .font04 {
-  font-size: 0.4em !important;
+  font-size: 0.4rem !important;
 }
 .font03 {
-  font-size: 0.3em !important;
+  font-size: 0.3rem !important;
 }
 .font02 {
-  font-size: 0.2em !important;
+  font-size: 0.2rem !important;
 }
 .font01 {
-  font-size: 0.1em !important;
+  font-size: 0.1rem !important;
 }
 
 .text-c {
@@ -646,13 +646,13 @@ footer a {
 .bg-transparent {
   background: rgba(0, 0, 0, 0) !important;
 }
-.bg-white-trans{
-  background:rgba(255,255,255,0.5) !important;
+.bg-white-trans {
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 .pointer {
   cursor: pointer;
 }
-.arrow :hover{
+.arrow :hover {
   cursor: crosshair;
 }
 .bg-red {
@@ -677,16 +677,16 @@ footer a {
   float: right !important;
   /* background: rgba(1, 22, 22, 0.4); */
 }
-.w-22{
+.w-22 {
   width: 22%;
 }
-.permanent-marker{
+.permanent-marker {
   font-family: 'Permanent Marker', cursive;
   font-size: 2.7rem;
   padding: 0px !important;
 }
-.architects-daughter{
-  font-size:2.2rem;
+.architects-daughter {
+  font-size: 2.2rem;
   font-family: 'Architects Daughter', cursive;
 }
 /* ------------------S-H-A-H-I-D------------------------ */

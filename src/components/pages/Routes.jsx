@@ -42,7 +42,13 @@ const Routes = () => {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <div style={{ paddingTop: '55px', minWidth:'fit-content',minHeight:"38rem" }}>
+          <div
+            style={{
+              paddingTop: '55px',
+              minWidth: 'fit-content',
+              minHeight: '38rem',
+            }}
+          >
             <Switch>
               <PrivateRoute path={HOME_ROUTE}>
                 <Home />

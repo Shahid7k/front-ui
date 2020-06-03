@@ -131,6 +131,7 @@ const SingleQues = () => {
     created,
     satisfied,
     photoURL,
+    showAnswers,
   } = quesState;
 
   //   console.log("ANSWERS ARRAY : ",answers)
@@ -252,9 +253,9 @@ const SingleQues = () => {
               <div className='btn-link text-center' onClick={toggleAnswers}>
                 {!quesState.showAnswers ? 'Show' : 'Hide'} All Answers!
               </div>
-              {quesState.showAnswers &&
-                quesState.answers.length !== 0 &&
-                quesState.answers.map((x, i) => (
+              {showAnswers &&
+                answers.length !== 0 &&
+                answers.map((x, i) => (
                   <div key={i} className='p'>
                     <div key={i} className='p-4 d-flex'>
                       <div className='comment-photo rounded-circle'>
@@ -281,7 +282,9 @@ const SingleQues = () => {
                       </div>
                       <div className='be-comment-content  m-1'>
                         <div className=' mx-1 h6 font11 d-inline-block '>
-                          {x != null && x != undefined && x.postedBy != null ? (
+                          {x != null &&
+                          x !== undefined &&
+                          x.postedBy != null ? (
                             <NavLink
                               to={`/profile/${x.postedBy._id}`}
                               style={mode}

@@ -7,6 +7,7 @@ const initialState = {
   userAuth: { ...defaultState },
   setAuthStatus: () => {},
   setUnAuthStatus: () => {},
+  toggleDarkMode: () => {},
 };
 
 export const authContext = createContext(initialState);
@@ -14,9 +15,12 @@ export const authContext = createContext(initialState);
 const { Provider } = authContext;
 
 const AuthContextProvider = ({ children }) => {
-  const { userAuth, setAuthStatus, setUnAuthStatus } = useAuthHandler(
-    getUserInfoFromLocalStorage()
-  );
+  const {
+    userAuth,
+    setAuthStatus,
+    setUnAuthStatus,
+    toggleDarkMode,
+  } = useAuthHandler(getUserInfoFromLocalStorage());
 
   // React.useEffect(() => {
   //   console.log(userAuth);
@@ -29,7 +33,9 @@ const AuthContextProvider = ({ children }) => {
   }
 
   return (
-    <Provider value={{ userAuth, setAuthStatus, setUnAuthStatus }}>
+    <Provider
+      value={{ userAuth, setAuthStatus, setUnAuthStatus, toggleDarkMode }}
+    >
       {children}
     </Provider>
   );
