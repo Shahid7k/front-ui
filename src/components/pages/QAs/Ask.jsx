@@ -102,7 +102,7 @@ const Ask =()=>{
             addAlert('Your question is posted now', 'success');
             setTimeout(() => {
                 setOtherStates({asked:true})
-            }, 5000); 
+            }, 2000); 
           
         } else if (response.error) {
           addAlert(response.error.data.error, 'danger');

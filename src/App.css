@@ -516,64 +516,64 @@ footer a {
   color: white !important;
 }
 .font2 {
-  font-size: 2em;
+  font-size: 2em !important;
 }
 .font19 {
-  font-size: 1.9em;
+  font-size: 1.9em !important;
 }
 .font18 {
-  font-size: 1.8em;
+  font-size: 1.8em !important;
 }
 .font17 {
-  font-size: 1.7em;
+  font-size: 1.7em !important;
 }
 .font16 {
-  font-size: 1.6em;
+  font-size: 1.6em !important;
 }
 .font15 {
-  font-size: 1.5em;
+  font-size: 1.5em !important;
 }
 .font14 {
-  font-size: 1.4em;
+  font-size: 1.4em !important;
 }
 .font13 {
-  font-size: 1.3em;
+  font-size: 1.3em !important;
 }
 .font12 {
-  font-size: 1.2em;
+  font-size: 1.2em !important;
 }
 .font11 {
-  font-size: 1.1em;
+  font-size: 1.1em !important;
 }
 .font1 {
-  font-size: 1em;
+  font-size: 1em !important;
 }
 .font09 {
-  font-size: 0.9em;
+  font-size: 0.9em !important;
 }
 .font08 {
-  font-size: 0.8em;
+  font-size: 0.8em !important;
 }
 .font07 {
-  font-size: 0.7em;
+  font-size: 0.7em !important;
 }
 .font06 {
-  font-size: 0.6em;
+  font-size: 0.6em !important;
 }
 .font05 {
-  font-size: 0.5em;
+  font-size: 0.5em !important;
 }
 .font04 {
-  font-size: 0.4em;
+  font-size: 0.4em !important;
 }
 .font03 {
-  font-size: 0.3em;
+  font-size: 0.3em !important;
 }
 .font02 {
-  font-size: 0.2em;
+  font-size: 0.2em !important;
 }
 .font01 {
-  font-size: 0.1em;
+  font-size: 0.1em !important;
 }
 
 .text-c {
@@ -646,11 +646,15 @@ footer a {
 .bg-transparent {
   background: rgba(0, 0, 0, 0) !important;
 }
-
+.bg-white-trans{
+  background:rgba(255,255,255,0.5) !important;
+}
 .pointer {
   cursor: pointer;
 }
-
+.arrow :hover{
+  cursor: crosshair;
+}
 .bg-red {
   background: rgba(233, 33, 33, 0.726) !important;
 }
@@ -673,5 +677,16 @@ footer a {
   float: right !important;
   /* background: rgba(1, 22, 22, 0.4); */
 }
-
+.w-22{
+  width: 22%;
+}
+.permanent-marker{
+  font-family: 'Permanent Marker', cursive;
+  font-size: 2.7rem;
+  padding: 0px !important;
+}
+.architects-daughter{
+  font-size:2.2rem;
+  font-family: 'Architects Daughter', cursive;
+}
 /* ------------------S-H-A-H-I-D------------------------ */

@@ -23,7 +23,7 @@ const SingleQues = () => {
   const history = useHistory();
   let props = useParams();
   const userId = React.useContext(authContext).userAuth.user._id;
-
+  const [quesArr, setQuesArr] = useState([]);
   const { quesId } = props;
   const [quesState, fetchQues] = useState({ ...initialQuesState });
   // console.log("ID: ",quesId)
@@ -33,6 +33,9 @@ const SingleQues = () => {
     async function getData() {
       fetchQues({ ...quesState, loading: true });
       const result = await axios.get('http://localhost:8080/qa/' + quesId);
+      const result2 = await axios.get('http://localhost:8080/allqa');
+      const arr = result2.data.ques;
+      setQuesArr(arr);
       //   console.log(result.data)
       const {
         title,
@@ -134,7 +137,7 @@ const SingleQues = () => {
   if (redirect) return <Redirect to='/' />;
   return (
     <div className={`${condition ? 'bg-dark' : 'bg-mint-cream'}`}>
-      <div className='container'>
+      <div className='w-75'>
         <button
           className={`btn btn-raised btn-outline-primary m-1 `}
           // onClick={goBack}
@@ -145,19 +148,24 @@ const SingleQues = () => {
           Back
         </button>
       </div>
-      <div className='mx-5 p-5 container '>
-        <h1 className=' font18 p-2 container mx-5 px-5' style={mode}>
+      <div className=' '>
+        <h1 className=' font18 p-2  mx-5 px-5' style={mode}>
           {title}.
         </h1>
         <div className='d-flex'>
-          <div className='   container px-5 mx-5 my-0'>
+          <div className=''>
             <div className=' p-5' style={mode}>
-              <NavLink
-                to={`/profile/${postedBy._id}`}
-                className='h6 font-italic'
-              >
-                asked by - {postedBy.userName}{' '}
-              </NavLink>
+              {postedBy != null ? (
+                <NavLink
+                  to={`/profile/${postedBy._id}`}
+                  className='h6 font-italic'
+                >
+                  asked by - {postedBy.firstName}{' '}
+                </NavLink>
+              ) : (
+                <div className='h6 font-italic'>asked by - Anonymous </div>
+              )}
+
               <div className='text-muted p-3 h5'>
                 {' '}
                 {'Tags : '} {tags}
@@ -187,7 +195,7 @@ const SingleQues = () => {
                   </>
                 )}
               </p>
-              {userId === postedBy._id && (
+              {postedBy != null && userId === postedBy._id && (
                 <div className='container m-4'>
                   <NavLink
                     className={`btn  btn-raised ${
@@ -250,7 +258,7 @@ const SingleQues = () => {
                   <div key={i} className='p'>
                     <div key={i} className='p-4 d-flex'>
                       <div className='comment-photo rounded-circle'>
-                        {x !== null && x !== undefined ? (
+                        {x !== null && x !== undefined && x.postedBy != null ? (
                           <NavLink to={`/profile/${x.postedBy._id}`}>
                             <img
                               src={`http://localhost:8080/user/photo/${x.postedBy._id}`}
@@ -263,24 +271,33 @@ const SingleQues = () => {
                             />
                           </NavLink>
                         ) : (
-                          <p> Anonymous!</p>
+                          <figure>
+                            <img
+                              src='https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png'
+                              className='comment-photo rounded-circle'
+                            />
+                          </figure>
                         )}
                       </div>
                       <div className='be-comment-content  m-1'>
                         <div className=' mx-1 h6 font11 d-inline-block '>
-                          <NavLink
-                            to={`/profile/${x.postedBy._id}`}
-                            style={mode}
-                          >
-                            {x.postedBy.firstName}
-                          </NavLink>
+                          {x != null && x != undefined && x.postedBy != null ? (
+                            <NavLink
+                              to={`/profile/${x.postedBy._id}`}
+                              style={mode}
+                            >
+                              {x.postedBy.firstName}
+                            </NavLink>
+                          ) : (
+                            <p style={mode}>{'Anonymous'}</p>
+                          )}
                         </div>
                         <div className='comment-time font09 mx-5 d-inline-block'>
                           <i className='fa fa-clock-o'></i>
                           {x.created.substring(0, 10)}
                           {' , '}
                           {x.created.substring(11, 19)} {' (GMT)'}
-                          {userId === x.postedBy._id && (
+                          {x.postedBy != null && userId === x.postedBy._id && (
                             <div className='d-inline-block'>
                               {/* <img src="https://toppng.com/uploads/preview/delete-button-clipart-volume-icon-hapus-11563950527luvjbpuej2.png"
                                                                 alt="delete" 
@@ -314,19 +331,29 @@ const SingleQues = () => {
               )}
             </div>
           </div>
-
-          <div className=' text-center my-5 py-5 font11'>
-            Things <br />
-            Things <br />
-            Things <br />
-            Things <br />
-            Things <br />
-            Things <br />
+        </div>
+        <div className=' my-5 py-5 font11'>
+          <div className=' text-wrap '>
+            <div className='text-truncate'>
+              <div className='h6 underline'>{'Recent Questions:'}</div>
+              {quesArr
+                .filter(ques => ques._id !== userId)
+                .map((ques, i) => (
+                  <div key={i}>
+                    <a
+                      href={`/question/${ques._id}`}
+                      className=' text-truncate'
+                    >
+                      {' '}
+                      {ques.title.substring(0, 20)}{' '}
+                    </a>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default SingleQues;

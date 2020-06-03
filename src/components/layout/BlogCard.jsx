@@ -16,7 +16,7 @@ const BlogCard = props => {
 
       <div className='card-body'>
         <p className='card-text'>{title}</p>
-        <p className='card-text'>{description}</p>
+        <p className='card-text text-truncate'>{description}</p>
       </div>
       <div className='card-text text-italic'>{content}</div>
     </div>
