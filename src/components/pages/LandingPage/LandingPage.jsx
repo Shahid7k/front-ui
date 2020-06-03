@@ -1,4 +1,4 @@
-import React ,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactTypingEffect from 'react-typing-effect';
 import qaScreenshot from '../../../images/qaScreenshot.jpg';
 import BlogsScreenshot from '../../../images/BlogsScreenshot.jpg';
@@ -7,29 +7,34 @@ import axios from 'axios';
 import './landingPage.css';
 import { mode } from '../../../utils/theme';
 
-const initialCount={
-  blogCount:0,
-  userCount:0,
-  qaCount:0,
-}
+const initialCount = {
+  blogCount: 0,
+  userCount: 0,
+  qaCount: 0,
+};
 
 const LandingPage = () => {
-  const [counts, setCounts]=useState({...initialCount});
-  useEffect(()=>{
-    async function getData(){
-        const a=await axios.get("http://localhost:8080/countPosts")
-        const b=await axios.get("http://localhost:8080/usersCount")
-        const c=await axios.get("http://localhost:8080/countqa")
-        setCounts({blogCount:a.data.length,userCount:b.data.length,qaCount:c.data.length})
-    }
-    getData()
-},[])
+  const [counts, setCounts] = useState({ ...initialCount });
 
-  const {userCount,blogCount,qaCount} = counts
+  useEffect(() => {
+    (async function () {
+      const a = await axios.get('http://localhost:8080/countPosts');
+      const b = await axios.get('http://localhost:8080/usersCount');
+      const c = await axios.get('http://localhost:8080/countqa');
+      setCounts({
+        blogCount: a.data.length,
+        userCount: b.data.length,
+        qaCount: c.data.length,
+      });
+    })();
+  }, []);
 
-  console.log("Counts: ",counts)
+  const { userCount, blogCount, qaCount } = counts;
+
+  console.log('Counts: ', counts);
+
   return (
-    <div className=" secondHalfOfHomePage">
+    <div className=' secondHalfOfHomePage'>
       <div style={mode}>
         <div className='BigOne'>
           <div
@@ -162,36 +167,48 @@ const LandingPage = () => {
             </div>
 
           </div>
-        </div> */}
+          </div> */}
         </div>
 
-        <div className="px-5" style={{ paddingTop: '40px' }}>
-          <hr />
-          {/* Remove that <hr /> tag from the above code... It was kept just to show separation between work which is done, and which is to be done. */}
+        <div
+          className='screenshotsHome font14 bg-red'
+          style={{ padding: '55px 20px' }}
+        >
+          <img
+            className='px-3 img-fluid rounded'
+            src={BlogsScreenshot}
+            alt='BlogsScreenshot'
+          />
 
-          <div className="d-flex flex-wrap font14 ">
-            <div className="screenshotsHome py-4 bg-red">
-                <img  className="img-fluid rounded d-inline px-4" src={BlogsScreenshot} alt="BlogsScreenshot" />
-                <span className="px-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui molestiae minus necessitatibus voluptas consequatur illo harum maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum quos officia ducimus itaque! Itaque, facilis?
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, ipsum tenetur eaque eius rem ullam dolore accusamus dicta corporis debitis laboriosam voluptatem, molestias placeat perspiciatis, cupiditate id vitae tempore quod?
-                </span>
-            </div>
-            <hr />
-            <div  className="screenshotsHome bg-blue text-white py-4">
-                <span className="px-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui molestiae minus necessitatibus voluptas consequatur illo harum maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum quos officia ducimus itaque! Itaque, facilis?
-                </span>
-                <img className="px-4 img-fluid rounded " src={qaScreenshot}  alt="QAsScreenshot"  />
-            </div>
-            
-
-          </div>
+          <span className='px-3 my-auto'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+            molestiae minus necessitatibus voluptas consequatur illo harum
+            maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
+            quos officia ducimus itaque! Itaque, facilis? Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Quo, ipsum tenetur eaque eius rem
+            ullam dolore accusamus dicta corporis debitis laboriosam voluptatem,
+            molestias placeat perspiciatis, cupiditate id vitae tempore quod?
+          </span>
         </div>
-      
 
+        <div
+          className='screenshotsHome bg-blue font14 text-white'
+          style={{ padding: '55px 20px' }}
+        >
+          <span className='px-3 my-auto'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+            molestiae minus necessitatibus voluptas consequatur illo harum
+            maiores aspernatur fugit dolorum? Eligendi voluptatum magni earum
+            quos officia ducimus itaque! Itaque, facilis?
+          </span>
+
+          <img
+            className='px-3 img-fluid rounded '
+            src={qaScreenshot}
+            alt='QAsScreenshot'
+          />
+        </div>
       </div>
-    
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { mode, condition, dark } from '../../../utils/theme';
 import { editUser, getUserById } from '../../../requests/user';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
-import {LOADING} from '../../layout/otherConstants';
+import { LOADING } from '../../layout/otherConstants';
 import { BarLoader } from 'react-spinners';
 
 const initialUserState = {
@@ -63,12 +63,19 @@ const EditProfile = () => {
   const { addAlert } = React.useContext(alertContext);
 
   let history = useHistory();
-  const userId = useContext(authContext).userAuth.user._id;
-  const [redirect,setRedirect] = useState(false)
+
+  const { userAuth, toggleDarkMode } = useContext(authContext);
+
+  const userId = userAuth.user._id;
+
+  const [redirect, setRedirect] = useState(false);
+
   const [user, setUser] = useState({ ...initialUserState });
+
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
   });
+
   const handleValidatorChange = e => {
     const value = user[e.target.name];
     const currValidator = { ...formDataValidator[e.target.name] };
@@ -82,7 +89,7 @@ const EditProfile = () => {
 
   const [showLoader, setShowLoader] = useState(true);
 
-  const userDetails = new FormData();
+  // const userDetails = new FormData();
 
   useEffect(() => {
     (async function () {
@@ -102,7 +109,7 @@ const EditProfile = () => {
         city,
         country,
         phoneNo,
-        photo,
+        // photo,
         email,
         darkEnabled,
       } = res.data;
@@ -134,14 +141,18 @@ const EditProfile = () => {
     // console.log(data);
     if (response.data) {
       addAlert('Profile Updated', 'success');
-      setRedirect(true)
+      setRedirect(true);
     } else if (response.error) {
       addAlert(response.error.data.error, 'danger');
     }
   };
-  const toggleMode= (name)=>e=>{
-    setUser({...user,darkEnabled:(name==="dark")})
-  }
+  const toggleMode = name => e => {
+    setUser({ ...user, darkEnabled: name === 'dark' });
+    // const userAuthDetails = { ...userAuth, user[darkEnabled]: name === 'dark' };
+    let userInAuth = userAuth.user;
+    userInAuth = { ...userInAuth, darkEnabled: name === 'dark' };
+    toggleDarkMode(name);
+  };
 
   const {
     firstName,
@@ -153,11 +164,14 @@ const EditProfile = () => {
     phoneNo,
     gender,
     about,
-    darkEnabled
+    darkEnabled,
   } = user;
 
-  const userToken = JSON.parse(localStorage.getItem('userInfo')).token;
-  if(redirect) return <Redirect to={`/profile/${userId}`} />
+  // console.log(darkEnabled);
+
+  // const userToken = JSON.parse(localStorage.getItem('userInfo')).token;
+  if (redirect) return <Redirect to={`/profile/${userId}`} />;
+
   return (
     <Fragment>
       <BarLoader
@@ -166,7 +180,7 @@ const EditProfile = () => {
         width={'100%'}
       />
 
-      {!showLoader? (
+      {!showLoader ? (
         <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
           <div className=''>
             <button
@@ -179,12 +193,29 @@ const EditProfile = () => {
               Back
             </button>
           </div>
-          <div className="fl-r m-5">
-            <label className="mx-4 h5 underline" >Mode: <div className="font08">{darkEnabled?"Dark":"Light"}</div></label>
-             <br/>
+          <div className='fl-r m-5'>
+            <label className='mx-4 h5 underline'>
+              Mode:{' '}
+              <div className='font08'>{darkEnabled ? 'Dark' : 'Light'}</div>
+            </label>
+            <br />
             {/* THE ABOVE TEXT WRAPPED IN DIV {inside Label,not the Label} IS JUST TO CHECK IF OUR DARK,LIGHT MODES ARE WORKING PROPERLY OR NOT! */}
-            <div className={`btn btn-dark  bg-darker ${condition?"disabled":""} `} onClick={toggleMode("dark")}  >Dark</div>
-            <button className={`btn btn-raised btn-light ${condition?"":"disabled"}`} onClick={toggleMode("light")}  >Light</button>
+            <div
+              className={`btn btn-dark  bg-darker ${
+                condition ? 'disabled' : ''
+              } `}
+              onClick={toggleMode('dark')}
+            >
+              Dark
+            </div>
+            <button
+              className={`btn btn-raised btn-light ${
+                condition ? '' : 'disabled'
+              }`}
+              onClick={toggleMode('light')}
+            >
+              Light
+            </button>
             <br />
           </div>
 
@@ -211,8 +242,8 @@ const EditProfile = () => {
                       <input
                         className='form-control col-2 m-0 my-1'
                         type='text'
-                        placeholder={`${gender == 'male' ? 'Male' : 'Female'}`}
-                        value={`${gender == 'male' ? 'Male' : 'Female'}`}
+                        placeholder={`${gender === 'male' ? 'Male' : 'Female'}`}
+                        value={`${gender === 'male' ? 'Male' : 'Female'}`}
                         readOnly
                         style={mode}
                       />
@@ -381,7 +412,9 @@ const EditProfile = () => {
             </button>
           </form>
         </div>
-      ):<>{LOADING}</>}
+      ) : (
+        <>{LOADING}</>
+      )}
     </Fragment>
   );
 };

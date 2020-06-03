@@ -1,6 +1,6 @@
 import axiosClient from '../utils/axiosClient';
-import LOCAL_STORAGE_KEYS from '../constants/localStorageKeys';
-import axios from 'axios';
+// import LOCAL_STORAGE_KEYS from '../constants/localStorageKeys';
+// import axios from 'axios';
 
 export const askQuestion = async (userId, quesData) => {
   //   console.log('post action called', quesData);

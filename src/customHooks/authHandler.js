@@ -24,10 +24,18 @@ const useAuthHandler = userDetails => {
     setUserAuth(defaultState);
   };
 
+  const toggleDarkMode = name => {
+    const state = window.localStorage.getItem(LOCAL_STORAGE_KEYS.USER_AUTH);
+    const info = JSON.parse(state);
+    info.user.darkEnabled = name === 'dark';
+    setAuthStatus(info);
+  };
+
   return {
     userAuth,
     setAuthStatus,
     setUnAuthStatus,
+    toggleDarkMode,
   };
 };
 
