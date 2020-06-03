@@ -5,7 +5,7 @@ const UserCard = ({ user }) => {
   // console.log(user)
   return (
     <div
-      className={`card text-center userCard ${condition?"":"bg-white"}`} 
+      className={`card text-center userCard ${condition ? '' : 'bg-white'}`}
       style={mode}
       //  style={{height:"auto"}}
     >
@@ -16,7 +16,9 @@ const UserCard = ({ user }) => {
         alt='UserPic'
       />
       <div className='card-body'>
-        <h5 className='card-title'>{user.firstName} </h5>
+        <h5 className='card-title'>
+          {user.firstName} {user.lastName}
+        </h5>
         <p className='card-text'>
           {user.profession !== undefined ? user.profession : 'Standard User'}{' '}
         </p>

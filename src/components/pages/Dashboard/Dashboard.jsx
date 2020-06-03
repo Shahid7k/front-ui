@@ -94,7 +94,7 @@ const Dashboard = () => {
             {/* here */}
             {/* to here */}
             <div className='text-center shadows-in-light font19 bg-white p-3'>
-              {"D . A . S . H . B . O . A . R . D ."}
+              {'D . A . S . H . B . O . A . R . D .'}
             </div>
             <div
               className={`border rounded  p-5 my-5 ${
@@ -107,14 +107,18 @@ const Dashboard = () => {
               {/* <p>You can always edit a bad page. But you cannot edit a Blank Page. So, what do you want to do today?</p> */}
               <NavLink
                 to='/post-blog'
-                className='btn btn-primary btn-raised mx-2'
+                className={`btn ${
+                  condition ? 'btn-dark' : 'btn-primary'
+                } btn-raised mx-2`}
                 role='NavLink '
               >
                 Write a Blog
               </NavLink>
               <NavLink
                 to='/ask'
-                className='btn btn-primary btn-raised mx-2'
+                className={`btn ${
+                  condition ? 'btn-dark' : 'btn-primary'
+                } btn-raised mx-2`}
                 role='NavLink '
               >
                 Ask Something

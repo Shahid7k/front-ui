@@ -2,15 +2,16 @@ import React, { useState, Fragment } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import BlogCard from '../../layout/BlogCard';
 import { getBlogs } from '../../../requests/blog';
+import { getAllQa } from '../../../requests/ques';
 import { BarLoader } from 'react-spinners';
 import { condition } from '../../../utils/theme';
-import axios from 'axios';
-import {LOADING} from '../../layout/otherConstants';
+import { LOADING } from '../../layout/otherConstants';
 import './Home.css';
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
-  const [qa, setQA] = useState([]);
+
+  const [qa, setQa] = useState([]);
 
   const [showLoader, setShowLoader] = useState(true);
 
@@ -19,11 +20,12 @@ const Home = () => {
   React.useEffect(() => {
     (async function () {
       const res = await getBlogs();
-      const result = await axios.get('http://localhost:8080/allqa');
+      const result = await getAllQa();
+
       if (res.data && result.data) {
         setBlogs(res.data);
         const n = Math.min(5, result.data.ques.length);
-        setQA(result.data.ques.slice(0, n));
+        setQa(result.data.ques.slice(0, n));
       }
       setShowLoader(false);
     })();
@@ -36,12 +38,10 @@ const Home = () => {
         color={`${condition ? '#fff' : '#b02'}`}
         width={'100%'}
       />
-      {showLoader && (
-        LOADING()
-      )}
+
       {!showLoader && (
         <div className='clearfix'>
-          <div className=' w-100 font11'>
+          <div className='w-100'>
             <div className='write-blog-top position position-relative  '>
               <div className='d-inline-block' id='blog-text'>
                 <hr />
@@ -50,7 +50,7 @@ const Home = () => {
                   Blogging is...{' '}
                 </span>{' '}
                 <br />
-                <div className='h3 permanent-marker mx-4 p-0'>
+                <div className='h2 permanent-marker mx-4 p-0'>
                   Thinking <div className='text-center p-0 m-0'> out </div>
                   <div className='text-right mx-4 p-0'> loud</div>
                 </div>
@@ -60,8 +60,14 @@ const Home = () => {
                 </div>
                 <hr />
               </div>
+
               <div className=' d-inline-block' id='create-blog-button'>
-                <NavLink to='/post-blog' className={`btn ${condition?"btn-outline-dark":"btn-outline-light"}`}>
+                <NavLink
+                  to='/post-blog'
+                  className={`btn ${
+                    condition ? 'btn-outline-dark' : 'btn-outline-light'
+                  }`}
+                >
                   Create blog <i className='fas fa-angle-right mr-2' />
                 </NavLink>
               </div>
@@ -99,7 +105,7 @@ const Home = () => {
                 <div className='h6 underline'>{'Recent Questions:'}</div>
                 {qa.map((ques, i) => (
                   <NavLink
-                  key={i}
+                    key={i}
                     to={`/question/${ques._id}`}
                     className={`h6 ${condition ? 'text-white' : ''}`}
                   >
@@ -108,9 +114,15 @@ const Home = () => {
                     {ques.title.substring(0, 50)}...
                   </NavLink>
                 ))}
-                <hr/><hr/>
-                <div className="h4" >
-                  <NavLink to="/allqa" className={` ${condition ? 'text-white' : ''}`} >{"▓ QA Section >"}</NavLink>  
+                <hr />
+                <hr />
+                <div className='h4'>
+                  <NavLink
+                    to='/allqa'
+                    className={` ${condition ? 'text-white' : ''}`}
+                  >
+                    {'▓ QA Section >'}
+                  </NavLink>
                 </div>
               </div>
             </div>

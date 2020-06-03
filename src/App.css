@@ -656,11 +656,16 @@ footer a {
   cursor: crosshair;
 }
 .bg-red {
-  background: rgba(214, 23, 23, 0.938) !important;
+  background: rgba(238, 36, 36, 0.938) !important;
 }
 .bg-blue {
-  background: rgba(23, 23, 59, 0.856);
+  background: rgba(16, 16, 46, 0.856);
 }
+
+.bg-gray {
+  background: #454545;
+}
+
 .bg-darker {
   background: rgba(16, 16, 19, 0.87) !important;
   color: white !important;
@@ -682,27 +687,28 @@ footer a {
 }
 .permanent-marker {
   font-family: 'Permanent Marker', cursive;
-  font-size: 2.7rem;
+  font-size: 3rem;
   padding: 0px !important;
 }
+
 .architects-daughter {
   font-size: 2.2rem;
   font-family: 'Architects Daughter', cursive;
 }
-.great-vibes{
+.great-vibes {
   font-size: 3rem !important;
   font-family: 'Great Vibes', cursive;
 }
-.megrim{
+.megrim {
   font-family: 'Megrim', cursive;
 }
-.poiret-one{
+.poiret-one {
   font-family: 'Poiret One', cursive;
 }
-.press-start{
+.press-start {
   font-family: 'Press Start 2P', cursive;
 }
-.shadows-in-light{
+.shadows-in-light {
   font-family: 'Shadows Into Light', cursive;
 }
 /* ------------------S-H-A-H-I-D------------------------ */

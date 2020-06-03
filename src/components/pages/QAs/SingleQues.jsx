@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useParams, useHistory, NavLink, Redirect } from 'react-router-dom';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
@@ -21,14 +21,21 @@ const initialQuesState = {
 
 const SingleQues = () => {
   const history = useHistory();
+
   let props = useParams();
+
   const userId = React.useContext(authContext).userAuth.user._id;
+
   const [quesArr, setQuesArr] = useState([]);
+
   const { quesId } = props;
+
   const [quesState, fetchQues] = useState({ ...initialQuesState });
-  // console.log("ID: ",quesId)
-  // let photoURL="";
+
   const [redirect, setRedirect] = useState(false);
+
+  const { addAlert } = React.useContext(alertContext);
+
   useEffect(() => {
     async function getData() {
       fetchQues({ ...quesState, loading: true });
@@ -36,7 +43,6 @@ const SingleQues = () => {
       const result2 = await axios.get('http://localhost:8080/allqa');
       const arr = result2.data.ques;
       setQuesArr(arr);
-      //   console.log(result.data)
       const {
         title,
         body,
@@ -45,8 +51,8 @@ const SingleQues = () => {
         postedBy,
         created,
         satisfied,
-        photo,
       } = result.data;
+
       fetchQues({
         ...quesState,
         title,
@@ -71,11 +77,9 @@ const SingleQues = () => {
   };
 
   const handleChange = name => e => {
-    //   const name=e.target.name;
     const value = e.target.value;
     fetchQues({ ...quesState, [name]: value });
   };
-  const { addAlert } = React.useContext(alertContext);
 
   const submitAnswer = async e => {
     e.preventDefault();
@@ -102,12 +106,8 @@ const SingleQues = () => {
   };
 
   const deleteAnswerConfirmed = async answer => {
-    // this.setState({loading:true})
-    // const userId=comment.postedBy._id
-    // const quesId=this.props.postId
-    // const token="Bearer "+(isAuthenticated().token)
     const response = await deleteAnswer(userId, quesId, answer);
-    // console.log("DEL",response)
+
     if (response.data) {
       addAlert('Your answer is deleted  .', 'success');
       fetchQues({ ...quesState, answer: '', answers: response.data.answers });
@@ -134,14 +134,12 @@ const SingleQues = () => {
     showAnswers,
   } = quesState;
 
-  //   console.log("ANSWERS ARRAY : ",answers)
   if (redirect) return <Redirect to='/' />;
   return (
     <div className={`${condition ? 'bg-dark' : 'bg-mint-cream'}`}>
       <div className='w-75'>
         <button
           className={`btn btn-raised btn-outline-primary m-1 `}
-          // onClick={goBack}
           onClick={() => history.goBack()}
           style={mode}
         >
@@ -186,14 +184,14 @@ const SingleQues = () => {
 
               <p className={` ${satisfied ? 'text-success' : 'text-danger'}`}>
                 {satisfied ? (
-                  <>
+                  <Fragment>
                     <i className='fa fa-check m-1' aria-hidden='true'></i>Solved
-                  </>
+                  </Fragment>
                 ) : (
-                  <>
-                    <i className='fa fa-times m-1' aria-hidden='true'></i>Not
-                    Solved
-                  </>
+                  <Fragment>
+                    <i className='fa fa-times m-1' aria-hidden='true' />
+                    Not Solved
+                  </Fragment>
                 )}
               </p>
               {postedBy != null && userId === postedBy._id && (
@@ -302,12 +300,6 @@ const SingleQues = () => {
                           {x.created.substring(11, 19)} {' (GMT)'}
                           {x.postedBy != null && userId === x.postedBy._id && (
                             <div className='d-inline-block'>
-                              {/* <img src="https://toppng.com/uploads/preview/delete-button-clipart-volume-icon-hapus-11563950527luvjbpuej2.png"
-                                                                alt="delete" 
-                                                                className="pointer"
-                                                                style={{height:"30px",width:"30px"}} 
-                                                                onClick={()=>deleteAns(x)}
-                                                                /> */}
                               <i
                                 className='font13 fas fa-trash mx-4 pointer'
                                 onClick={() => deleteAns(x)}
@@ -348,7 +340,8 @@ const SingleQues = () => {
                       className=' text-truncate'
                     >
                       {' '}
-                      {ques.title.substring(0, 20)}{' '}
+                      {ques.title.substring(0, 30)}
+                      {'...'}
                     </a>
                   </div>
                 ))}

@@ -1,17 +1,18 @@
-.write-blog-top{
-    background: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-chinese-word-heritage-book-brush-gradient-background-image_143251.jpg") !important;
-    background-size: cover  !important;
-    height: 20rem;
-    width: 100% !important;
+.write-blog-top {
+  background: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190620/ourmid/pngtree-chinese-word-heritage-book-brush-gradient-background-image_143251.jpg') !important;
+  background-size: cover !important;
+  height: 20rem;
+  width: 100% !important;
 }
-#create-blog-button{
-    position: absolute;
-    right:30rem;
-    top: 8em;
-    box-shadow:white 1px 1px 20px 5px;
-}
-#blog-text{
-    position: absolute;
-    left: 7rem;
 
+#create-blog-button {
+  position: absolute;
+  right: 30rem;
+  top: 8em;
+  box-shadow: white 1px 1px 20px 5px;
+}
+
+#blog-text {
+  position: absolute;
+  left: 7rem;
 }
