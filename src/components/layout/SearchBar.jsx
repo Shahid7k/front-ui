@@ -7,7 +7,7 @@ const SearchBar = ({ search }) => {
         type='text'
         onChange={search}
         placeholder='&#xF002; Search'
-        className="rounded"
+        className='rounded'
         style={{ fontFamily: 'Arial, FontAwesome' }}
       />
     </div>

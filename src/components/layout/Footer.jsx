@@ -54,7 +54,7 @@ const Footer = () => {
           aria-expanded='false'
           aria-controls='collapseExample'
         >
-          <i class='fas fa-users mr-2' />
+          <i className='fas fa-users mr-2' />
           Who We Are
         </button>
         <div className='d-flex-wrap collapse' id='collapseExample'>

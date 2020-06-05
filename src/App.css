@@ -588,6 +588,10 @@ footer a {
   bottom: 0;
   left: 0;
   z-index: -1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
 }
 
 .fl-l {
@@ -669,6 +673,15 @@ footer a {
 .bg-darker {
   background: rgba(16, 16, 19, 0.87) !important;
   color: white !important;
+}
+
+.bg-ondark {
+  background: rgba(16, 16, 19) !important;
+  color: white !important;
+}
+
+.card-dark {
+  background: #292929 !important;
 }
 
 .errorMsg {

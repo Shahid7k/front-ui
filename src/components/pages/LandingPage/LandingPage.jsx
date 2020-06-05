@@ -170,10 +170,10 @@ const LandingPage = () => {
         <div className='m-auto'>
           <NavLink
             to={SIGNUP_ROUTE}
-            className='btn btn-light mx-2'
+            className='btn btn-lg btn-light mx-2'
             style={{ width: '100%' }}
           >
-            Sign Up Now >
+            Get Started >
           </NavLink>
         </div>
       </div>

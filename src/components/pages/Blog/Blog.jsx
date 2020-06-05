@@ -146,6 +146,7 @@ const Blog = () => {
               <button
                 className='btn btn-info mt-2 mb-5'
                 onClick={submitComment}
+                disabled={userComment.length == 0}
               >
                 Comment
               </button>

@@ -102,26 +102,26 @@ const getAuthLinks = (user, handleLogout) => (
       >
         <NavLink
           to={POST_BLOG}
-          className='nobg text-dark dropdown-item text-decoration-nonee'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           New Blog
         </NavLink>
         <NavLink
           to={ASK_ROUTE}
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           Ask
         </NavLink>
         <NavLink
           to={`/profile/${user._id}`}
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           My Profile
         </NavLink>
 
         <NavLink
           to='#'
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
           onClick={handleLogout}
         >
           Log out

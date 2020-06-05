@@ -6,7 +6,7 @@ const initialQuote = {
   author: 'someone',
 };
 
-const i = Math.round(1000 * Math.random());
+// const i = Math.round(1000 * Math.random());
 
 const Quote = () => {
   const [quote, saveQuote] = useState({ ...initialQuote });
@@ -23,11 +23,11 @@ const Quote = () => {
 
   return (
     <>
-      <span className='bg-half-dark font19'>
+      <span className='bg-half-dark font16'>
         {'“'}
         {quote.text}
         {'”'} <br />{' '}
-        <span className='font19'>
+        <span className='font16'>
           {' - '}
           {quote.author == null ? 'Anonymous' : quote.author}
         </span>

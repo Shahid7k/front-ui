@@ -2,8 +2,6 @@
   /* background: url("https://marketplace.canva.com/EADan4b2aiE/1/0/800w/canva-photo-of-triangle-shape-digital-wallpaper-KOZl2W4wCi8.jpg"); */
   background-size: cover;
 
-  /* max-width: 1e; */
-  /* min-width: 100rem; */
   width: 100%;
   top: 0;
   bottom: 0;
@@ -13,7 +11,6 @@
 }
 
 .userCard {
-  /* min-width: max-content; */
   width: 100%;
   height: 15rem;
   transition: 0.1s;

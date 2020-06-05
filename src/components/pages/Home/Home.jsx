@@ -5,7 +5,7 @@ import { getBlogs } from '../../../requests/blog';
 import { getAllQa } from '../../../requests/ques';
 import { BarLoader } from 'react-spinners';
 import { condition } from '../../../utils/theme';
-import { LOADING } from '../../layout/otherConstants';
+import { ASK_ROUTE, ALLQA_ROUTE } from '../../../constants/routesNomenclature';
 import './Home.css';
 
 const Home = () => {
@@ -64,7 +64,7 @@ const Home = () => {
               <div className=' d-inline-block' id='create-blog-button'>
                 <NavLink
                   to='/post-blog'
-                  className={`btn ${
+                  className={`btn btn-lg ${
                     condition ? 'btn-outline-dark' : 'btn-outline-light'
                   }`}
                 >
@@ -74,7 +74,10 @@ const Home = () => {
             </div>
           </div>
 
-          <div className='d-flex align-items-start'>
+          <div
+            className='d-flex align-items-start'
+            style={{ background: condition ? '#000' : '#fcfbfb' }}
+          >
             <div className='w-75 d-inline-flex'>
               <div className='row m-2'>
                 {blogs.map((blog, index) => (
@@ -91,37 +94,39 @@ const Home = () => {
 
             <div className='w-22 text-wrap my-4 px-3 mx-1 border text-truncate d-inline-flex'>
               <div>
-                <div className='h3'>
-                  {' '}
-                  {
-                    '<SOME TEXT><SOME TEXT><SOME TEXT><SOME TEXT><SOME TEXT><SOME TEXT><SOME TEXT>'
-                  }{' '}
-                </div>
+                <h3 className='pt-2'>Recent Questions...</h3>
                 <hr />
-                <NavLink to='/ask' className='btn btn-raised btn-info'>
-                  {' '}
-                  Ask{' '}
+
+                <NavLink
+                  to={ASK_ROUTE}
+                  className='btn btn-raised btn-info d-block'
+                >
+                  Ask
                 </NavLink>
-                <div className='h6 underline'>{'Recent Questions:'}</div>
+
                 {qa.map((ques, i) => (
                   <NavLink
                     key={i}
                     to={`/question/${ques._id}`}
                     className={`h6 ${condition ? 'text-white' : ''}`}
                   >
-                    <hr />
-                    <i className='fas mx-1 fa-chevron-right'></i>
+                    <hr
+                      className={`${condition ? 'text-dark' : 'text-white'}`}
+                    />
+                    <i className='fas mx-1 fa-chevron-right' />
                     {ques.title.substring(0, 50)}...
                   </NavLink>
                 ))}
+
                 <hr />
-                <hr />
-                <div className='h4'>
+
+                <div className='h4 ml-3 pb-3'>
                   <NavLink
-                    to='/allqa'
-                    className={` ${condition ? 'text-white' : ''}`}
+                    to={ALLQA_ROUTE}
+                    className={`${condition ? 'text-white' : ''}`}
                   >
-                    {'▓ QA Section >'}
+                    QA Section
+                    <i className='fas fa-angle-right ml-2' />
                   </NavLink>
                 </div>
               </div>
