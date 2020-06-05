@@ -680,6 +680,11 @@ footer a {
   color: white !important;
 }
 
+.bg-themedark {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: white !important;
+}
+
 .card-dark {
   background: #292929 !important;
 }
