@@ -1,10 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import axios from 'axios';
 import { useParams, useHistory, NavLink, Redirect } from 'react-router-dom';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
-import axios from 'axios';
-import { mode, condition } from '../../../utils/theme';
 import { answer, deleteAnswer, deleteQues } from '../../../requests/ques';
+import { BarLoader } from 'react-spinners';
+import { mode, condition } from '../../../utils/theme';
 
 const initialQuesState = {
   title: '',
@@ -22,13 +23,11 @@ const initialQuesState = {
 const SingleQues = () => {
   const history = useHistory();
 
-  let props = useParams();
-
   const userId = React.useContext(authContext).userAuth.user._id;
 
   const [quesArr, setQuesArr] = useState([]);
 
-  const { quesId } = props;
+  const { quesId } = useParams();
 
   const [quesState, fetchQues] = useState({ ...initialQuesState });
 
@@ -36,13 +35,19 @@ const SingleQues = () => {
 
   const { addAlert } = React.useContext(alertContext);
 
+  const [showLoader, setShowLoader] = useState(true);
+
   useEffect(() => {
-    async function getData() {
-      fetchQues({ ...quesState, loading: true });
+    (async function () {
+      fetchQues({ ...quesState });
+      setShowLoader(true);
+
       const result = await axios.get('http://localhost:8080/qa/' + quesId);
       const result2 = await axios.get('http://localhost:8080/allqa');
       const arr = result2.data.ques;
+
       setQuesArr(arr);
+
       const {
         title,
         body,
@@ -63,15 +68,16 @@ const SingleQues = () => {
         created,
         satisfied,
         photoURL: 'http://localhost:8080/qa/photo/' + quesId,
-        loading: false,
       });
-    }
-    getData();
+
+      setShowLoader(false);
+    })();
   }, []);
 
   const toggleAnswers = () => {
     fetchQues({ ...quesState, showAnswers: !quesState.showAnswers });
   };
+
   const showAnswerBox = () => {
     fetchQues({ ...quesState, showAnsBox: true });
   };
@@ -85,7 +91,7 @@ const SingleQues = () => {
     e.preventDefault();
 
     const response = await answer(userId, quesId, { answer: quesState.answer });
-    //   console.log("RESPONSE",response);
+
     if (response.data) {
       addAlert('Your answer is successfully submitted .', 'success');
       fetchQues({ ...quesState, answer: '', answers: response.data.answers });
@@ -97,6 +103,7 @@ const SingleQues = () => {
   const del = async () => {
     if (window.confirm('Are you sure you want to delete?')) {
       const res = await deleteQues(quesId);
+
       if (res.data) {
         setRedirect(true);
       } else if (res.error) {
@@ -115,6 +122,7 @@ const SingleQues = () => {
       addAlert(response.error.data.error, 'danger');
     }
   };
+
   const deleteAns = answer => {
     let decision = window.confirm(
       'Are you sure you want to delete the answer?'
@@ -128,7 +136,6 @@ const SingleQues = () => {
     body,
     answers,
     postedBy,
-    created,
     satisfied,
     photoURL,
     showAnswers,
@@ -136,121 +143,159 @@ const SingleQues = () => {
 
   if (redirect) return <Redirect to='/' />;
   return (
-    <div className={`${condition ? 'bg-dark' : 'bg-mint-cream'}`}>
-      <div className='w-75'>
-        <button
-          className={`btn btn-raised btn-outline-primary m-1 `}
-          onClick={() => history.goBack()}
-          style={mode}
+    <Fragment>
+      <BarLoader
+        loading={showLoader}
+        color={`${condition ? '#fff' : '#b02'}`}
+        width={'100%'}
+      />
+
+      {!showLoader && (
+        <div
+          className={`container ${condition ? 'bg-ondark' : 'bg-mint-cream'}`}
         >
-          <i className='fas fa-angle-left mr-2' />
-          Back
-        </button>
-      </div>
-      <div className=' '>
-        <h1 className=' font18 p-2  mx-5 px-5' style={mode}>
-          {title}.
-        </h1>
-        <div className='d-flex'>
-          <div className=''>
-            <div className=' p-5' style={mode}>
-              {postedBy != null ? (
-                <NavLink
-                  to={`/profile/${postedBy._id}`}
-                  className='h6 font-italic'
-                >
-                  asked by - {postedBy.firstName}{' '}
-                </NavLink>
-              ) : (
-                <div className='h6 font-italic'>asked by - Anonymous </div>
-              )}
+          <button
+            className={`btn btn-raised m-2 ${
+              condition ? 'btn-white' : 'btn-outline-primary'
+            }`}
+            onClick={() => history.goBack()}
+            style={mode}
+          >
+            <i className='fas fa-angle-left mr-2' />
+            Back
+          </button>
 
-              <div className='text-muted p-3 h5'>
-                {' '}
-                {'Tags : '} {tags}
-              </div>
-              <div className='font12'>{body}</div>
-              <a href={photoURL} target='_blank' className='figure text-wrap'>
-                <img
-                  src={photoURL}
-                  className='figure-img rounded'
-                  onError={i => (i.target.src = '')}
-                  style={{ height: '120px', width: 'auto' }}
-                />
-                <p className='figure-caption'>Click to open</p>
-              </a>
+          <div className={`container mt-3 ${condition ? 'bg-themedark' : ''}`}>
+            <h1 className='font18 p-2 px-5'>{title}.</h1>
 
-              <hr />
+            <div className='d-flex'>
+              <div className='w-75'>
+                <div className='px-5 pb-5'>
+                  {postedBy != null ? (
+                    <NavLink
+                      to={`/profile/${postedBy._id}`}
+                      className={`h6 font-italic ${
+                        condition ? 'text-white' : ''
+                      }`}
+                    >
+                      asked by - {postedBy.firstName}
+                    </NavLink>
+                  ) : (
+                    <div className='h6 font-italic'>asked by - Anonymous </div>
+                  )}
 
-              <p className={` ${satisfied ? 'text-success' : 'text-danger'}`}>
-                {satisfied ? (
-                  <Fragment>
-                    <i className='fa fa-check m-1' aria-hidden='true'></i>Solved
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    <i className='fa fa-times m-1' aria-hidden='true' />
-                    Not Solved
-                  </Fragment>
-                )}
-              </p>
-              {postedBy != null && userId === postedBy._id && (
-                <div className='container m-4'>
-                  <NavLink
-                    className={`btn  btn-raised ${
-                      condition ? 'btn-dark' : 'btn-warning'
-                    } mx-2`}
-                    to={`/edit-question/${quesId}`}
+                  <div className='text-muted p-3 h5'>Tags : {tags}</div>
+
+                  <div className='font12 mb-4'>{body}</div>
+
+                  <a
+                    href={photoURL}
+                    target='_blank'
+                    className='figure text-wrap'
                   >
-                    Edit
-                  </NavLink>
-                  <button
-                    className={`btn btn-raised ${
-                      condition ? 'btn-dark' : 'btn-danger'
-                    } mx-2`}
-                    onClick={del}
+                    <img
+                      src={photoURL}
+                      className='figure-img rounded'
+                      onError={i => (i.target.src = '')}
+                      style={{ height: '120px', width: 'auto' }}
+                    />
+                    <p className='figure-caption'>Click to open</p>
+                  </a>
+
+                  <hr />
+
+                  <p
+                    className={`${satisfied ? 'text-success' : 'text-danger'}`}
                   >
-                    Delete Question
-                  </button>
+                    {satisfied ? (
+                      <Fragment>
+                        <i className='fa fa-check m-1' aria-hidden='true'></i>
+                        Solved
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <i className='fa fa-times m-1' aria-hidden='true' />
+                        Not Solved
+                      </Fragment>
+                    )}
+                  </p>
+
+                  {postedBy != null && userId === postedBy._id && (
+                    <div className='container mb-4 p-0'>
+                      <NavLink
+                        className='btn btn-raised btn-warning mr-2'
+                        to={`/edit-question/${quesId}`}
+                      >
+                        Edit
+                      </NavLink>
+                      <button
+                        className='btn btn-raised btn-danger'
+                        onClick={del}
+                      >
+                        Delete Question
+                      </button>
+                    </div>
+                  )}
+
+                  <div className='btn btn-info' onClick={showAnswerBox}>
+                    Answer this Question
+                  </div>
                 </div>
-              )}
-              <div>
-                <div
-                  className={`btn  ${condition ? 'btn-dark' : 'btn-info'}`}
-                  onClick={showAnswerBox}
-                >
-                  Answer this Question
+
+                {quesState.showAnsBox && (
+                  <div className='m-3 p-2 container'>
+                    <div className='form'>
+                      <textarea
+                        type='text'
+                        className='form-control'
+                        rows='4'
+                        name='answer'
+                        value={quesState.answer}
+                        onChange={handleChange('answer')}
+                        placeholder='Start writing your answer here'
+                      />
+
+                      <button
+                        className='btn btn-primary m-2'
+                        onClick={submitAnswer}
+                      >
+                        {' '}
+                        Submit Answer!
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className={`mt-5 mx-3 py-3 font11`}>
+                <div className='text-truncate text-wrap'>
+                  <div className='h4 underline'>Recent Questions:</div>
+                  {quesArr
+                    .filter(ques => ques._id !== userId)
+                    .map((ques, i) => (
+                      <div className='h5' key={i}>
+                        <a
+                          href={`/question/${ques._id}`}
+                          className={`${
+                            condition ? 'text-white' : ''
+                          } text-truncate`}
+                        >
+                          {ques.title.substring(0, 30)}
+                          {'...'}
+                        </a>
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>
 
-            <div className=' m-3 p-2 container' style={mode}>
-              {quesState.showAnsBox && (
-                <div className='form'>
-                  <textarea
-                    type='text'
-                    className='form-control'
-                    rows='4'
-                    style={mode}
-                    name='answer'
-                    value={quesState.answer}
-                    onChange={handleChange('answer')}
-                    placeholder='Start writing your answer here'
-                  />
-                  <button
-                    className='btn btn-primary m-2'
-                    onClick={submitAnswer}
-                  >
-                    {' '}
-                    Submit Answer!
-                  </button>
-                  <hr />
-                </div>
-              )}
+            <hr />
 
+            <div>
               <div className='btn-link text-center' onClick={toggleAnswers}>
                 {!quesState.showAnswers ? 'Show' : 'Hide'} All Answers!
               </div>
+
               {showAnswers &&
                 answers.length !== 0 &&
                 answers.map((x, i) => (
@@ -278,21 +323,24 @@ const SingleQues = () => {
                           </figure>
                         )}
                       </div>
+
                       <div className='be-comment-content  m-1'>
-                        <div className=' mx-1 h6 font11 d-inline-block '>
+                        <div className='mx-1 h6 font11 d-inline-block'>
                           {x != null &&
                           x !== undefined &&
                           x.postedBy != null ? (
-                            <NavLink
-                              to={`/profile/${x.postedBy._id}`}
-                              style={mode}
-                            >
-                              {x.postedBy.firstName}
+                            <NavLink to={`/profile/${x.postedBy._id}`}>
+                              <h6
+                                className={`${condition ? 'text-white' : ''}`}
+                              >
+                                {x.postedBy.firstName}
+                              </h6>
                             </NavLink>
                           ) : (
-                            <p style={mode}>{'Anonymous'}</p>
+                            <p>{'Anonymous'}</p>
                           )}
                         </div>
+
                         <div className='comment-time font09 mx-5 d-inline-block'>
                           <i className='fa fa-clock-o'></i>
                           {x.created.substring(0, 10)}
@@ -307,49 +355,25 @@ const SingleQues = () => {
                             </div>
                           )}
                         </div>
-
-                        <p className='comment-text ' style={mode}>
-                          {x.text}
-                        </p>
+                        <p className='comment-text'>{x.text}</p>
                       </div>
                     </div>
                   </div>
                 ))}
+
               {quesState.showAnswers && quesState.answers.length === 0 && (
                 <div className='h4 p-3'>
-                  {' '}
-                  No Answers Yet. Wanna be the first one to answer? Click{' '}
+                  No Answers Yet. Wanna be the first one to answer? Click&nbsp;
                   <span onClick={showAnswerBox} className='pointer underline '>
                     here
-                  </span>{' '}
+                  </span>
                 </div>
               )}
             </div>
           </div>
         </div>
-        <div className=' my-5 py-5 font11'>
-          <div className=' text-wrap '>
-            <div className='text-truncate'>
-              <div className='h6 underline'>{'Recent Questions:'}</div>
-              {quesArr
-                .filter(ques => ques._id !== userId)
-                .map((ques, i) => (
-                  <div key={i}>
-                    <a
-                      href={`/question/${ques._id}`}
-                      className=' text-truncate'
-                    >
-                      {' '}
-                      {ques.title.substring(0, 30)}
-                      {'...'}
-                    </a>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </Fragment>
   );
 };
 export default SingleQues;
