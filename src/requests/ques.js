@@ -2,6 +2,23 @@ import axiosClient from '../utils/axiosClient';
 // import LOCAL_STORAGE_KEYS from '../constants/localStorageKeys';
 // import axios from 'axios';
 
+export const getAllQa = async () => {
+  try {
+    const res = await axiosClient.get('http://localhost:8080/allqa');
+    return res;
+  } catch (error) {
+    const {
+      response: { data, status },
+    } = error;
+    return {
+      error: {
+        status,
+        data,
+      },
+    };
+  }
+};
+
 export const askQuestion = async (userId, quesData) => {
   //   console.log('post action called', quesData);
   //   for(var pair of quesData.entries()) {

@@ -9,7 +9,9 @@ const BlogCard = props => {
 
   return (
     <div
-      className={`card ${condition ? '' : 'bg-white'} pointer `}
+      className={`card border-0 p-0 ${
+        condition ? 'card-dark' : 'bg-white'
+      } pointer `}
       style={mode}
     >
       <img src={image} className='card-img-top' alt='Card cap' />

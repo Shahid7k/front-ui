@@ -113,11 +113,7 @@
   color: #000 !important;
 }
 
-.screenshotsHome {
-  display: flex;
-  flex-wrap: nowrap;
-}
-.screenshotsHome img {
+.previewImg {
   height: 20rem;
   width: 43%;
 }

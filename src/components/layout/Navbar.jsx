@@ -22,9 +22,15 @@ const Navbar = ({ title, icon }) => {
   };
 
   return (
-    <div className='navbar font13 navbar-expand-lg navBar poiret-one' style={{zIndex:"3"}}>
+    <div
+      className='navbar font13 navbar-expand-lg navBar poiret-one'
+      style={{ zIndex: '3' }}
+    >
       <h1>
-        <NavLink to='/' className='text-decoration-none poiret-one '>
+        <NavLink
+          to='/'
+          className='text-decoration-none poiret-one font-weight-bold'
+        >
           <i className={icon} /> {title}
         </NavLink>
       </h1>
@@ -55,17 +61,26 @@ const getAuthLinks = (user, handleLogout) => (
   <Fragment>
     <ul className='my-auto ml-auto'>
       <li>
-        <NavLink to={HOME_ROUTE} className='text-decoration-none'>
+        <NavLink
+          to={HOME_ROUTE}
+          className='text-decoration-none font-weight-bold'
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to={DASHBOARD} className='text-decoration-none'>
+        <NavLink
+          to={DASHBOARD}
+          className='text-decoration-none font-weight-bold'
+        >
           Dashboard
         </NavLink>
       </li>
       <li>
-        <NavLink to={PROFILES} className='text-decoration-none'>
+        <NavLink
+          to={PROFILES}
+          className='text-decoration-none font-weight-bold'
+        >
           Profiles
         </NavLink>
       </li>
@@ -73,9 +88,8 @@ const getAuthLinks = (user, handleLogout) => (
     <div className='dropdown'>
       <button
         style={{ minWidth: '120px' }}
-        className='btn btn-dark nobg dropdown-toggle font13'
+        className='btn btn-dark nobg dropdown-toggle shadow-none font13 font-weight-bold'
         type='button'
-        id='dropdownMenuButton'
         data-toggle='dropdown'
         aria-haspopup='true'
         aria-expanded='false'
@@ -88,26 +102,26 @@ const getAuthLinks = (user, handleLogout) => (
       >
         <NavLink
           to={POST_BLOG}
-          className='nobg text-dark dropdown-item text-decoration-nonee'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           New Blog
         </NavLink>
         <NavLink
           to={ASK_ROUTE}
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           Ask
         </NavLink>
         <NavLink
           to={`/profile/${user._id}`}
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
         >
           My Profile
         </NavLink>
 
         <NavLink
           to='#'
-          className='nobg text-dark dropdown-item text-decoration-none'
+          className='nobg text-dark dropdown-item text-decoration-none font-weight-bold'
           onClick={handleLogout}
         >
           Log out

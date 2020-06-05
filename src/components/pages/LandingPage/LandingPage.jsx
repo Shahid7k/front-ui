@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import ReactTypingEffect from 'react-typing-effect';
-import qaScreenshot from '../../../images/qaScreenshot.jpg';
-import BlogsScreenshot from '../../../images/BlogsScreenshot.jpg';
 import Quote from './Quote';
 import axios from 'axios';
-import './landingPage.css';
 import { mode } from '../../../utils/theme';
+import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
+import qaScreenshot from '../../../images/qaScreenshot.jpg';
+import BlogsScreenshot from '../../../images/BlogsScreenshot.jpg';
 
 const initialCount = {
   blogCount: 0,
@@ -31,182 +32,149 @@ const LandingPage = () => {
 
   const { userCount, blogCount, qaCount } = counts;
 
-  console.log('Counts: ', counts);
-
   return (
-    <div className=' secondHalfOfHomePage'>
-      <div style={mode}>
-        <div className='BigOne'>
-          <div
-            className='site-blocks-cover overlay'
-            id='txtt'
-            data-aos='fade'
-            data-stellar-background-ratio='0.5'
+    <div style={mode}>
+      <div className='BigOne'>
+        <div
+          className='site-blocks-cover overlay'
+          data-aos='fade'
+          data-stellar-background-ratio='0.5'
+        >
+          <header id='showcase'>
+            <div className='showcase-content'>
+              <h1 className='l-heading lead glow p-0'>
+                If you are a
+                <ReactTypingEffect
+                  text={[' Student', ' Teacher', ' Coder', ' Aspirant']}
+                  speed={100}
+                  eraseDelay={2000}
+                  typingDelay={1000}
+                />
+                &nbsp;
+                <br />
+                then this is the right place <br /> to
+                <ReactTypingEffect
+                  text={[' discover.', ' guide.', ' share.', ' achieve.']}
+                  speed={100}
+                  eraseDelay={1800}
+                  typingDelay={1000}
+                />
+              </h1>
+              <hr className='p-0' />
+              <p className='font19 p-0'>
+                <Quote />
+              </p>
+            </div>
+          </header>
+        </div>
+
+        <div className='bg-light' id='user-blog-qa'>
+          <div className='user-blog-qa-item'>
+            <img
+              className='homeIcons'
+              style={{ textAlign: 'left' }}
+              src='https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png'
+              alt='Users'
+            />
+            <div className='text'>
+              <strong className='heading'>
+                <span className='excerpt'>{userCount} </span> {' Users'}
+              </strong>
+            </div>
+          </div>
+
+          <div className='user-blog-qa-item'>
+            <img
+              className='homeIcons'
+              src='https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png'
+              alt='Blogs'
+            />
+            <div className='text'>
+              <strong className='heading'>
+                <span className='excerpt'>{blogCount} </span> {' Blogs'}
+              </strong>
+            </div>
+          </div>
+          <div className='user-blog-qa-item'>
+            <img
+              className='homeIcons'
+              src='https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png'
+              alt='Q&A'
+            />
+            <div className='text'>
+              <strong className='heading'>
+                <span className='excerpt'>{qaCount} </span>
+                {' Q&A'}
+              </strong>
+            </div>
+          </div>
+          <div className='user-blog-qa-item'>
+            <div className='text'>
+              <strong className='heading'>
+                &nbsp; with endless stories
+                <br /> to tell.&nbsp;
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className='d-flex flex-nowrap font15 bg-red'
+        style={{ padding: '55px 20px' }}
+      >
+        <img
+          className='img-fluid rounded previewImg'
+          src={BlogsScreenshot}
+          alt='BlogsScreenshot'
+        />
+
+        <p className='rounded p-4 m-2 my-auto text-center'>
+          A platform for sharing your tech expertise while building a
+          potentially valuable readership.
+          <br />
+          Got a product review or advances in latest technology to exhibit?
+          <br />
+          Grab some eyeballs with your writing on any thing related to tech.
+        </p>
+      </div>
+
+      <div
+        className='d-flex flex-nowrap bg-blue font15 text-white'
+        style={{ padding: '55px 20px' }}
+      >
+        <span className='p-3 rounded text-center m-2 my-auto'>
+          A great resource to find questions, that people in your industry are
+          asking.
+          <br />A question and answer site where queries are asked, answered,
+          edited and organised by DeVloggers.
+        </span>
+
+        <img
+          className='img-fluid rounded previewImg'
+          src={qaScreenshot}
+          alt='QAsScreenshot'
+        />
+      </div>
+
+      <div
+        className='d-flex flex-nowrap bg-gray font15 text-white'
+        style={{ padding: '30px 20px' }}
+      >
+        <p className='p-3 rounded text-center m-2 my-auto w-75'>
+          Tell a story. Make it true. Make it compelling. Make it relevant.
+          <br />
+          <br />
+          The key to DeVlogging is to become a DeVlogger.
+        </p>
+        <div className='m-auto'>
+          <NavLink
+            to={SIGNUP_ROUTE}
+            className='btn btn-lg btn-light mx-2'
+            style={{ width: '100%' }}
           >
-            <header id='showcase'>
-              <div className='showcase-content'>
-                <h1
-                  className='l-heading lead glow p-0'
-                  // style={stylez.body}
-                >
-                  If you are a
-                  <ReactTypingEffect
-                    text={[' Student', ' Teacher', ' Coder', ' Aspirant']}
-                    speed={100}
-                    eraseDelay={2000}
-                    typingDelay={1000}
-                  />{' '}
-                  <br />
-                  then this is the right place <br /> to
-                  <ReactTypingEffect
-                    text={[' discover.', ' guide.', ' share.', ' achieve.']}
-                    speed={100}
-                    eraseDelay={1800}
-                    typingDelay={1000}
-                  />
-                </h1>
-                <hr className='p-0' />
-                <p className='font19 p-0'>
-                  <Quote />
-                  {/* A Quotefdskankfs fdksn fs akf f ssdk - someone    */}
-                </p>
-              </div>
-            </header>
-          </div>
-
-          <div className='bg-light' id='user-blog-qa'>
-            <div className='user-blog-qa-item'>
-              <img
-                className='homeIcons'
-                style={{ textAlign: 'left' }}
-                src='https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png'
-                alt='Users'
-              />
-              <div className='text'>
-                <strong className='heading'>
-                  <span className='excerpt'>{userCount} </span> {' Users'}{' '}
-                </strong>
-              </div>
-            </div>
-
-            <div className='user-blog-qa-item'>
-              <img
-                className='homeIcons'
-                src='https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png'
-                alt='Blogs'
-              />
-              <div className='text'>
-                <strong className='heading'>
-                  <span className='excerpt'>{blogCount} </span> {' Blogs'}{' '}
-                </strong>
-              </div>
-            </div>
-            <div className='user-blog-qa-item'>
-              <img
-                className='homeIcons'
-                src='https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png'
-                alt='Q&A'
-              />
-              <div className='text'>
-                <strong className='heading'>
-                  <span className='excerpt'>{qaCount} </span>
-                  {' Q&A'}{' '}
-                </strong>
-              </div>
-            </div>
-            <div className='user-blog-qa-item'>
-              <div className='text'>
-                <strong className='heading'>
-                  {' '}
-                  with endless stories
-                  <br /> to tell.{' '}
-                </strong>
-              </div>
-            </div>
-          </div>
-
-          {/* <div className="block-quick-info-2" >
-          <div className="container" >
-            <div className="block-quick-info-2-inner bg-light"  >
-              <div className="row font13"  >
-                <div className="col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0" >
-                  <div className="d-flex quick-info-2">
-                  <img className="homeIcons" src="https://img.pngio.com/group-icon-png-crosby-community-group-icon-png-1600_1600.png"  />
-                    <div className="text">
-                      <strong className="d-block heading"> 
-                      <span className="excerpt">100 </span> {" Users"} </strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0">
-                  <div className="d-flex quick-info-2">
-                    <img className="homeIcons" src="https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/001/923/original/article.png" />
-                    <div className="text">
-                      <strong className="d-block heading"> 
-                      <span className="excerpt">100 </span> {"Blogs"} </strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0" >
-                  <div className="d-flex quick-info-2">
-                    <img className="homeIcons" src="https://cdn0.iconfinder.com/data/icons/customer-service-and-feedback-part-2/64/Q_A-session-512.png" />
-                    <div className="text">
-                      <strong className="d-block heading">
-                      <span className="excerpt">100 </span> <br/>{"Q&A"} </strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0" >
-                  <div className="d-flex quick-info-2">
-                    <div className="text">
-                      <strong className="d-block heading" id="cursive" >with endless stories to tell</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          </div> */}
-        </div>
-
-        <div
-          className='screenshotsHome font14 bg-red'
-          style={{ padding: '55px 20px' }}
-        >
-          <img
-            className='img-fluid rounded border border-danger'
-            src={BlogsScreenshot}
-            alt='BlogsScreenshot'
-          />
-
-          <p className=' border rounded p-4 m-2 my-auto text-center'>
-            A platform for sharing your tech expertise while building a
-            potentially valuable readership.
-            <br />
-            Got a product review or advances in latest technology to exhibit?
-            <br />
-            Grab some eyeballs with your writing on any thing related to tech.
-          </p>
-        </div>
-
-        <div
-          className='screenshotsHome bg-blue font14 text-white'
-          style={{ padding: '55px 20px' }}
-        >
-
-          <span className='p-3 rounded border text-center border-danger m-2 my-auto'>
-            A great resource to find questions, that people in your industry are
-            asking.
-            <br />A question and answer site where queries are asked, answered,
-            edited and organised by the community of DeVloggers.
-          </span>
-
-          <img
-            className=' img-fluid rounded border border-primary '
-            src={qaScreenshot}
-            alt='QAsScreenshot'
-          />
+            Get Started >
+          </NavLink>
         </div>
       </div>
     </div>

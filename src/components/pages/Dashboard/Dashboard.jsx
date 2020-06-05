@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { POST_BLOG } from '../../../constants/routesNomenclature';
+import { POST_BLOG, ASK_ROUTE } from '../../../constants/routesNomenclature';
 import { authContext } from '../../../context/AuthContext';
 import BlogCard from '../../layout/BlogCard';
 import { getBlogsByUserId } from '../../../requests/blog';
@@ -29,6 +29,7 @@ const Dashboard = () => {
   const { userAuth } = useContext(authContext);
 
   const [blogs, setBlogs] = useState([]);
+
   const [qa, setQAs] = useState([]);
 
   const [showLoader, setShowLoader] = useState(true);
@@ -36,6 +37,7 @@ const Dashboard = () => {
   const history = useHistory();
 
   const userName = getUserFromLocalStorage().user.firstName;
+
   const [userStuff, setStuff] = useState({ ...initialStuff });
 
   useEffect(() => {
@@ -43,7 +45,6 @@ const Dashboard = () => {
       const res = await getBlogsByUserId(userAuth.user._id);
       const quesArr = await getQuesByUser(userAuth.user._id);
       console.log(quesArr.data);
-      // console.log(res.data);
       if (res.data.length === 0) {
         console.log('No Blogs By this user');
       } else if (quesArr.data && res.data) {
@@ -82,48 +83,54 @@ const Dashboard = () => {
       />
       {!showLoader && (
         <div
-          className='m-0 p-0'
-          // style={{background:"url('https://i.redd.it/qwd83nc4xxf41.jpg')"}}
+          className='m-0 pt-0 pb-4'
+          style={{
+            background: condition && '#000',
+          }}
         >
           <img
-            src='https://i.redd.it/qwd83nc4xxf41.jpg'
+            // src='https://i.redd.it/qwd83nc4xxf41.jpg'
+            // src='https://images.unsplash.com/photo-1506143925201-0252c51780b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+            src='https://images.unsplash.com/photo-1520698857293-5d763dde010f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
             className='bg-still'
             alt=''
           />
           <div className='container'>
-            {/* here */}
-            {/* to here */}
             <div className='text-center shadows-in-light font19 bg-white p-3'>
-              {"D . A . S . H . B . O . A . R . D ."}
+              {'D . A . S . H . B . O . A . R . D .'}
             </div>
             <div
               className={`border rounded  p-5 my-5 ${
-                condition ? 'bg-darker text-white' : 'bg-white'
+                condition ? 'bg-ondark' : 'bg-white'
               }`}
             >
-              <h1 className='display-4'>Hello, {userName} </h1>
+              <h1 className='display-4'>
+                <strong>Hello, {userName} </strong>
+              </h1>
               <p className='lead'> {msg} </p>
               <hr className='my-4' />
-              {/* <p>You can always edit a bad page. But you cannot edit a Blank Page. So, what do you want to do today?</p> */}
               <NavLink
-                to='/post-blog'
-                className='btn btn-primary btn-raised mx-2'
+                to={POST_BLOG}
+                className={`btn ${
+                  condition ? 'btn-dark' : 'btn-primary'
+                } btn-raised mx-2`}
                 role='NavLink '
               >
                 Write a Blog
               </NavLink>
               <NavLink
-                to='/ask'
-                className='btn btn-primary btn-raised mx-2'
+                to={ASK_ROUTE}
+                className={`btn ${
+                  condition ? 'btn-dark' : 'btn-primary'
+                } btn-raised mx-2`}
                 role='NavLink '
               >
                 Ask Something
               </NavLink>
             </div>
             <button
-              className={` btn  ${
-                userStuff.showBlogs ? 'btn-outline-light' : 'btn-outline-dark'
-              } ${
+              className={` btn  
+              ${
                 condition ? 'bg-darker' : 'bg-white'
               } border font12 p-2 mx-0 rounded`}
               onClick={showBlogs}
@@ -133,8 +140,6 @@ const Dashboard = () => {
             </button>
             <button
               className={` btn ${
-                userStuff.showQAs ? 'btn-outline-light' : 'btn-outline-dark'
-              } ${
                 condition ? 'bg-darker' : 'bg-white'
               } border font12 p-2 mx-0 rounded`}
               onClick={showQA}
@@ -142,7 +147,10 @@ const Dashboard = () => {
             >
               Your Questions
             </button>
-            <div className='row container bg-white-trans border'>
+            <div
+              className='row container border pb-3'
+              style={{ background: condition ? 'bg-ondark' : '#fbfcfc' }}
+            >
               {userStuff.showBlogs &&
                 blogs.map((blog, index) => (
                   <div

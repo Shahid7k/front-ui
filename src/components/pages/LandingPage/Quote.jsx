@@ -6,7 +6,7 @@ const initialQuote = {
   author: 'someone',
 };
 
-const i = Math.round(1000 * Math.random());
+// const i = Math.round(1000 * Math.random());
 
 const Quote = () => {
   const [quote, saveQuote] = useState({ ...initialQuote });
@@ -14,18 +14,20 @@ const Quote = () => {
   useEffect(() => {
     (async function () {
       // const result = await axios.get('https://type.fit/api/quotes');
-      const result = await axios.get('https://quotes.rest/qod')
-      const qObj=(result.data.contents.quotes[0])
+      const result = await axios.get('https://quotes.rest/qod');
+      const qObj = result.data.contents.quotes[0];
       // saveQuote({ author: result.data[i].author, text: result.data[i].text });
-      saveQuote({ author:qObj.author, text: qObj.quote });
+      saveQuote({ author: qObj.author, text: qObj.quote });
     })();
   }, []);
 
   return (
     <>
-      <span className='bg-half-dark font19 great-vibes'>
-        {'“'} {quote.text} {'”'} <br />{' '}
-        <span className='font19'>
+      <span className='bg-half-dark font16'>
+        {'“'}
+        {quote.text}
+        {'”'} <br />{' '}
+        <span className='font16'>
           {' - '}
           {quote.author == null ? 'Anonymous' : quote.author}
         </span>

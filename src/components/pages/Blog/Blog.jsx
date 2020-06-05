@@ -14,7 +14,7 @@ import { DASHBOARD } from '../../../constants/routesNomenclature';
 import { BarLoader } from 'react-spinners';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
-import { mode, condition } from '../../../utils/theme';
+import { mode } from '../../../utils/theme';
 
 const blogState = {
   title: '',
@@ -41,24 +41,19 @@ const Blog = () => {
 
   const [userComment, setUserComment] = useState('');
 
-  // const [userLike, setUserLike] = useState(false);
-
   const [showLoader, setShowLoader] = useState(true);
 
   React.useEffect(() => {
     (async function () {
       const res = await getBlogById(blogId);
-      // console.log("BLOGDATA:",res.data);
+
       if (res.data) {
         const match = res.data.likes.indexOf(userId) !== -1;
-        // setBlog(res.data);
         setBlog({ ...res.data, userLiked: match });
       }
       setShowLoader(false);
     })();
   }, []);
-
-  // console.log(blog);
 
   const handleSubmit = async blog => {
     setBlog({ ...blog }, blog);
@@ -72,7 +67,6 @@ const Blog = () => {
 
   const handleDelete = async () => {
     const response = await deleteBlog(blogId);
-    // console.log(response);
     if (response.data) {
       addAlert('Blog deleted', 'success');
       history.push(DASHBOARD);
@@ -86,11 +80,10 @@ const Blog = () => {
   };
 
   const submitLike = async () => {
-    // setBlog({ ...blog, likes });
     const response = !blog.userLiked
       ? await like(userId, blogId)
       : await unlike(userId, blogId);
-    // console.log(response);
+
     if (response.likes) {
       const match = response.likes.indexOf(userId) !== -1;
       setBlog({ ...blog, likes: response.likes, userLiked: match });
@@ -100,9 +93,8 @@ const Blog = () => {
   };
 
   const submitComment = async () => {
-    // setBlog({ ...blog, comments });
     const response = await addComment(userId, blogId, userComment);
-    console.log(response);
+
     if (response.data) {
       setUserComment('');
       setBlog({ ...blog, comments: response.data.comments });
@@ -113,9 +105,8 @@ const Blog = () => {
 
   const removeComment = async userComment => {
     const response = await deleteComment(userId, blogId, userComment);
-    console.log(response);
+
     if (response.data) {
-      // setUserComment('');
       addAlert('Comment deleted.', 'success');
       setBlog({ ...blog, comments: response.data.comments });
     } else {
@@ -151,7 +142,12 @@ const Blog = () => {
                 value={userComment}
                 onChange={handleCommentChange}
               />
-              <button className='btn btn-info m-2' onClick={submitComment}>
+              <br />
+              <button
+                className='btn btn-info mt-2 mb-5'
+                onClick={submitComment}
+                disabled={userComment.length == 0}
+              >
                 Comment
               </button>
             </div>
@@ -163,7 +159,10 @@ const Blog = () => {
                   <div key={i} className='d-flex'>
                     <div className='comment-photo rounded-circle'>
                       {comment !== null && comment !== undefined ? (
-                        <NavLink to={`/profile/${comment.postedBy._id}`}>
+                        <NavLink
+                          to={`/profile/${comment.postedBy._id}`}
+                          style={mode}
+                        >
                           <img
                             src={`http://localhost:8080/user/photo/${comment.postedBy._id}`}
                             alt='Face'
@@ -175,17 +174,28 @@ const Blog = () => {
                           />
                         </NavLink>
                       ) : (
-                        <p> Anonymous!</p>
+                        <figure>
+                          <img
+                            src='https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png'
+                            className='comment-photo rounded-circle'
+                          />
+                        </figure>
                       )}
                     </div>
                     <div className='be-comment-content ml-2 w-100'>
                       <div>
-                        <NavLink
-                          to={`/profile/${comment.postedBy._id}`}
-                          style={mode}
-                        >
-                          <strong>{comment.postedBy.firstName}</strong>
-                        </NavLink>
+                        {comment !== null &&
+                        comment !== undefined &&
+                        comment.postedBy !== null ? (
+                          <NavLink
+                            to={`/profile/${comment.postedBy._id}`}
+                            style={mode}
+                          >
+                            <strong>{comment.postedBy.firstName}</strong>
+                          </NavLink>
+                        ) : (
+                          <p style={mode}>{'Anonymous'}</p>
+                        )}
                         <div className='comment-time ml-auto d-inline-block'>
                           <i className='far fa-clock mr-1' />
                           {comment.created.substring(0, 10)}
