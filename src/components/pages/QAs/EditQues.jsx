@@ -72,6 +72,7 @@ const EditQues = () => {
           created,
           satisfied,
         } = result.data;
+
         fetchQues({
           ...quesState,
           title,
@@ -136,12 +137,7 @@ const EditQues = () => {
     question.append('tags', tags);
     question.append('photo', photo);
     question.append('satisfied', satisfied);
-    console.log('title:', title);
-    console.log('tags:', tags);
-    console.log('body:', body);
-    console.log('photo:', photo);
 
-    console.log('FORMDATA : ', JSON.stringify(question));
     const response = await editQuestion(quesId, question);
     console.log('RESPONSE-EDIT', response);
     if (response.data) {
@@ -162,8 +158,7 @@ const EditQues = () => {
     <div className={`${condition ? 'bg-dark' : 'bg-mint-cream'}`}>
       <div className='container'>
         <button
-          className={`btn btn-raised btn-outline-primary m-1 `}
-          // onClick={goBack}
+          className={`btn btn-raised btn-outline-primary m-1 mb-5`}
           onClick={() => history.goBack()}
           style={mode}
         >
@@ -171,11 +166,12 @@ const EditQues = () => {
           Back
         </button>
       </div>
-      <div className='mx-5 p-5 container '>
+
+      <div className='container'>
         <form onSubmit={submit} encType='multipart/form-data'>
-          <div className='mx-5'>
+          <div className='mb-2'>
             <button
-              className='btn mr-3 btn-info mx-5'
+              className='btn btn-info'
               data-toggle='tooltip'
               onClick={toggleSatisfied}
               data-placement='bottom'
@@ -184,12 +180,13 @@ const EditQues = () => {
               Mark as {satisfied ? ' Unsolved' : ' Solved.'}
             </button>
           </div>
-          <div className='p-2 container mx-5 px-5'>
+
+          <div className='container p-5' style={mode}>
             <label>Title</label>
             <input
               type='text'
               className={`${
-                formDataValidator.title.error ? 'border-danger' : ''
+                formDataValidator.title.error ? 'card-dark border-danger' : ''
               } font18 text-justify ${
                 condition ? 'bg-darker text-white' : ''
               } `}
@@ -204,78 +201,67 @@ const EditQues = () => {
               </span>
             )}
           </div>
-          <div className='d-flex'>
-            <div className='   container px-5 mx-5 my-0'>
-              <div className=' p-5' style={mode}>
-                <div className='text-muted p-3 h5'>
-                  <label>Tags : </label>
-                  <input
-                    type='text'
-                    className={`${
-                      formDataValidator.tags.error ? 'border-danger' : ''
-                    }`}
-                    name='tags'
-                    onChange={handleChange}
-                    onBlur={handleValidatorChange}
-                    value={tags}
-                  />
-                  {formDataValidator.tags.error && (
-                    <span className='errorMsg font09 font-weight-light '>
-                      {formDataValidator.tags.message}
-                    </span>
-                  )}
-                </div>
-                <textarea
-                  className='font12 my-4'
-                  rows='5'
-                  name='body'
-                  onChange={handleChange}
-                  onBlur={handleValidatorChange}
-                  value={body}
-                />
-                {formDataValidator.body.error && (
-                  <span className='errorMsg font09 my-0 font-weight-light'>
-                    {formDataValidator.body.message}
-                  </span>
-                )}
-                <br />
-                {/* <a href={photoURL} target="_blank" className="figure text-wrap"  >   */}
-                {quesState.photoURL && (
-                  <img
-                    src={photoURL}
-                    className='figure-img rounded'
-                    onError={i => (i.target.src = no_image)}
-                    style={{ height: '120px', width: 'auto' }}
-                  />
-                )}
-                <input
-                  type='file'
-                  name='photo'
-                  onChange={handleChange}
-                  className='form-control w-50'
-                  accept='image/*'
-                />
-                {/* </a> */}
 
-                <hr />
-
-                <div className='container m-4'>
-                  <input
-                    type='submit'
-                    className='btn btn-raised btn-warning'
-                    value='Save Changes'
-                  />
-                </div>
-              </div>
+          <div className='container p-5' style={mode}>
+            <div className='text-muted h5'>
+              <label>Tags : </label>
+              <input
+                type='text'
+                className={`${condition ? 'card-dark' : ''} ${
+                  formDataValidator.tags.error ? 'border-danger' : ''
+                }`}
+                name='tags'
+                onChange={handleChange}
+                onBlur={handleValidatorChange}
+                value={tags}
+              />
+              {formDataValidator.tags.error && (
+                <span className='errorMsg font09 font-weight-light '>
+                  {formDataValidator.tags.message}
+                </span>
+              )}
             </div>
+            <textarea
+              className={`font12 my-4 p-2 ${condition ? 'card-dark' : ''}`}
+              rows='10'
+              name='body'
+              onChange={handleChange}
+              onBlur={handleValidatorChange}
+              value={body}
+              style={{ width: '100%' }}
+            />
+            {formDataValidator.body.error && (
+              <span className='errorMsg font09 my-0 font-weight-light'>
+                {formDataValidator.body.message}
+              </span>
+            )}
+            <br />
+            {/* <a href={photoURL} target="_blank" className="figure text-wrap"  >   */}
+            {quesState.photoURL && (
+              <img
+                src={photoURL}
+                className='figure-img rounded'
+                onError={i => (i.target.src = no_image)}
+                style={{ height: '120px', width: 'auto' }}
+              />
+            )}
+            <input
+              type='file'
+              name='photo'
+              onChange={handleChange}
+              className={`form-control w-50 ${condition ? 'card-dark' : ''}`}
+              accept='image/*'
+            />
+            {/* </a> */}
 
-            <div className=' text-center my-5 py-5 font11'>
-              Things <br />
-              Things <br />
-              Things <br />
-              Things <br />
-              Things <br />
-              Things <br />
+            <hr />
+
+            <div className='container m-4'>
+              <input
+                type='submit'
+                className='btn btn-raised btn-warning'
+                value='Save Changes'
+              />
             </div>
           </div>
         </form>

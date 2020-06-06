@@ -45,12 +45,18 @@ const Navbar = ({ title, icon }) => {
 const getNoAuthLinks = () => (
   <ul className='my-auto'>
     <li>
-      <NavLink to={SIGNIN_ROUTE} className='text-decoration-none'>
+      <NavLink
+        to={SIGNIN_ROUTE}
+        className='text-decoration-none font-weight-bold'
+      >
         Sign In
       </NavLink>
     </li>
     <li>
-      <NavLink to={SIGNUP_ROUTE} className='text-decoration-none'>
+      <NavLink
+        to={SIGNUP_ROUTE}
+        className='text-decoration-none font-weight-bold'
+      >
         Sign Up
       </NavLink>
     </li>

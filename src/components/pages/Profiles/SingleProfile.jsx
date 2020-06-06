@@ -118,6 +118,7 @@ const SingleProfile = () => {
     phoneNo,
     gender,
     about,
+    created,
   } = state.userData;
 
   if (deletedAccount) return <Redirect to='/' />;
@@ -226,11 +227,11 @@ const SingleProfile = () => {
         </div>
         <hr />
         <ul className='d-flex flex-wrap justify-content-around text-center'>
-          <li>
+          {/* <li>
             <i className='far fa-circle'></i>
             <br />
             {'~ ~ ~ ~'}
-          </li>
+          </li> */}
           <li>
             <i className='far fa-circle'></i>
             <br />
@@ -240,7 +241,8 @@ const SingleProfile = () => {
           <li>
             <i className='far fa-circle'></i>
             <br />
-            {'~ ~ ~ ~'}
+            {created && created.substring(0, 10)}
+            <p>Joined</p>
           </li>
         </ul>
         <hr />

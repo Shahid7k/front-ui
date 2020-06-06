@@ -91,6 +91,7 @@ const Home = () => {
                     <BlogCard
                       blog={blog}
                       name={
+                        blog.postedBy &&
                         blog.postedBy.firstName + ' ' + blog.postedBy.lastName
                       }
                     />

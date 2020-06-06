@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
+import { alertContext } from '../../../context/AlertContext';
 import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
-import { mode } from '../../../utils/theme';
-
 
 const initialState = {
   email: '',
@@ -21,20 +20,22 @@ const validatorInititalState = {
 
   password: {
     error: false,
-    // hasError: pwd =>
-    //   !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
-    //     pwd
-    //   ),
-    hasError: pwd => false,
+    hasError: pwd =>
+      !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
+        pwd
+      ),
     message:
       'password should be at least 8 characters long with one of (a-z, A-Z, 0-9, special characters)',
   },
 };
 
 const SignIn = () => {
-  const { setAuthStatus } = React.useContext(authContext);
+  const { setAuthStatus } = useContext(authContext);
+
+  const { addAlert } = useContext(alertContext);
 
   const [formData, setFormData] = useState({ ...initialState });
+
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
   });
@@ -57,10 +58,11 @@ const SignIn = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const data = await signInUser({ email, password });
-    // console.log(data);
+    console.log(data);
     if (data) {
       setAuthStatus(data);
     } else {
+      addAlert('Invalid email/password', 'danger');
       setFormData({ ...initialState });
     }
   };
@@ -69,7 +71,7 @@ const SignIn = () => {
 
   return (
     <div className='form-container'>
-      <div className='form-wrap' style={mode}>
+      <div className='form-wrap'>
         <h1>Sign In</h1>
         <p>Sign in and explore the world!</p>
         <form onSubmit={handleSubmit}>

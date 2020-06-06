@@ -8,6 +8,8 @@ const BlogCard = props => {
     name,
   } = props;
 
+  const userName = name === null ? 'Anonymous' : name;
+
   return (
     <div
       className={`card border-0 p-0 ${
@@ -20,7 +22,11 @@ const BlogCard = props => {
       <div className='card-body'>
         <p className='font11 card-text'>{title}</p>
         <p className='font09 card-text text-truncate'>{description}</p>
-        {name && <p className='card-text text-right'>~ {name}</p>}
+        {userName !== '' ? (
+          <p className='card-text text-right'>~ {userName}</p>
+        ) : (
+          ''
+        )}
       </div>
       <div className='card-text text-italic'>{content}</div>
     </div>

@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 import { signUpUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
 import { SIGNIN_ROUTE } from '../../../constants/routesNomenclature';
-import { mode } from '../../../utils/theme';
 import { alertContext } from '../../../context/AlertContext';
 
-
 const initialState = {
-  firstName: 'user',
-  lastName: 'test',
-  email: 'user@email.com',
-  password: '111111',
-  confirmPassword: '111111',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
   gender: '',
-  country: 'Ind',
-  city: 'Hyd',
+  country: '',
+  city: '',
   profession: '',
-  phoneNo: '1234567890',
+  phoneNo: '',
 };
 
 const validatorInititalState = {
@@ -42,10 +40,10 @@ const validatorInititalState = {
 
   password: {
     error: false,
-    hasError: pwd => false,
-    // !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
-    //   pwd
-    // ),
+    hasError: pwd =>
+      !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
+        pwd
+      ),
     message:
       'password should be at least 8 characters long with one of (a-z, A-Z, 0-9, special characters)',
   },
@@ -134,7 +132,7 @@ const SignUp = () => {
 
   return (
     <div className='form-container'>
-      <div className='form-wrap' style={mode}>
+      <div className='form-wrap'>
         <h1>Sign Up</h1>
         <p>It's free and only takes a minute</p>
         <form onSubmit={handleSubmit}>
