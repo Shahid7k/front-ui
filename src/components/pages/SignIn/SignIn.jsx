@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
+import { alertContext } from '../../../context/AlertContext';
 import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
 
 const initialState = {
@@ -29,9 +30,12 @@ const validatorInititalState = {
 };
 
 const SignIn = () => {
-  const { setAuthStatus } = React.useContext(authContext);
+  const { setAuthStatus } = useContext(authContext);
+
+  const { addAlert } = useContext(alertContext);
 
   const [formData, setFormData] = useState({ ...initialState });
+
   const [formDataValidator, setFormDataValidator] = useState({
     ...validatorInititalState,
   });
@@ -54,10 +58,11 @@ const SignIn = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const data = await signInUser({ email, password });
-    // console.log(data);
+    console.log(data);
     if (data) {
       setAuthStatus(data);
     } else {
+      addAlert('Invalid email/password', 'danger');
       setFormData({ ...initialState });
     }
   };
