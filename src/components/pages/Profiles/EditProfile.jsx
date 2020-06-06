@@ -59,6 +59,13 @@ const validatorInititalState = {
   },
 };
 
+const dlMode = condition
+  ? {
+      background: '#454545',
+      color: 'white',
+    }
+  : {};
+
 const EditProfile = () => {
   const { addAlert } = React.useContext(alertContext);
 
@@ -168,9 +175,6 @@ const EditProfile = () => {
     darkEnabled,
   } = user;
 
-  // console.log(darkEnabled);
-
-  // const userToken = JSON.parse(localStorage.getItem('userInfo')).token;
   if (redirect) return <Redirect to={`/profile/${userId}`} />;
 
   return (
@@ -182,25 +186,30 @@ const EditProfile = () => {
       />
 
       {!showLoader ? (
-        <div className='bg-mint-cream container' style={{ minHeight: '100vh' }}>
-          <div className=''>
+        <div className='container' style={{ minHeight: '100vh' }}>
+          <img
+            src='https://images.unsplash.com/photo-1520698857293-5d763dde010f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+            className='bg-still'
+            alt='BackGroundPic'
+          />
+
+          <div className='mt-5'>
             <button
-              className={`btn btn-raised btn-outline-primary m-1 `}
-              // onClick={goBack}
+              className={`btn btn-white btn-outline-primary m-1 `}
               onClick={() => history.goBack()}
-              style={mode}
             >
               <i className='fas fa-angle-left mr-2' />
               Back
             </button>
           </div>
+
           <div className='fl-r m-5'>
             <label className='mx-4 h5 underline'>
-              Mode:{' '}
+              Mode:
               <div className='font08'>{darkEnabled ? 'Dark' : 'Light'}</div>
             </label>
             <br />
-            {/* THE ABOVE TEXT WRAPPED IN DIV {inside Label,not the Label} IS JUST TO CHECK IF OUR DARK,LIGHT MODES ARE WORKING PROPERLY OR NOT! */}
+            {/* THE ABOVE TEXT WRAPPED IN DIV {inside Label, not the Label} IS JUST TO CHECK IF OUR DARK,LIGHT MODES ARE WORKING PROPERLY OR NOT! */}
             <div
               className={`btn btn-dark  bg-darker ${
                 condition ? 'disabled' : ''
@@ -221,35 +230,38 @@ const EditProfile = () => {
           </div>
 
           <br />
+
           <form className='form'>
-            <div className={`container ${condition ? 'bg-dark' : 'bg-white'} `}>
+            <div
+              className={`container ${condition ? 'card-dark' : 'bg-white'} `}
+            >
               <div className='form-inline'>
                 <div className='d-flex flex-wrap'>
-                  <div className=' p-2 w-25'>
+                  <div className='ml-5 mt-5 p-2 w-25'>
                     <img
-                      src='https://2.bp.blogspot.com/-3V7O72C-y6Q/WtgKBJ8xMvI/AAAAAAAAF9g/3uqiHiABmswMsJKKGkbcIitnYS2GSfkZACEwYBhgL/s1600/cool%2Bpictures%2Bfor%2Bprofile.png'
+                      // src='https://2.bp.blogspot.com/-3V7O72C-y6Q/WtgKBJ8xMvI/AAAAAAAAF9g/3uqiHiABmswMsJKKGkbcIitnYS2GSfkZACEwYBhgL/s1600/cool%2Bpictures%2Bfor%2Bprofile.png'
+                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR3oew7CirJdodwRVmgyXyiwa0mVJYgPI29tQKR2mH1-vc2S7U3&usqp=CAU'
                       alt='profilePic'
-                      style={{ height: '25vh', width: '80%' }}
+                      style={{ height: '25vh', width: 'auto' }}
                     />
                   </div>
 
-                  <div className=' font11  p-5 w-44 text-center'>
-                    <span>
+                  <div className='font11 p-5 w-44 text-center'>
+                    <div className='mb-2'>
                       <i
-                        className={`fas p-0 ${
+                        className={`fas p-0 mr-2 ${
                           gender === 'M' ? 'fa-mars' : 'fa-venus'
                         }`}
-                      />{' '}
+                      />
                       <input
                         className='form-control col-2 m-0 my-1'
                         type='text'
-                        placeholder={`${gender === 'male' ? 'Male' : 'Female'}`}
                         value={`${gender === 'male' ? 'Male' : 'Female'}`}
                         readOnly
-                        style={mode}
+                        style={dlMode}
                       />
-                    </span>
-                    <br />
+                    </div>
+
                     <input
                       type='text'
                       className={`${
@@ -260,8 +272,9 @@ const EditProfile = () => {
                       value={firstName}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
-                      style={mode}
+                      style={dlMode}
                     />
+
                     <input
                       type='text'
                       className={`${
@@ -272,9 +285,9 @@ const EditProfile = () => {
                       value={lastName}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
-                      style={mode}
+                      style={dlMode}
                     />
-                    <br />
+
                     {formDataValidator.lastName.error && (
                       <span className='errorMsg font07 mx-1 my-0'>
                         {formDataValidator.lastName.message}
@@ -286,7 +299,9 @@ const EditProfile = () => {
                         {formDataValidator.firstName.message}
                       </span>
                     )}
+
                     <br />
+
                     <input
                       type='text'
                       className={`${
@@ -299,15 +314,18 @@ const EditProfile = () => {
                       value={profession}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
-                      style={mode}
+                      style={dlMode}
                     />
+
                     {formDataValidator.profession.error && (
                       <span className='errorMsg font07'>
                         {formDataValidator.profession.message}
                       </span>
                     )}
+
                     <br />
-                    <i className='fas fa-map-marker-alt p-2'></i>
+
+                    <i className='fas fa-map-marker-alt p-2' />
                     <input
                       type='text'
                       className={`${
@@ -318,7 +336,7 @@ const EditProfile = () => {
                       value={city}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
-                      style={mode}
+                      style={dlMode}
                     />
 
                     <input
@@ -331,20 +349,23 @@ const EditProfile = () => {
                       value={country}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
-                      style={mode}
+                      style={dlMode}
                     />
+
                     <br />
+
                     {formDataValidator.city.error && (
                       <span className='errorMsg font07 mx-1 my-0'>
                         {formDataValidator.city.message}
                       </span>
                     )}
+
                     {formDataValidator.country.error && (
                       <span className='errorMsg font07 mx-1 my-0'>
                         {formDataValidator.country.message}
                       </span>
                     )}
-                    <br />
+
                     <i className='far fa-envelope p-2'></i>
                     <input
                       type='email'
@@ -352,10 +373,12 @@ const EditProfile = () => {
                       placeholder='Email'
                       name='email'
                       value={email || ''}
-                      style={mode}
+                      style={dlMode}
                       readOnly
                     />
+
                     <br />
+
                     <i className='fas fa-phone'></i>
                     <input
                       type='tel'
@@ -365,7 +388,7 @@ const EditProfile = () => {
                       placeholder='Phone Number'
                       name='phoneNo'
                       value={phoneNo || ''}
-                      style={mode}
+                      style={dlMode}
                       onChange={handleChange}
                       onBlur={handleValidatorChange}
                     />
@@ -377,13 +400,14 @@ const EditProfile = () => {
                     <br />
                   </div>
 
-                  {user.photoURL !== '' && (
+                  {/* {user.photoURL !== '' && (
                     <img src={user.photoURL} alt='ProfilePic' />
-                  )}
+                  )} */}
                 </div>
               </div>
 
               <hr />
+
               <div className=' text-center'>
                 --ABOUT--
                 <br />
@@ -392,28 +416,26 @@ const EditProfile = () => {
                   onChange={handleChange}
                   className='form-control'
                   name='about'
-                  //  onChange={this.handleChange("about")}
                   value={about}
                   id='validationDefaultUsername'
                   placeholder='About '
                   rows='5'
                   aria-describedby='inputGroupPrepend2'
                   required
-                  style={mode}
+                  style={dlMode}
                 />
               </div>
               <hr />
             </div>
-            <button
-              onClick={handleSubmit}
-              className='btn btn-raised btn-outline-info'
-              style={mode}
-            >
+
+            <button onClick={handleSubmit} className='mt-3 btn btn-primary'>
               Save the Changes
             </button>
           </form>
         </div>
-      ) : LOADING}
+      ) : (
+        LOADING
+      )}
     </Fragment>
   );
 };

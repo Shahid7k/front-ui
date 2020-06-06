@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { HOME_ROUTE } from '../../../constants/routesNomenclature';
 import SearchBar from '../../layout/SearchBar';
 import QuesCard from './QuesCard';
 import { NOTFOUND } from '../../layout/otherConstants';
@@ -58,6 +60,16 @@ const AllQAs = () => {
             alt='bgForQA'
             className='bg-still'
           />
+
+          <div className='container'>
+            <NavLink
+              to={HOME_ROUTE}
+              className={`btn mx-2 ${condition ? 'btn-cyan' : 'btn-dark'}`}
+            >
+              <i className='fas fa-angle-left mr-2' />
+              Home
+            </NavLink>
+          </div>
 
           <div className='container text-c mb-4'>
             <SearchBar search={onSearch} />

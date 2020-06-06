@@ -12,10 +12,12 @@ export const blogInitialState = {
   content: '',
 };
 
-const dlMode = condition ? {
-  background:"black",
-  color:"white"
-}:{}
+const dlMode = condition
+  ? {
+      background: '#292929',
+      color: 'white',
+    }
+  : {};
 
 const BlogEditor = props => {
   const history = useHistory();
@@ -52,7 +54,7 @@ const BlogEditor = props => {
       <div className='container'>
         <div className='fl-l'>
           <button
-            className='btn btn-dark mt-2 mb-5'
+            className={`btn mt-2 mb-5 ${condition ? 'btn-cyan' : 'btn-dark'}`}
             onClick={() => history.goBack()}
           >
             <i className='fas fa-angle-left mr-2' />
@@ -63,7 +65,7 @@ const BlogEditor = props => {
         <div className='text-right'>
           {rest.showPostButton && (
             <button
-              className='btn btn-success mt-2 ml-2 mb-5'
+              className='btn btn-cyan mt-2 ml-2 mb-5'
               disabled={
                 title.length < 4 ||
                 description.length < 5 ||
@@ -71,7 +73,6 @@ const BlogEditor = props => {
               }
               onClick={handleSave}
             >
-              <i className='fas fa-save mr-2' />
               Post
             </button>
           )}
@@ -86,6 +87,7 @@ const BlogEditor = props => {
                     <i className='fas fa-pen mr-2' />
                     Edit
                   </button>
+
                   <button
                     className='btn btn-danger mt-2 mb-5 ml-2'
                     onClick={handleRemove}
