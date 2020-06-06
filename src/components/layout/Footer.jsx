@@ -27,18 +27,15 @@ const Footer = () => {
               data-placement='top'
               title='OurMailID will show up here!'
             />
-            {/* Mail     */}
           </a>
           <a
             href='#OurFaceBookPage'
             className='text-center p-0 d-inline-block mx-1 '
           >
             <i className='fa fa-facebook' aria-hidden='true' />
-            {/* Facebook */}
           </a>
           <a href='#OurInstaPage' className='text-center d-inline-block mx-1 '>
             <i className='fa fa-instagram' aria-hidden='true' />
-            {/* Instagram  */}
           </a>
         </div>
         {/* <div className="text-center p-0  flex-fill ">

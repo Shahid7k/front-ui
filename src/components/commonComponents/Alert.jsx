@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { alertContext } from '../../context/AlertContext';
 
 const TOP = 6;
@@ -7,7 +7,7 @@ const Alert = () => {
   const { alerts } = useContext(alertContext);
 
   return (
-    <>
+    <Fragment>
       {alerts &&
         alerts.map((alert, index) => (
           <div
@@ -47,7 +47,7 @@ const Alert = () => {
             </div>
           </div>
         ))}
-    </>
+    </Fragment>
   );
 };
 

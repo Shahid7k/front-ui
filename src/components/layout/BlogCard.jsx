@@ -22,7 +22,11 @@ const BlogCard = props => {
       <div className='card-body'>
         <p className='font11 card-text'>{title}</p>
         <p className='font09 card-text text-truncate'>{description}</p>
-        <p className='card-text text-right'>~ {userName}</p>
+        {userName !== '' ? (
+          <p className='card-text text-right'>~ {userName}</p>
+        ) : (
+          ''
+        )}
       </div>
       <div className='card-text text-italic'>{content}</div>
     </div>
@@ -37,7 +41,6 @@ BlogCard.defaultProps = {
     description: '',
     content: '',
   },
-  name: 'Anonymous',
 };
 
 export default BlogCard;

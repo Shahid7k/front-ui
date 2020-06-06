@@ -38,18 +38,17 @@ export const editUser = async (userId, userData) => {
   }
 };
 
-export const deleteUser = async(userId)=>{
-  try{
-    const response= await axiosClient.delete(`http://localhost:8080/user/${userId}`)
-    console.log("DELETERESP",response)
-    return {data:response.data};
-  }
-  catch(error){
+export const deleteUser = async userId => {
+  try {
+    const response = await axiosClient.delete(
+      `http://localhost:8080/user/${userId}`
+    );
+    console.log('DELETERESP', response);
+    return { data: response.data };
+  } catch (error) {
     const {
-      response:{
-        data,status
-      }
+      response: { data, status },
     } = error;
-    return {error:{status,data}};
+    return { error: { status, data } };
   }
-}
+};

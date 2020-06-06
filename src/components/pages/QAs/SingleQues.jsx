@@ -241,30 +241,6 @@ const SingleQues = () => {
                     Answer this Question
                   </div>
                 </div>
-
-                {quesState.showAnsBox && (
-                  <div className='m-3 p-2 container'>
-                    <div className='form'>
-                      <textarea
-                        type='text'
-                        className='form-control'
-                        rows='4'
-                        name='answer'
-                        value={quesState.answer}
-                        onChange={handleChange('answer')}
-                        placeholder='Start writing your answer here'
-                      />
-
-                      <button
-                        className='btn btn-primary m-2'
-                        onClick={submitAnswer}
-                      >
-                        {' '}
-                        Submit Answer!
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
 
               <div className={`mt-5 mx-3 py-3 font11`}>
@@ -288,6 +264,31 @@ const SingleQues = () => {
                 </div>
               </div>
             </div>
+
+            {quesState.showAnsBox && (
+              <div className='m-3 p-2 container'>
+                <div className='form'>
+                  <textarea
+                    type='text'
+                    className='form-control'
+                    rows='5'
+                    name='answer'
+                    value={quesState.answer}
+                    onChange={handleChange('answer')}
+                    placeholder='Start writing your answer here'
+                    style={{ width: '100%' }}
+                  />
+
+                  <button
+                    className='btn btn-primary m-2'
+                    onClick={submitAnswer}
+                  >
+                    {' '}
+                    Submit Answer!
+                  </button>
+                </div>
+              </div>
+            )}
 
             <hr />
 

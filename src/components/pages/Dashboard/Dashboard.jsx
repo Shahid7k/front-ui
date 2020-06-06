@@ -12,11 +12,11 @@ import QuesCard from '../QAs/QuesCard';
 
 const post0 = `Oh? Looks like you have not started blogging yet! It's better late than never, you know. So... What are you waiting for? Let's get started.`;
 const post1 =
-  'Congratulations! Looks like you have swung into action. You have successfully posted a blog out there. Keep going.';
+  'Congratulations! Looks like you have swung into action. You have successfully posted a blog out there. Keep going!';
 const post2 =
   "Hey! You are doing well. It seems you've learnt to blog afterall. And yes, it'll get more exciting when you keep sharing your stories and keep posting.";
 const post3 =
-  "Niiiiccceeee! You're finally getting a kick out of it, aren't you? You have more than 2 blogs now. Go on blogging...go on exploring.";
+  "Niiiiccceeee! You're finally getting a kick out of it, aren't you? You have more than 2 blogs now. Go on blogging...go on exploring!";
 const post4 =
   "Woah Woah Woah! Look at how much you've grown! You've finally crossed the 4-blogs-benchmark. Your contribution is going to be really helpful. To you, and others.";
 
@@ -156,7 +156,7 @@ const Dashboard = () => {
                     onClick={() => history.push(`/blogs/${blog._id}`)}
                     className='col-md-4 col-md-offset-3'
                   >
-                    <BlogCard blog={blog} />
+                    <BlogCard blog={blog} name={''} />
                   </div>
                 ))}
               {userStuff.showQAs &&
