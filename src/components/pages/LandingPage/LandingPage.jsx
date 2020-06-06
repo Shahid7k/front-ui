@@ -3,10 +3,13 @@ import { NavLink } from 'react-router-dom';
 import ReactTypingEffect from 'react-typing-effect';
 import Quote from './Quote';
 import axios from 'axios';
-import { mode } from '../../../utils/theme';
 import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
-import qaScreenshot from '../../../images/qaScreenshot.jpg';
-import BlogsScreenshot from '../../../images/BlogsScreenshot.jpg';
+import home from '../../../images/home.JPG';
+import qa from '../../../images/qa.JPG';
+import dashboard from '../../../images/dashboard.JPG';
+import writeblog from '../../../images/writeblog.JPG';
+import blog from '../../../images/blog.JPG';
+import { mode } from '../../../utils/theme';
 
 const initialCount = {
   blogCount: 0,
@@ -123,11 +126,7 @@ const LandingPage = () => {
         className='d-flex flex-nowrap font15 bg-red'
         style={{ padding: '55px 20px' }}
       >
-        <img
-          className='img-fluid rounded previewImg'
-          src={BlogsScreenshot}
-          alt='BlogsScreenshot'
-        />
+        <img className='img-fluid rounded previewImg' src={home} alt='Home' />
 
         <p className='rounded p-4 m-2 my-auto text-center'>
           A platform for sharing your tech expertise while building a
@@ -150,15 +149,33 @@ const LandingPage = () => {
           edited and organised by DeVloggers.
         </span>
 
-        <img
-          className='img-fluid rounded previewImg'
-          src={qaScreenshot}
-          alt='QAsScreenshot'
-        />
+        <img className='img-fluid rounded previewImg' src={qa} alt='QA' />
+      </div>
+
+      <div className='bg-gray font15 text-white'>
+        <h2 className='pt-3 rounded text-center m-2 my-auto'>
+          Introducing Dark Mode!
+        </h2>
+        <p className='rounded text-center'>
+          Now you can toggle to the mode that is candy to your eye.
+        </p>
+        <div className='d-flex flex-nowrap' style={{ padding: '55px 20px' }}>
+          <img
+            className='img-fluid rounded previewImg'
+            src={dashboard}
+            alt='Dashboard'
+          />
+
+          <img
+            className='ml-auto img-fluid rounded previewImg'
+            src={writeblog}
+            alt='WriteBlog'
+          />
+        </div>
       </div>
 
       <div
-        className='d-flex flex-nowrap bg-gray font15 text-white'
+        className='d-flex flex-nowrap bg-blue font15 text-white'
         style={{ padding: '30px 20px' }}
       >
         <p className='p-3 rounded text-center m-2 my-auto w-75'>
