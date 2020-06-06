@@ -8,7 +8,7 @@ import home from '../../../images/home.JPG';
 import qa from '../../../images/qa.JPG';
 import dashboard from '../../../images/dashboard.JPG';
 import writeblog from '../../../images/writeblog.JPG';
-import blog from '../../../images/blog.JPG';
+// import blog from '../../../images/blog.JPG';
 import { mode } from '../../../utils/theme';
 
 const initialCount = {
