@@ -106,7 +106,7 @@ const Ask = () => {
   return (
     <div className='container p-4'>
       <button
-        className={`btn my-3 ${condition ? 'btn-secondary' : 'btn-dark'}`}
+        className={`btn my-3 ${condition ? 'btn-cyan' : 'btn-dark'}`}
         onClick={() => history.goBack()}
       >
         <i className='fas fa-angle-left mr-2' />

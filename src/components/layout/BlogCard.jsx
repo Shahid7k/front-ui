@@ -5,6 +5,7 @@ const BlogCard = props => {
   const {
     image,
     blog: { title, description, content },
+    name,
   } = props;
 
   return (
@@ -17,8 +18,9 @@ const BlogCard = props => {
       <img src={image} className='card-img-top' alt='Card cap' />
 
       <div className='card-body'>
-        <p className='card-text'>{title}</p>
-        <p className='card-text text-truncate'>{description}</p>
+        <p className='font11 card-text'>{title}</p>
+        <p className='font09 card-text text-truncate'>{description}</p>
+        {name && <p className='card-text text-right'>~ {name}</p>}
       </div>
       <div className='card-text text-italic'>{content}</div>
     </div>

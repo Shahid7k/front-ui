@@ -31,6 +31,8 @@ const Home = () => {
     })();
   }, []);
 
+  console.log(blogs);
+
   return (
     <Fragment>
       <BarLoader
@@ -76,7 +78,7 @@ const Home = () => {
 
           <div
             className='d-flex align-items-start'
-            style={{ background: condition ? '#000' : '#fcfbfb' }}
+            style={{ background: condition ? '#000' : 'bg-light' }}
           >
             <div className='w-75 d-inline-flex'>
               <div className='row m-2'>
@@ -86,7 +88,12 @@ const Home = () => {
                     onClick={() => history.push(`/blogs/${blog._id}`)}
                     className='col-md-4 col-md-offset-3'
                   >
-                    <BlogCard blog={blog} />
+                    <BlogCard
+                      blog={blog}
+                      name={
+                        blog.postedBy.firstName + ' ' + blog.postedBy.lastName
+                      }
+                    />
                   </div>
                 ))}
               </div>

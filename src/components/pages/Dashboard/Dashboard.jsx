@@ -17,8 +17,8 @@ const post2 =
   "Hey! You are doing well. It seems you've learnt to blog afterall. And yes, it'll get more exciting when you keep sharing your stories and keep posting.";
 const post3 =
   "Niiiiccceeee! You're finally getting a kick out of it, aren't you? You have more than 2 blogs now. Go on blogging...go on exploring.";
-const post10 =
-  "Woah Woah Woah! Look at how much you've grown! You've finally crossed the 10-blogs-benchmark. Your contribution is going to be really helpful. To you, and others.";
+const post4 =
+  "Woah Woah Woah! Look at how much you've grown! You've finally crossed the 4-blogs-benchmark. Your contribution is going to be really helpful. To you, and others.";
 
 const initialStuff = {
   showBlogs: true,
@@ -65,7 +65,7 @@ const Dashboard = () => {
       ? post2
       : n <= 3
       ? post3
-      : post10;
+      : post4;
 
   const showBlogs = () => {
     setStuff({ ...initialStuff });
@@ -81,11 +81,12 @@ const Dashboard = () => {
         color={`${condition ? '#fff' : '#b02'}`}
         width={'100%'}
       />
+
       {!showLoader && (
         <div
           className='m-0 pt-0 pb-4'
           style={{
-            background: condition && '#000',
+            background: condition && 'bg-darker',
           }}
         >
           <img
@@ -108,26 +109,21 @@ const Dashboard = () => {
                 <strong>Hello, {userName} </strong>
               </h1>
               <p className='lead'> {msg} </p>
+
               <hr className='my-4' />
-              <NavLink
-                to={POST_BLOG}
-                className={`btn ${
-                  condition ? 'btn-dark' : 'btn-primary'
-                } btn-raised mx-2`}
-                role='NavLink '
-              >
+
+              <NavLink to={POST_BLOG} className='btn btn-primary mx-2'>
                 Write a Blog
               </NavLink>
+
               <NavLink
                 to={ASK_ROUTE}
-                className={`btn ${
-                  condition ? 'btn-dark' : 'btn-primary'
-                } btn-raised mx-2`}
-                role='NavLink '
+                className='btn btn-primary btn-raised mx-2'
               >
                 Ask Something
               </NavLink>
             </div>
+
             <button
               className={` btn  
               ${
@@ -138,6 +134,7 @@ const Dashboard = () => {
             >
               Your Blogs
             </button>
+
             <button
               className={` btn ${
                 condition ? 'bg-darker' : 'bg-white'
@@ -147,6 +144,7 @@ const Dashboard = () => {
             >
               Your Questions
             </button>
+
             <div
               className='row container border pb-3'
               style={{ background: condition ? 'bg-ondark' : '#fbfcfc' }}

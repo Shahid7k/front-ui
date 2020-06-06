@@ -14,7 +14,7 @@ import { DASHBOARD } from '../../../constants/routesNomenclature';
 import { BarLoader } from 'react-spinners';
 import { authContext } from '../../../context/AuthContext';
 import { alertContext } from '../../../context/AlertContext';
-import { mode } from '../../../utils/theme';
+import { condition } from '../../../utils/theme';
 
 const blogState = {
   title: '',
@@ -115,9 +115,11 @@ const Blog = () => {
   };
 
   const likesCount = blog.likes.length;
+
   return (
     <Fragment>
       <BarLoader loading={showLoader} color='#333' width={'100%'} />
+
       {!showLoader && (
         <Fragment>
           <BlogEditor
@@ -152,17 +154,15 @@ const Blog = () => {
               </button>
             </div>
           </div>
+
           <div className='container'>
             {blog.comments.length !== 0 &&
               blog.comments.map((comment, i) => (
-                <div key={i} className='p'>
+                <div key={i} className='p mb-3'>
                   <div key={i} className='d-flex'>
                     <div className='comment-photo rounded-circle'>
                       {comment !== null && comment !== undefined ? (
-                        <NavLink
-                          to={`/profile/${comment.postedBy._id}`}
-                          style={mode}
-                        >
+                        <NavLink to={`/profile/${comment.postedBy._id}`}>
                           <img
                             src={`http://localhost:8080/user/photo/${comment.postedBy._id}`}
                             alt='Face'
@@ -188,13 +188,15 @@ const Blog = () => {
                         comment !== undefined &&
                         comment.postedBy !== null ? (
                           <NavLink
+                            className={`${condition ? 'text-white' : ''}`}
                             to={`/profile/${comment.postedBy._id}`}
-                            style={mode}
                           >
                             <strong>{comment.postedBy.firstName}</strong>
                           </NavLink>
                         ) : (
-                          <p style={mode}>{'Anonymous'}</p>
+                          <p className={`${condition ? 'text-white' : ''}`}>
+                            {'Anonymous'}
+                          </p>
                         )}
                         <div className='comment-time ml-auto d-inline-block'>
                           <i className='far fa-clock mr-1' />
@@ -212,9 +214,7 @@ const Blog = () => {
                           )}
                         </div>
                       </div>
-                      <p className='comment-text' style={mode}>
-                        {comment.text}
-                      </p>
+                      <p className='comment-text'>{comment.text}</p>
                     </div>
                   </div>
                 </div>
