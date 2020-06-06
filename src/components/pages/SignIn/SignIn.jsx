@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { signInUser } from '../../../requests/auth';
 import { authContext } from '../../../context/AuthContext';
 import { SIGNUP_ROUTE } from '../../../constants/routesNomenclature';
-import { mode } from '../../../utils/theme';
-
 
 const initialState = {
   email: '',
@@ -21,11 +19,10 @@ const validatorInititalState = {
 
   password: {
     error: false,
-    // hasError: pwd =>
-    //   !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
-    //     pwd
-    //   ),
-    hasError: pwd => false,
+    hasError: pwd =>
+      !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(
+        pwd
+      ),
     message:
       'password should be at least 8 characters long with one of (a-z, A-Z, 0-9, special characters)',
   },
@@ -69,7 +66,7 @@ const SignIn = () => {
 
   return (
     <div className='form-container'>
-      <div className='form-wrap' style={mode}>
+      <div className='form-wrap'>
         <h1>Sign In</h1>
         <p>Sign in and explore the world!</p>
         <form onSubmit={handleSubmit}>
