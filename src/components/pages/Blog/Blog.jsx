@@ -132,7 +132,7 @@ const Blog = () => {
             <button className='btn btn-info my-2 mr-2' onClick={submitLike}>
               {blog.userLiked ? 'Unlike' : 'Like'}
             </button>
-            {likesCount} {likesCount == 1 ? 'Like' : 'Likes'}
+            {likesCount} {likesCount === 1 ? 'Like' : 'Likes'}
             <div>
               <textarea
                 style={commentStyle}
@@ -148,7 +148,7 @@ const Blog = () => {
               <button
                 className='btn btn-info mt-2 mb-5'
                 onClick={submitComment}
-                disabled={userComment.length == 0}
+                disabled={userComment.length === 0}
               >
                 Comment
               </button>

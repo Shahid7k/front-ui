@@ -11,7 +11,7 @@ const initialState = {
   email: '',
   password: '',
   confirmPassword: '',
-  gender: '',
+  gender: 'male',
   country: '',
   city: '',
   profession: '',
