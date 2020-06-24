@@ -93,7 +93,7 @@ const SingleQues = () => {
     const response = await answer(userId, quesId, { answer: quesState.answer });
 
     if (response.data) {
-      addAlert('Your answer is successfully submitted .', 'success');
+      addAlert('Your answer is successfully submitted.', 'success');
       fetchQues({ ...quesState, answer: '', answers: response.data.answers });
     } else if (response.error) {
       addAlert(response.error.data.error, 'danger');
@@ -105,6 +105,7 @@ const SingleQues = () => {
       const res = await deleteQues(quesId);
 
       if (res.data) {
+        addAlert('Your question is deleted.', 'success');
         setRedirect(true);
       } else if (res.error) {
         addAlert(res.error.data.error, 'danger');
@@ -141,7 +142,7 @@ const SingleQues = () => {
     showAnswers,
   } = quesState;
 
-  if (redirect) return <Redirect to='/' />;
+  if (redirect) return <Redirect to='/dashboard' />;
   return (
     <Fragment>
       <BarLoader
