@@ -22,6 +22,7 @@ export const signInUser = async data => {
   console.log('action called', data);
   try {
     const res = await axios.post('http://localhost:8080/signin', data);
+	console.log("SignInMessage:",res);
     return res.data;
   } catch (error) {
     const {
